@@ -1,0 +1,1 @@
+Vine = Ember.Application.create();
