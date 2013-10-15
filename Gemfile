@@ -20,6 +20,7 @@ gem 'ember-rails'
 
 ### REAR END
 
+gem 'figaro'
 gem 'analytics-ruby'
 gem 'bcrypt-ruby', '~> 3.0.0' # sorcery hack
 gem 'cancan'
@@ -34,10 +35,10 @@ end
 
 group :development do
   gem 'letter_opener'
-  gem 'quiet_assets'
 end
 
 group :development, :test do
+  gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
