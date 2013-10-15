@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   before_filter :load_settings
 
   def load_settings
-    gon.settings = {bla: "yes"}
+    gon.settings = {name: "Vine"}
   end
 end

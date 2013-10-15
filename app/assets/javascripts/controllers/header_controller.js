@@ -1,0 +1,1 @@
+Vine.HeaderController = Vine.Controller.extend({});

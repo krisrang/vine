@@ -1,0 +1,58 @@
+class VineRedis
+  def self.raw_connection(config = nil)
+    config ||= self.config
+    redis_opts = {host: config['host'], port: config['port'], db: config['db']}
+    redis_opts[:password] = config['password'] if config['password']
+    Redis.new(redis_opts)
+  end
+
+  def self.config
+    @config ||= YAML.load(ERB.new(File.new("#{Rails.root}/config/redis.yml").read).result)[Rails.env]
+
+    unless @config
+      puts '', "Redis config for environment '#{Rails.env}' was not found in #{Rails.root}/config/redis.yml."
+      puts "Did you forget to do RAILS_ENV=production?"
+      puts "Check your redis.yml and make sure it has configuration for the environment you're trying to use.", ''
+      raise 'Redis config not found'
+    end
+
+    @config
+  end
+
+  def self.url(config)
+    "redis://#{(':' + config['password'] + '@') if config['password']}#{config['host']}:#{config['port']}/#{config['db']}"
+  end
+
+  def self.cache_url
+    redis_config = self.config
+    redis_config['db'] = redis_config['cache_db']
+    return self.url(redis_config)
+  end
+
+  def self.i18n_url
+    redis_config = self.config
+    return self.url(redis_config)
+  end
+
+  def self.new_redis_store
+    redis_store = ActiveSupport::Cache::RedisStore.new self.cache_url
+    redis_store
+  end
+
+  def initialize
+    @config = VineRedis.config
+    @redis = VineRedis.raw_connection(@config)
+  end
+
+  def url
+    self.class.url(@config)
+  end
+
+  def method_missing(meth, *args, &block)
+    if @redis.respond_to?(meth)
+      @redis.send(meth, *args, &block)
+    else
+      super
+    end
+  end
+end

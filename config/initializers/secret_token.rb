@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Vine::Application.config.secret_key_base = '4ce083b599a251170009e8e1c6e77005a6b7c7b5a7364ede865cbe95aee287ad2f20f0bf1d7ca04aec04e1d4300af9aaea0bab4e156bb30379b3fe0699262d18'
+Vine::Application.config.secret_key_base = Figaro.env.secret

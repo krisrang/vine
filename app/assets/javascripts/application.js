@@ -7,7 +7,10 @@
 //= require ember-data
 //= require ./vine
 //= require ./store
+//= require_tree ./mixins
+//= require ./models/model
 //= require_tree ./models
+//= require ./controllers/controller
 //= require_tree ./controllers
 //= require_tree ./views
 //= require_tree ./helpers

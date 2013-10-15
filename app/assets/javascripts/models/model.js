@@ -1,0 +1,1 @@
+Vine.Model = Ember.Object.extend(Vine.Presence, {});
