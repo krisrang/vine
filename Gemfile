@@ -2,7 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
 gem 'pg'
+gem 'hiredis'
+gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
+gem 'faye'
+gem 'faye-redis'
 
 ### FRONTEND
 
@@ -27,7 +31,7 @@ gem 'bcrypt-ruby', '~> 3.0.0' # sorcery hack
 gem 'cancan'
 gem 'sorcery'
 gem 'uuidtools'
-gem 'whenever', require: false
+gem 'oj'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

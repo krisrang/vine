@@ -27,3 +27,18 @@ module Vine
     # config.i18n.default_locale = :de
   end
 end
+
+require 'faye'
+require 'faye/redis'
+
+faye = Faye::RackAdapter.new(
+  Rails.application,
+  mount: '/faye', 
+  timeout: 25,
+  engine: {
+    type: Faye::Redis,
+    uri: VineRedis.faye_url
+})
+
+$faye = faye
+$bayeux = faye.get_client
