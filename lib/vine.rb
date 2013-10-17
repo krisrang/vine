@@ -1,0 +1,48 @@
+require_dependency 'auth/local_user_provider'
+
+module Vine
+  # Expected less matches than what we got in a find
+  class TooManyMatches < Exception; end
+
+  # When they try to do something they should be logged in for
+  class NotLoggedIn < Exception; end
+
+  # When the input is somehow bad
+  class InvalidParameters < Exception; end
+
+  # When they don't have permission to do something
+  class InvalidAccess < Exception; end
+
+  # When something they want is not found
+  class NotFound < Exception; end
+
+  # When a setting is missing
+  class SiteSettingMissing < Exception; end
+
+  # Cross site request forgery
+  class CSRF < Exception; end
+
+  def self.git_version
+    return $git_version if $git_version
+
+    begin
+      $git_version ||= `git rev-parse HEAD`.strip
+    rescue
+      $git_version = "unknown"
+    end
+  end
+
+  def self.current_user_provider
+    @current_user_provider || Auth::LocalUserProvider
+  end
+
+  def self.current_user_provider=(val)
+    @current_user_provider = val
+  end
+
+private
+
+  def self.maintenance_mode_key
+    'maintenance_mode'
+  end
+end

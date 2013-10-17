@@ -8,15 +8,27 @@ Bundler.require(:default, Rails.env)
 
 module Vine
   class Application < Rails::Application
+    require 'vine'
+
     require 'vine_redis'
     config.cache_store = VineRedis.new_redis_store
 
+    config.autoload_paths += Dir["#{config.root}/app/serializers"]
+    config.autoload_paths += Dir["#{config.root}/lib/validators/"]
+
     # nginx does whatever caching necessary
     config.action_dispatch.rack_cache = nil
-    
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+
+    require 'js_locale_helper'
+    config.assets.paths += %W(#{config.root}/config/locales)
+
+    Dir.glob("#{config.root}/app/assets/javascripts/locales/*.js.erb").each do |file|
+      config.assets.precompile << "locales/#{file.match(/([a-z_A-Z]+\.js)\.erb$/)[1]}"
+    end
+
+    # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
+    config.pbkdf2_iterations = 64000
+    config.pbkdf2_algorithm = "sha256"
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -40,5 +52,8 @@ faye = Faye::RackAdapter.new(
     uri: VineRedis.faye_url
 })
 
-$faye = faye
-$bayeux = faye.get_client
+Faye.logger = Logger.new(File.join(Rails.root, 'log/faye.log'))
+Faye.ensure_reactor_running!
+
+$fayerack = faye
+$faye = faye.get_client

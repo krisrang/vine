@@ -79,4 +79,7 @@ Vine::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.ember.variant = :production
+
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { api_key: Figaro.env.postmark }
 end

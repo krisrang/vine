@@ -1,52 +1,68 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+### REAR END
+
+gem 'puma', require: false
+
+gem 'rails', github: 'rails/rails', branch: '4-0-stable'
 gem 'pg'
+
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
+
+gem 'eventmachine'
 gem 'faye'
 gem 'faye-redis'
 
+gem 'message_bus', github: 'SamSaffron/message_bus'
+
+
 ### FRONTEND
 
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier'
 gem 'bourbon'
 gem 'jquery-rails'
-# gem 'turbolinks'
-# gem 'therubyracer', platforms: :ruby
-
 gem 'slim-rails'
-gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'simple_form'
 gem 'jbuilder'
-gem 'gon'
 gem 'ember-rails'
 
-### REAR END
+### MISC
 
+gem 'active_model_serializers'
+gem 'sidekiq'
+gem 'sidetiq'
+gem 'sidekiq-failures'
+gem 'sinatra', require: nil
+gem 'therubyracer', require: 'v8'
+gem 'postmark-rails'
 gem 'figaro'
 gem 'analytics-ruby'
-gem 'bcrypt-ruby', '~> 3.0.0' # sorcery hack
+gem 'bcrypt-ruby'
 gem 'cancan'
-gem 'sorcery'
 gem 'uuidtools'
 gem 'oj'
+gem 'lru_redux'
+gem 'fast_xor'
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', require: false # rake doc:rails generates the API under doc/api.
 end
 
 group :development do
+  gem 'foreman'
   gem 'letter_opener'
 end
 
 group :development, :test do
   gem 'quiet_assets'
-  gem 'rspec-rails'
-  gem 'guard-rspec'
   gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'turnip'
+  gem 'poltergeist'
+  gem 'guard-rspec'
 end
 
 group :test do

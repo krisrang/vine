@@ -11,42 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131014104402) do
+ActiveRecord::Schema.define(version: 20131017132950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authentications", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
+  create_table "site_settings", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "data_type",  null: false
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "site_settings", ["name"], name: "index_site_settings_on_name", using: :btree
+
+  create_table "user_stats", force: true do |t|
+    t.integer "user_id",                  null: false
+    t.integer "days_visited", default: 0, null: false
+  end
+
+  create_table "user_visits", force: true do |t|
+    t.integer "user_id",    null: false
+    t.date    "visited_at", null: false
+  end
+
+  add_index "user_visits", ["user_id", "visited_at"], name: "index_user_visits_on_user_id_and_visited_at", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",                                    null: false
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "salt"
+    t.string   "username",          limit: 20,                   null: false
+    t.string   "username_lower",    limit: 20,                   null: false
+    t.string   "email",                                          null: false
+    t.string   "password_hash",     limit: 64
+    t.string   "salt",              limit: 32
+    t.string   "auth_token",        limit: 32
+    t.string   "ip_address"
+    t.datetime "last_seen_at"
+    t.datetime "previous_visit_at"
+    t.boolean  "admin",                        default: "false", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-    t.string   "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
-    t.integer  "failed_logins_count",             default: 0
-    t.datetime "lock_expires_at"
-    t.string   "unlock_token"
-    t.datetime "last_login_at"
-    t.datetime "last_logout_at"
-    t.datetime "last_activity_at"
-    t.string   "last_login_from_ip_address"
   end
 
-  add_index "users", ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at", using: :btree
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+  add_index "users", ["username_lower"], name: "index_users_on_username_lower", unique: true, using: :btree
 
 end

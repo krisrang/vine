@@ -1,4 +1,13 @@
+require 'sidekiq/web'
+require 'sidetiq/web'
+
+require_dependency 'admin_constraint'
+
+USERNAME_ROUTE_FORMAT = /[A-Za-z0-9\_]+/ unless defined? USERNAME_ROUTE_FORMAT
+
 Vine::Application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
+
   root 'home#index'
 
   # Example of regular route:

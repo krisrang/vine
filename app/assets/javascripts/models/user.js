@@ -13,7 +13,7 @@ Vine.User = Vine.Model.extend({
 
 Vine.User.reopenClass(Vine.Singleton, {
   createCurrent: function() {
-    var userJson = gon.currentUser;
+    var userJson = PreloadStore.get('currentUser');
     if (userJson) { return Vine.User.create(userJson); }
     return null;
   },

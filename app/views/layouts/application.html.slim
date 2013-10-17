@@ -3,14 +3,22 @@ html
   head
   title Vine
   = stylesheet_link_tag    "application", media: "all"
+  = javascript_include_tag "preload_store"
+  = javascript_include_tag "locales/#{I18n.locale}"
   = csrf_meta_tags
 
   body
     == yield
 
-  = include_gon
+  - if @preloaded.present?
+    - @preloaded.each do |key, json|
+      javascript:
+        PreloadStore.store("#{key}", #{escape_unicode(json)});
+
   = javascript_include_tag "/faye/client.js"
   = javascript_include_tag "application"
   javascript:
     Vine.start()
     window.client = new Faye.Client('/faye');
+
+/! Git Version: #{Vine.git_version}

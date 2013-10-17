@@ -13,6 +13,8 @@ if defined?(PhusionPassenger)
       # We're in smart spawning mode.
       $redis = VineRedis.new
       Vine::Application.config.cache_store.reconnect
+
+      MessageBus.after_fork
       
       Analytics = AnalyticsRuby
       Analytics.init(secret: Figaro.env.analytics)

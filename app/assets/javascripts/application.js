@@ -5,6 +5,7 @@
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require ./helpers/i18n
 //= require ./vine
 //= require ./store
 //= require_tree ./mixins

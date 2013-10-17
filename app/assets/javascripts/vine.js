@@ -3,6 +3,6 @@ Vine.SiteSettings = {};
 
 Vine = Ember.Application.createWithMixins({
   start: function() {
-    Vine.SiteSettings = gon.settings;
+    Vine.SiteSettings = PreloadStore.get('settings');
   }
 });
