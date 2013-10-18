@@ -2,10 +2,14 @@
 //= require jquery_ujs
 //= require ./lib/jquery.html5-placeholder-shim
 //= require ./lib/bootstrap
+//= require ./lib/lodash
 //= require handlebars
 //= require ember
 //= require ember-data
+
+//= require ./init
 //= require ./helpers/i18n
+//= require ./mixins/ajax
 //= require ./vine
 //= require ./store
 //= require_tree ./mixins

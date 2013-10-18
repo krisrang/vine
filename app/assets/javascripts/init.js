@@ -1,0 +1,2 @@
+window.Vine = {};
+Vine.SiteSettings = {};

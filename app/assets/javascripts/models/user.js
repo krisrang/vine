@@ -39,11 +39,11 @@ Vine.User.reopenClass(Vine.Singleton, {
   },
 
   logout: function() {
-    var bubblesUserClass = this;
-    return Vine.ajax("/session/" + Vine.User.current('username'), {
+    var vineUserClass = this;
+    return Vine.ajax("/session/" + Vine.User.currentProp('username'), {
       type: 'DELETE'
     }).then(function () {
-      bubblesUserClass.currentUser = null;
+      vineUserClass.currentUser = null;
     });
   }
 });

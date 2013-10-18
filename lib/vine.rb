@@ -40,6 +40,20 @@ module Vine
     @current_user_provider = val
   end
 
+  def self.enable_maintenance_mode
+    $redis.set maintenance_mode_key, 1
+    true
+  end
+
+  def self.disable_maintenance_mode
+    $redis.del maintenance_mode_key
+    true
+  end
+
+  def self.maintenance_mode?
+    !!$redis.get( maintenance_mode_key )
+  end
+
 private
 
   def self.maintenance_mode_key

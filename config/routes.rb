@@ -8,6 +8,14 @@ USERNAME_ROUTE_FORMAT = /[A-Za-z0-9\_]+/ unless defined? USERNAME_ROUTE_FORMAT
 Vine::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
+  resources :session, id: USERNAME_ROUTE_FORMAT, only: [:create, :destroy] do
+    collection do
+      post 'forgot_password'
+    end
+  end
+
+  get 'session/csrf' => 'session#csrf'
+
   root 'home#index'
 
   # Example of regular route:
