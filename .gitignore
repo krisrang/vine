@@ -6,7 +6,6 @@
 /doc
 /log/*.log
 /tmp
-database.yml
 .DS_Store
 .env
 .project
