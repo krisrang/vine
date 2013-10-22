@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require ./bootstrap
 //= require ./lib/jquery.html5-placeholder-shim
-//= require ./lib/bootstrap
 //= require ./lib/lodash
 //= require handlebars
 //= require ember

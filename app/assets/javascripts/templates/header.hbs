@@ -7,14 +7,10 @@
       <span class="icon-bar"></span>
     </button>
 
-    {{#link-to 'index' class="navbar-brand"}}{{Vine.SiteSettings.title}}{{/link-to}}
+    {{#linkTo "index" href=false class="navbar-brand"}}{{title}}{{/linkTo}}
   </div>
 
   <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <!--<ul class="nav navbar-nav">
-      <li class="active"><a href="#">Messages</a></li>
-    </ul>-->
-
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search">
@@ -35,8 +31,13 @@
     </ul>
     {{else}}
     <form class="navbar-form navbar-right">
-      <button {{action showLogin}} class='btn btn-primary btn-small'>{{i18n user.log_in}}</button>
+      {{#linkTo "login" class="btn btn-primary btn-small"}}{{i18n user.log_in}}{{/linkTo}}
     </form>
     {{/if}}
+
+    <ul class="nav navbar-nav navbar-right">
+      {{#linkTo "index" tagName="li" href=false}}<a {{bindAttr href="view.href"}}><i class="icon-home"></i> Messages</a>{{/linkTo}}
+      <li><a href="#">Stuff</a></li>
+    </ul>
   </div>
 </nav>

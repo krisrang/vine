@@ -20,6 +20,7 @@ gem 'message_bus', github: 'SamSaffron/message_bus'
 
 ### FRONTEND
 
+gem 'less'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier'
 gem 'bourbon'
