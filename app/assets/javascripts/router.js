@@ -1,5 +1,5 @@
 Vine.Router.map(function() {
-	this.route('login');
+  // this.route('login');
 });
 
 Vine.Router.reopen({

@@ -1,0 +1,51 @@
+<div class="modal-body">
+  {{#if Vine.SiteSettings.enable_local_logins}}
+    <form id='login-form' method='post' class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for='login-account-name' class="col-lg-2 control-label">{{i18n login.username}}&nbsp;</label>
+        <div class="col-lg-6">
+          {{textField value=loginName placeholderKey="login.email_placeholder" id="login-account-name" class="form-control" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for='login-account-password' class="col-lg-2 control-label">{{i18n login.password}}&nbsp;</label>
+        <div class="col-lg-6">
+          {{textField value=loginPassword type="password" id="login-account-password" class="form-control"}}
+        </div>
+        <div class="col-lg-4">
+          <a id="forgot-password-link" {{action showForgotPassword}}>{{i18n forgot_password.action}}</a>
+        </div>
+      </div>
+    </form>
+  {{/if}}
+  {{#if hasAtLeastOneLoginButton}}
+    <h3 style="text-align:center; margin-bottom:10px;">{{i18n login.or}}</h3>
+    <div id="login-buttons">
+      {{#each Vine.LoginMethod.all}}
+        <button class="btn btn-{{unbound color}} btn-social {{unbound name}}" {{action externalLogin this}}>
+          {{#if icon}}<i class="{{unbound icon}}"></i>{{/if}}
+          {{unbound title}}
+        </button>
+      {{/each}}
+    </div>
+  {{/if}}
+  {{authMessage}}
+  <div id='login-alert' {{bindAttr class="alertClass"}}>{{alert}}</div>
+</div>
+<div class="modal-footer">
+  {{#if authenticate}}
+    {{i18n login.authenticating}}
+  {{/if}}
+  {{#if Vine.SiteSettings.enable_local_logins}}
+    <button class='btn btn-large btn-primary'
+      {{bindAttr disabled="loginDisabled"}}
+      {{action login}}>
+        <i class="icon-unlock"></i>&nbsp;{{loginButtonText}}
+    </button>
+
+    <button class='btn btn-large btn-default'
+      {{action showCreateAccount}}>
+        {{i18n create_account.action}}
+    </button>
+  {{/if}}
+</div>

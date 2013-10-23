@@ -8,3 +8,17 @@ body {
 a {
   cursor: pointer;
 }
+
+#login-buttons {
+  text-align: center;
+
+  .btn-social {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+
+    i {
+      font-size: 30px;
+    }
+  }
+}

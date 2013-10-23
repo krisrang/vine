@@ -13,6 +13,12 @@ class SiteSetting < ActiveRecord::Base
   setting(:api_key, '')
 
   client_setting(:login_required, false)
+
+  client_setting(:enable_local_logins, true)
+  client_setting(:enable_local_account_create, true)
+
+  client_setting(:enable_google_logins, true)
+  client_setting(:enable_persona_logins, true)
   
   client_setting(:email_domains_blacklist, 'mailinator.com')
   client_setting(:email_domains_whitelist)
