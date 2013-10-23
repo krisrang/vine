@@ -6,7 +6,8 @@ en:
 
     create_account:
       title: "Create Account"
-      action: "Create Account"
+      question: "Don't have an account?"
+      action: "Sign up"
       failed: "Something went wrong, perhaps this email is already registered, try the forgot password link"
 
     forgot_password:
@@ -20,7 +21,8 @@ en:
       title: "Log In"
       username: "Login"
       password: "Password"
-      email_placeholder: "email address or username"
+      email_placeholder: "Email address or username"
+      password_placeholder: "Your password"
       error: "Unknown error"
       reset_password: 'Reset Password'
       logging_in: "Logging In..."
@@ -33,8 +35,8 @@ en:
       resend_activation_email: "Click here to send the activation email again."
       sent_activation_email_again: "We sent another activation email to you at <b>{{currentEmail}}</b>. It might take a few minutes for it to arrive; be sure to check your spam folder."
       google:
-        title: "with Google"
+        title: "Google"
         message: "Authenticating with Google (make sure pop up blockers are not enabled)"
       persona:
-        title: "with Persona"
+        title: "Persona"
         message: "Authenticating with Mozilla Persona (make sure pop up blockers are not enabled)"

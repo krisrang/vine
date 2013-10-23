@@ -2,6 +2,7 @@
 @import "font-awesome";
 
 body {
+  font-family: 'Open Sans', sans-serif;
   padding-top: 70px;
 }
 
@@ -9,16 +10,56 @@ a {
   cursor: pointer;
 }
 
-#login-buttons {
+input:-moz-placeholder {
+  color: #9ba8b6;
+  font-size: 15px;
+  letter-spacing: 0px;
+  font-style: italic;
+}
+input:-ms-input-placeholder {
+  color: #9ba8b6;
+  font-style: italic;
+  letter-spacing: 0px;
+  font-size: 15px;
+}
+input::-webkit-input-placeholder {
+  color: #9ba8b6;
+  font-style: italic;
+  letter-spacing: 0px;
+  font-size: 15px;
+}
+
+// 
+//// LOGIN
+// 
+
+#forgot-password-link {
+  float: right;
+}
+
+.login-action {
   text-align: center;
+  margin-top: 20px;
 
-  .btn-social {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
+  .btn-login {
+    text-transform: uppercase;
+  }
 
-    i {
-      font-size: 30px;
+  p {
+    margin: 10px 0;
+  }
+
+  .login-buttons {
+    margin-top: 20px;
+
+    .btn-social {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 5px;
+
+      i {
+        font-size: 18px;
+      }
     }
   }
 }

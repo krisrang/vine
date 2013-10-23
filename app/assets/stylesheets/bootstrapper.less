@@ -1,17 +1,54 @@
 @import "bootstrap/bootstrap";
 
-.modal.fade {
-  background: url("/assets/blue.jpg") no-repeat center center fixed;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/blue.jpg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/blue.jpg', sizingMethod='scale')";
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+@border-radius-base:  3px;
+@border-radius-large: 4px;
+@border-radius-small: 3px;
+
+.btn-lg {
+  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-base);
+}
+
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.modal-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.modal-dialog {
+  .alert {
+    border-radius: 0;
+  }
+
+  h4 {
+    text-transform: uppercase;
+  }
 }
 
 .modal-content {
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.65);
+}
+
+.modal-footer {
+  text-align: center;
+}
+
+@media screen and (min-width: @screen-tablet) {
+  .modal-dialog {
+    width: 400px;
+  }
+}
+
+.alert-error {
+  .alert-danger;
+}
+
+.well {
+  background-color: #797979;
+  color: #FFF;
+  margin: 0;
 }

@@ -1,4 +1,8 @@
+require 'current_user'
+
 module ApplicationHelper
+  include CurrentUser
+
   def escape_unicode(javascript)
     if javascript
       javascript = javascript.dup.force_encoding("utf-8")
@@ -8,5 +12,9 @@ module ApplicationHelper
     else
       ''
     end
+  end
+
+  def admin?
+    current_user.try(:admin?)
   end
 end

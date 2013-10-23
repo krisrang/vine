@@ -1,51 +1,52 @@
 <div class="modal-body">
+
   {{#if Vine.SiteSettings.enable_local_logins}}
     <form id='login-form' method='post' class="form-horizontal" role="form">
       <div class="form-group">
-        <label for='login-account-name' class="col-lg-2 control-label">{{i18n login.username}}&nbsp;</label>
-        <div class="col-lg-6">
+        <label for='login-account-name' class="sr-only">{{i18n login.username}}&nbsp;</label>
+        <div class="col-lg-12">
           {{textField value=loginName placeholderKey="login.email_placeholder" id="login-account-name" class="form-control" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
         </div>
       </div>
       <div class="form-group">
-        <label for='login-account-password' class="col-lg-2 control-label">{{i18n login.password}}&nbsp;</label>
-        <div class="col-lg-6">
-          {{textField value=loginPassword type="password" id="login-account-password" class="form-control"}}
+        <label for='login-account-password' class="sr-only">{{i18n login.password}}&nbsp;</label>
+        <div class="col-lg-12">
+          {{textField value=loginPassword placeholderKey="login.password_placeholder" type="password" id="login-account-password" class="form-control"}}
         </div>
-        <div class="col-lg-4">
+      </div>
+      <div class="form-group">
+        <div class="col-lg-12">
           <a id="forgot-password-link" {{action showForgotPassword}}>{{i18n forgot_password.action}}</a>
         </div>
       </div>
     </form>
   {{/if}}
-  {{#if hasAtLeastOneLoginButton}}
-    <h3 style="text-align:center; margin-bottom:10px;">{{i18n login.or}}</h3>
-    <div id="login-buttons">
-      {{#each Vine.LoginMethod.all}}
-        <button class="btn btn-{{unbound color}} btn-social {{unbound name}}" {{action externalLogin this}}>
-          {{#if icon}}<i class="{{unbound icon}}"></i>{{/if}}
-          {{unbound title}}
-        </button>
-      {{/each}}
-    </div>
-  {{/if}}
-  {{authMessage}}
-  <div id='login-alert' {{bindAttr class="alertClass"}}>{{alert}}</div>
-</div>
-<div class="modal-footer">
-  {{#if authenticate}}
-    {{i18n login.authenticating}}
-  {{/if}}
-  {{#if Vine.SiteSettings.enable_local_logins}}
-    <button class='btn btn-large btn-primary'
+    
+  <div class="login-action">
+    {{#if Vine.SiteSettings.enable_local_logins}}
+    <button class='btn btn-lg btn-primary btn-login'
       {{bindAttr disabled="loginDisabled"}}
       {{action login}}>
-        <i class="icon-unlock"></i>&nbsp;{{loginButtonText}}
+        {{loginButtonText}}
     </button>
 
-    <button class='btn btn-large btn-default'
-      {{action showCreateAccount}}>
-        {{i18n create_account.action}}
-    </button>
-  {{/if}}
+    <p>
+      {{i18n create_account.question}} <a {{action showCreateAccount}}>{{i18n create_account.action}}</a>
+    </p>
+    {{/if}}
+
+    {{#if hasAtLeastOneLoginButton}}
+      <h4 style="text-align:center; margin:50px 0 20px 0;">{{i18n login.or}}</h4>
+      <div id="login-buttons" class="well">
+        {{#each Vine.LoginMethod.all}}
+          <button class="btn btn-{{unbound color}} btn-social {{unbound name}}" {{action externalLogin this}}>
+            {{#if icon}}<i class="{{unbound icon}}"></i>{{/if}}
+            {{unbound title}}
+          </button>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    {{authMessage}}
+  </div>
 </div>
