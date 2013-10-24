@@ -1,5 +1,7 @@
 @import "bourbon";
-@import "font-awesome";
+
+$fa-font-path: "/font";
+@import "font-awesome/font-awesome";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -27,6 +29,14 @@ input::-webkit-input-placeholder {
   font-style: italic;
   letter-spacing: 0px;
   font-size: 15px;
+}
+
+// 
+//// HEADER
+// 
+
+.navbar-nav li.notification-tab > a{
+  color: #AAA;
 }
 
 // 

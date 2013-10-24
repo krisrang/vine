@@ -25,6 +25,8 @@ html
 
   = javascript_include_tag "/faye/client.js"
   = javascript_include_tag "application"
+  = render_analytics
+  
   javascript:
     Vine.Environment = '#{Rails.env}';
     Vine.start()

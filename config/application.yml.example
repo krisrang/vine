@@ -1,3 +1,4 @@
 ANALYTICS: key
 SECRET: secret
 POSTMARK: key
+RAVEN_DSN: raven

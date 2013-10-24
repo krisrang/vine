@@ -79,11 +79,6 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
   },
 
   authenticationComplete: function(options) {
-    if (options.requires_invite) {
-      this.flash(I18n.t('login.requires_invite'), 'success');
-      this.set('authenticate', null);
-      return;
-    }
     if (options.awaiting_approval) {
       this.flash(I18n.t('login.awaiting_approval'), 'success');
       this.set('authenticate', null);

@@ -1,5 +1,4 @@
 Vine.ModalBodyView = Vine.View.extend({
-
   // Focus on first element
   didInsertElement: function() {
     $('#vine-modal').modal('show');
@@ -36,5 +35,3 @@ Vine.ModalBodyView = Vine.View.extend({
   }.observes('controller.flashMessage')
 
 });
-
-

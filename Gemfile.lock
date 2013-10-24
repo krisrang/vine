@@ -9,6 +9,15 @@ GIT
       thin
 
 GIT
+  remote: git://github.com/getsentry/raven-ruby.git
+  revision: a524ba2659ed4a4dd7659df7b69604fde9d10059
+  specs:
+    sentry-raven (0.6.0)
+      faraday (>= 0.7.6)
+      hashie (>= 1.1.0)
+      uuidtools
+
+GIT
   remote: git://github.com/rails/rails.git
   revision: 51ba5c9aad2ed3e3e76fb0972528096721799e6e
   branch: 4-0-stable
@@ -161,6 +170,7 @@ GEM
       guard (>= 2.1.1)
       rspec (~> 2.14)
     handlebars-source (1.0.12)
+    hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
     http_parser.rb (0.6.0.beta.2)
@@ -387,6 +397,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.1)
   sdoc
+  sentry-raven!
   sidekiq
   sidekiq-failures
   sidetiq

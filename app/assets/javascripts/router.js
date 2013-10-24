@@ -1,7 +1,5 @@
 Vine.Router.map(function() {
-  // this.route('login');
+  this.route('notifications');
 });
 
-Vine.Router.reopen({
-  location: 'history'
-});
+Vine.Router.reopen({location: 'history'});

@@ -29,6 +29,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:active_user_rate_limit_secs, 60)
   setting(:previous_visit_timeout_hours, 1)
 
+  setting(:analytics_code, 'urza14xmgm')
+
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)
   end

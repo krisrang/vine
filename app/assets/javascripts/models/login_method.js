@@ -34,13 +34,13 @@ Vine.LoginMethod.reopenClass({
           params.customLogin = function(){
             navigator.id.request();
           };
-          params.icon = "icon-envelope";
+          params.icon = "fa fa-envelope";
           params.color = "info";
         }
 
         if(name === "google") {
           params.color = "success";
-          params.icon = "icon-google-plus-sign";
+          params.icon = "fa fa-google-plus-square";
           params.frameWidth = 850;
           params.frameHeight = 500;
         }

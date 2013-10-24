@@ -32,6 +32,7 @@ gem 'ember-rails'
 
 ### MISC
 
+gem 'sentry-raven', github: "getsentry/raven-ruby"
 gem 'active_model_serializers'
 gem 'sidekiq'
 gem 'sidetiq'

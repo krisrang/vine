@@ -17,4 +17,10 @@ module ApplicationHelper
   def admin?
     current_user.try(:admin?)
   end
+
+  def render_analytics
+    if Rails.env.production? && SiteSetting.analytics_code.present?
+      render partial: "common/analytics"
+    end
+  end
 end
