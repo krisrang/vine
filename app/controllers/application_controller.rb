@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     if request.format && request.format.json?
       render status: error, layout: false, text: (error == 404) ? build_not_found_page(error) : message
     else
-      render text: build_not_found_page(error, 'static')
+      render text: build_not_found_page(error, 'no_js')
     end
   end
 

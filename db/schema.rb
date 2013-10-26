@@ -39,16 +39,16 @@ ActiveRecord::Schema.define(version: 20131017132950) do
   add_index "user_visits", ["user_id", "visited_at"], name: "index_user_visits_on_user_id_and_visited_at", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",          limit: 20,                   null: false
-    t.string   "username_lower",    limit: 20,                   null: false
-    t.string   "email",                                          null: false
+    t.string   "username",          limit: 20,                 null: false
+    t.string   "username_lower",    limit: 20,                 null: false
+    t.string   "email",                                        null: false
     t.string   "password_hash",     limit: 64
     t.string   "salt",              limit: 32
     t.string   "auth_token",        limit: 32
     t.string   "ip_address"
     t.datetime "last_seen_at"
     t.datetime "previous_visit_at"
-    t.boolean  "admin",                        default: "false", null: false
+    t.boolean  "admin",                        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
