@@ -19,6 +19,34 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :redirect_to_login_if_required
 
+  rescue_from Vine::NotLoggedIn do |e|
+    raise e if Rails.env.test?
+    redirect_to "/"
+  end
+
+  rescue_from Vine::NotFound do
+    rescue_vine_actions("[error: 'not found']", 404)
+  end
+
+  rescue_from Vine::InvalidAccess do
+    rescue_vine_actions("[error: 'invalid access']", 403)
+  end
+
+  def rescue_vine_actions(message, error)
+    if request.format && request.format.json?
+      render status: error, layout: false, text: (error == 404) ? build_not_found_page(error) : message
+    else
+      render text: build_not_found_page(error, 'static')
+    end
+  end
+
+  def build_not_found_page(status=404, layout=false)
+    @slug =  params[:slug].class == String ? params[:slug] : ''
+    @slug =  (params[:id].class == String ? params[:id] : '') if @slug.blank?
+    @slug.gsub!('-',' ')
+    render_to_string status: status, layout: layout, formats: [:html], template: '/exceptions/not_found'
+  end
+
   def set_locale
     I18n.locale = SiteSetting.default_locale
   end

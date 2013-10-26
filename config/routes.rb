@@ -8,6 +8,8 @@ USERNAME_ROUTE_FORMAT = /[A-Za-z0-9\_]+/ unless defined? USERNAME_ROUTE_FORMAT
 Vine::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
+  match "/404", to: "exceptions#not_found", via: [:get, :post]
+
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:create, :destroy] do
     collection do
       post 'forgot_password'
@@ -19,6 +21,7 @@ Vine::Application.routes.draw do
   resources :static
   post 'login' => 'static#enter'
   get 'login' => 'static#show', id: 'login'
+  get 'notifications' => 'static#show', id: 'notifications'
 
   root 'home#index'
 end

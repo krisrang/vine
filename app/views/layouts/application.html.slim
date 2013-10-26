@@ -1,12 +1,12 @@
 doctype html
-html
+html lang="#{SiteSetting.default_locale}"
   head
   title Vine
   = stylesheet_link_tag     "application", media: "all"
   = javascript_include_tag  "preload_store"
   = javascript_include_tag  "locales/#{I18n.locale}"
   = stylesheet_link_tag     "http://fonts.googleapis.com/css?family=Open+Sans"
-  = csrf_meta_tags
+  = vine_csrf_tags
 
   body
     - unless current_user
@@ -16,20 +16,28 @@ html
         input name="redirect" type="hidden"
         input type="submit" id="signin-button" value="Log In"
 
-    == yield
+    - if @preloaded.present?
+      - @preloaded.each do |key, json|
+        javascript:
+          PreloadStore.store("#{key}", #{escape_unicode(json)});
 
-  - if @preloaded.present?
-    - @preloaded.each do |key, json|
-      javascript:
-        PreloadStore.store("#{key}", #{escape_unicode(json)});
+    = javascript_include_tag "/faye/client.js"
+    = javascript_include_tag "application"
+    = render_analytics
+    
+    javascript:
+      Vine.Environment = '#{Rails.env}';
+      Vine.start()
+      window.client = new Faye.Client('/faye');
 
-  = javascript_include_tag "/faye/client.js"
-  = javascript_include_tag "application"
-  = render_analytics
-  
-  javascript:
-    Vine.Environment = '#{Rails.env}';
-    Vine.start()
-    window.client = new Faye.Client('/faye');
+    noscript data-path="#{request.env['PATH_INFO']}"
+      header class="d-header"
+        a href="/"
+          = SiteSetting.title
+
+      div#main-outlet class="container"
+        /! preload-content:
+        == yield
+        /! :preload-content
 
 /! Git Version: #{Vine.git_version}

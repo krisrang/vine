@@ -1,0 +1,23 @@
+doctype html
+html lang="#{SiteSetting.default_locale}"
+  head
+    meta charset="utf-8"
+    title = SiteSetting.title
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+    meta content="" name="description"
+    meta content="" name="author"
+
+    = stylesheet_link_tag     "application", media: "all"
+    = vine_csrf_tags
+
+  body
+    section id='main'
+    header class="d-header"
+      div class="container"
+        div class="contents"
+          div class="row"
+            div class="title span13"
+              a href="/"
+                = SiteSetting.title
+    #main-outlet class="container"
+      == yield
