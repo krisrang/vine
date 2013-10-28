@@ -1,4 +1,5 @@
 /*
 *= require ./bootstrapper
 *= require ./vine
+*= require_tree ./components
 */

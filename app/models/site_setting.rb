@@ -12,6 +12,7 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:api_key, '')
 
+  client_setting(:must_approve_users, false)
   client_setting(:login_required, false)
 
   client_setting(:enable_local_logins, true)
@@ -30,6 +31,18 @@ class SiteSetting < ActiveRecord::Base
   setting(:previous_visit_timeout_hours, 1)
 
   setting(:analytics_code, 'urza14xmgm')
+
+  setting(:hostname, 'forum.rang.ee')
+  setting(:port, Rails.env.development? ? 5000 : '')
+  setting(:use_ssl, false)
+
+  setting(:notification_email, 'forum@rang.ee')
+  setting(:email_custom_headers, '')
+
+  setting(:reply_by_email_enabled, false)
+  setting(:reply_by_email_address, '')
+
+  setting(:email_editable, true)
 
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)

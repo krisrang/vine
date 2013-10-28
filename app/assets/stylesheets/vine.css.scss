@@ -40,35 +40,45 @@ input::-webkit-input-placeholder {
 }
 
 // 
-//// LOGIN
-// 
+//// AUTH
+//
 
-#forgot-password-link {
-  float: right;
-}
-
-.login-action {
-  text-align: center;
-  margin-top: 20px;
-
-  .btn-login {
-    text-transform: uppercase;
+.modal {
+  .password-confirmation {
+    display: none;
   }
 
-  p {
-    margin: 10px 0;
+  #forgot-password-link {
+    float: right;
   }
 
-  .login-buttons {
+  .instruction label {
+    color: #666;
+  }
+
+  .login-action {
+    text-align: center;
     margin-top: 20px;
 
-    .btn-social {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0 5px;
+    .btn-login {
+      text-transform: uppercase;
+    }
 
-      i {
+    p {
+      margin: 10px 0;
+    }
+
+    .login-buttons {
+      margin-top: 20px;
+
+      .btn-social {
         font-size: 18px;
+        font-weight: bold;
+        margin: 0 5px;
+
+        i {
+          font-size: 18px;
+        }
       }
     }
   }

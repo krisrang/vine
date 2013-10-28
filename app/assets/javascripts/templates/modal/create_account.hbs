@@ -1,0 +1,49 @@
+{{#unless complete}}
+<div class="modal-body">
+  <form id='login-form' method='post' class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for='new-account-email' class="col-lg-3">{{i18n user.email.title}}&nbsp;</label>
+      <div class="col-lg-9">
+        {{textField value=accountEmail id="new-account-email" class="form-control"}}
+        &nbsp;{{inputTip validation=emailValidation}}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-9 instruction"><label>{{i18n user.email.instructions}}</label></div>
+    </div>
+
+    <div class="form-group">
+      <label for='new-account-username' class="col-lg-3">{{i18n user.username.title}}&nbsp;</label>
+      <div class="col-lg-9">
+        {{textField value=accountUsername id="new-account-username" class="form-control" maxlength="15"}}
+        &nbsp;{{inputTip validation=usernameValidation}}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-9 instruction"><label>{{i18n user.username.instructions}}</label></div>
+    </div>
+
+    {{#if passwordRequired}}
+    <div class="form-group">
+      <label for='new-account-password' class="col-lg-3">{{i18n user.password.title}}&nbsp;</label>
+      <div class="col-lg-9">
+        {{textField type="password" value=accountPassword id="new-account-password" class="form-control"}}
+        &nbsp;{{inputTip validation=passwordValidation}}
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="form-group password-confirmation">
+      <label for='new-account-password-confirmation' class="col-lg-3">{{i18n user.password_confirmation.title}}&nbsp;</label>
+      <div class="col-lg-9">
+        {{textField type="password" value=accountPasswordConfirm id="new-account-confirmation" class="form-control"}}
+        {{input value=accountChallenge id="new-account-challenge"}}
+      </div>
+    </div>
+  </form>
+
+  <button class='btn btn-large btn-primary' {{bindAttr disabled="submitDisabled"}} {{action createAccount}}>{{i18n create_account.title}}</button>
+</div>
+{{/unless}}

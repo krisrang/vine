@@ -6,5 +6,11 @@ Vine.Utilities = {
         delete hash[prop];
       }
     }
+  },
+
+  emailValid: function(email) {
+    // see:  http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+    var re = /^[a-zA-Z0-9!#$%&'*+\/=?\^_`{|}~\-]+(?:\.[a-zA-Z0-9!#$%&'\*+\/=?\^_`{|}~\-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?$/;
+    return re.test(email);
   }
 };

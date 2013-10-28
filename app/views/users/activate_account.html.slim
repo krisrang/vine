@@ -1,0 +1,12 @@
+- if flash[:error]
+  div class='alert alert-error'
+    = flash[:error]
+  
+- else
+  h2
+    = t 'activation.welcome_to', site_name: SiteSetting.title
+  p
+    - if @needs_approval
+      = t 'activation.approval_required'
+    - else
+      == t('activation.please_continue', link: link_to(SiteSetting.title, '/'))

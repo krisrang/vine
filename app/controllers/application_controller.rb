@@ -2,6 +2,8 @@ require 'current_user'
 
 class ApplicationController < ActionController::Base
   include CurrentUser
+
+  serialization_scope :guardian
   
   protect_from_forgery
 
@@ -69,9 +71,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def guardian
+    @guardian ||= Guardian.new(current_user)
+  end
+
   def serialize_data(obj, serializer, opts={})
     # If it's an array, apply the serializer as an each_serializer to the elements
-    # serializer_opts = {scope: guardian}.merge!(opts)
+     serializer_opts = {scope: guardian}.merge!(opts)
     if obj.is_a?(Array)
       serializer_opts[:each_serializer] = serializer
       ActiveModel::ArraySerializer.new(obj, serializer_opts).as_json
@@ -86,6 +92,17 @@ class ApplicationController < ActionController::Base
 
   def render_json_dump(obj)
     render json: MultiJson.dump(obj)
+  end
+
+  def fetch_user_from_params
+    username_lower = params[:username].downcase
+    username_lower.gsub!(/\.json$/, '')
+
+    user = User.where(username_lower: username_lower).first
+    raise Vine::NotFound.new if user.blank?
+
+    guardian.ensure_can_see!(user)
+    user
   end
 
   private

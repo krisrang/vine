@@ -24,10 +24,9 @@ Vine.User.reopenClass(Vine.Singleton, {
     });
   },
 
-  createAccount: function(name, email, password, username, passwordConfirm, challenge) {
+  createAccount: function(email, password, username, passwordConfirm, challenge) {
     return Vine.ajax("/users", {
       data: {
-        name: name,
         email: email,
         password: password,
         username: username,

@@ -1,4 +1,5 @@
 require 'mail'
+require_dependency 'email/message_builder'
 
 module Email
 

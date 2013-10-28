@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017132950) do
+ActiveRecord::Schema.define(version: 20131028100510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "email_tokens", force: true do |t|
+    t.integer  "user_id",                    null: false
+    t.string   "email",                      null: false
+    t.string   "token",                      null: false
+    t.boolean  "confirmed",  default: false, null: false
+    t.boolean  "expired",    default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "email_tokens", ["token"], name: "index_email_tokens_on_token", unique: true, using: :btree
 
   create_table "site_settings", force: true do |t|
     t.string   "name",       null: false
@@ -51,6 +63,12 @@ ActiveRecord::Schema.define(version: 20131017132950) do
     t.boolean  "admin",                        default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "banned_at"
+    t.datetime "banned_till"
+    t.boolean  "active"
+    t.boolean  "approved",                     default: false, null: false
+    t.integer  "approved_by_id"
+    t.datetime "approved_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree

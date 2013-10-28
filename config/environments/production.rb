@@ -82,4 +82,9 @@ Vine::Application.configure do
 
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = { api_key: Figaro.env.postmark }
+
+  # a comma delimited list of emails your devs have
+  # developers have god like rights and may impersonate anyone in the system
+  # normal admins may only impersonate other moderators (not admins)
+  config.developer_emails = []
 end

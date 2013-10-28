@@ -1,0 +1,8 @@
+form {
+  .tip {
+    display:inline-block;
+
+    &.good { color:#070 }
+    &.bad { color:#700 }
+  }
+}

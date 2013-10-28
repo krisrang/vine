@@ -22,6 +22,27 @@ module Vine
   # Cross site request forgery
   class CSRF < Exception; end
 
+  def self.current_hostname
+    SiteSetting.hostname
+  end
+
+  def self.base_url
+    default_port = 80
+    protocol = "http"
+
+    if SiteSetting.use_ssl?
+      protocol = "https"
+      default_port = 443
+    end
+
+    result = "#{protocol}://#{current_hostname}"
+
+    port = SiteSetting.port.present? && SiteSetting.port.to_i > 0 ? SiteSetting.port.to_i : default_port
+
+    result << ":#{SiteSetting.port}" if port != default_port
+    result
+  end
+
   def self.git_version
     return $git_version if $git_version
 

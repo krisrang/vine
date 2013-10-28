@@ -4,6 +4,32 @@ en:
       log_in: "Log In"
       log_out: "Log Out"
 
+      email:
+        title: "Email"
+        instructions: "Your email will never be shown to the public."
+        ok: "Looks good. We will email you to confirm."
+        invalid: "Please enter a valid email address."
+        authenticated: "Your email has been authenticated by {{provider}}."
+
+      username:
+        title: "Username"
+        instructions: "Must be unique, no spaces. People can mention you as @username."
+        short_instructions: "People can mention you as @{{username}}."
+        available: "Your username is available."
+        not_available: "Not available. Try {{suggestion}}?"
+        too_short: "Your username is too short."
+        too_long: "Your username is too long."
+        checking: "Checking username availability..."
+
+
+      password:
+        title: "Password"
+        too_short: "Your password is too short."
+        ok: "Your password looks good."
+
+      password_confirmation:
+        title: "Password Again"
+
     create_account:
       title: "Create Account"
       question: "Don't have an account?"

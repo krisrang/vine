@@ -28,6 +28,14 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
   },
 
   initDom: function() {
+    Vine.csrfToken = $('meta[name=csrf-token]').attr('content');
+
+    $.ajaxPrefilter(function(options, originalOptions, xhr) {
+      if (!options.crossDomain) {
+        xhr.setRequestHeader('X-CSRF-Token', Vine.csrfToken);
+      }
+    });
+
     bootbox.setDefaults({
       animate: false,
       backdrop: true
@@ -35,7 +43,7 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
   },
 
   start: function() {
-    Vine.SiteSettings = PreloadStore.get('settings');
     Vine.initDom();
+    Vine.SiteSettings = PreloadStore.get('settings');
   }
 });

@@ -12,4 +12,36 @@ en:
     something_already_taken: "Something went wrong, perhaps the username or email is already registered. Try the forgot password link."
     omniauth_error: "Sorry, there was an error authorizing your %{strategy} account. Perhaps you did not approve authorization?"
     omniauth_error_unknown: "Something went wrong processing your log in, please try again."
+
   login_required: "This message board requires an account. Please create an account or login to continue."
+
+  user:
+    username:
+      short: "must be longer than %{min} characters"
+      long: "must be shorter than %{max} characters"
+      characters: "must only include numbers and letters"
+      unique: "must be unique"
+      blank: "must be present"
+      must_begin_with_alphanumeric: "must begin with a letter or number"
+    email:
+      not_allowed: "is not allowed from that email provider. Please use another email address."
+      blocked: "is not allowed."
+
+  user_notifications:
+    signup_after_approval:
+      subject: "You've been approved on %{site_name}!"
+
+    signup:
+      subject: "[%{site_name}] Activate your new account"
+
+    forgot_password:
+      subject: "[%{site_name}] Password reset"
+
+    authorize_email:
+      subject: "[%{site_name}] Confirm your new email address"
+
+  activation:
+    already_done: "Sorry, this account confirmation link is no longer valid. Perhaps your account is already active?"
+    please_continue: "Your new account is confirmed, and you are now logged in. Continue to %{link}"
+    welcome_to: "Welcome to %{site_name}!"
+    approval_required: "A moderator must manually approve your new account before you can access this forum. You'll get an email when your account is approved!"

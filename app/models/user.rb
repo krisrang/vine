@@ -1,8 +1,12 @@
 require_dependency 'pbkdf2'
+require_dependency 'email'
+require_dependency 'vine'
 
 class User < ActiveRecord::Base
   has_many :user_visits, dependent: :destroy
   has_one :user_stat, dependent: :destroy
+  has_many :email_tokens, dependent: :destroy
+  belongs_to :approved_by, class_name: 'User'
 
   validates_presence_of :username
   validate :username_validator
@@ -13,7 +17,11 @@ class User < ActiveRecord::Base
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
 
+  after_create :create_email_token
   after_create :create_user_stat
+
+  scope :banned,      -> { where('banned_till IS NOT NULL AND banned_till > ?', Time.zone.now) }
+  scope :not_banned,  -> { where('banned_till IS NULL') }
 
   def self.username_length
     3..15
@@ -26,7 +34,6 @@ class User < ActiveRecord::Base
 
   def self.new_from_params(params)
     user = User.new
-    user.name = params[:name]
     user.email = params[:email]
     user.password = params[:password]
     user.username = params[:username]
@@ -49,8 +56,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  def approve(approved_by, send_mail=true)
+    self.approved = true
+
+    if Fixnum === approved_by
+      self.approved_by_id = approved_by
+    else
+      self.approved_by = approved_by
+    end
+
+    self.approved_at = Time.now
+
+    send_approval_email if save and send_mail
+  end
+
   def admin?
     admin
+  end
+
+  def is_banned?
+    banned_till && banned_till > DateTime.now
   end
 
   def update_username_lower
@@ -103,6 +128,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def email_confirmed?
+    email_tokens.where(email: email, confirmed: true).present? || email_tokens.empty?
+  end
+
+  def activate
+    email_token = self.email_tokens.active.first
+    if email_token
+      EmailToken.confirm(email_token.token)
+    else
+      self.active = true
+      save
+    end
+  end
+
+  def deactivate
+    self.active = false
+    save
+  end
+
   def seen_before?
     last_seen_at.present?
   end
@@ -148,5 +192,13 @@ class User < ActiveRecord::Base
     stat = UserStat.new
     stat.user_id = id
     stat.save!
+  end
+
+  def create_email_token
+    email_tokens.create(email: email)
+  end
+
+  def send_approval_email
+    UserEmail.perform_async({type: :signup_after_approval, user_id: id, email_token: email_tokens.first.token})
   end
 end
