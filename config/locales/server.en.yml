@@ -45,3 +45,8 @@ en:
     please_continue: "Your new account is confirmed, and you are now logged in. Continue to %{link}"
     welcome_to: "Welcome to %{site_name}!"
     approval_required: "A moderator must manually approve your new account before you can access this forum. You'll get an email when your account is approved!"
+
+  page_not_found:
+    title: "The page you requested doesn't exist or may have been deleted."
+    search_title: "Search for this page"
+    search_google: "Search Google"

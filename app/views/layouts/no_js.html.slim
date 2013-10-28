@@ -11,10 +11,10 @@ html lang="#{SiteSetting.default_locale}"
     = vine_csrf_tags
 
   body
-    div class="container"
-      div class="page-header"
+    .container
+      .page-header
         h1
           a href="/"
             = SiteSetting.title
-      p class="lead"
+      p.lead
         == yield
