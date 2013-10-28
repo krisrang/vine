@@ -33,6 +33,9 @@ Vine::Application.routes.draw do
   get 'users/:username' => 'users#show', constraints: {username: USERNAME_ROUTE_FORMAT}
   put 'users/:username' => 'users#update', constraints: {username: USERNAME_ROUTE_FORMAT}
 
+  match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
+  match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
+
   resources :static
   post 'login' => 'static#enter'
   get 'login' => 'static#show', id: 'login'

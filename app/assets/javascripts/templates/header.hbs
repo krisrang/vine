@@ -11,6 +11,7 @@
   </div>
 
   <div class="collapse navbar-collapse navbar-ex1-collapse">
+    {{#if hideWithoutLogin}}
     <ul class="nav navbar-nav">
       {{#linkTo "notifications" tagName="li" href=false class="notification-tab"}}<a {{bindAttr href="view.href"}}><i class="fa fa-dot-circle-o"></i></a>{{/linkTo}}
     </ul>
@@ -20,6 +21,7 @@
         <input type="text" class="form-control" placeholder="Search">
       </div>
     </form>
+    {{/if}}
 
 {{!--     <ul class="nav navbar-nav">
       {{#linkTo "index" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}

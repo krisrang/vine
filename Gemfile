@@ -32,6 +32,11 @@ gem 'ember-rails'
 
 ### MISC
 
+gem 'omniauth'
+gem 'omniauth-openid'
+gem 'openid-redis-store'
+gem 'omniauth-oauth2', require: false
+gem 'omniauth-browserid', git: 'https://github.com/callahad/omniauth-browserid.git', branch: 'observer_api'
 gem 'sentry-raven', github: "getsentry/raven-ruby"
 gem 'active_model_serializers'
 gem 'sidekiq'
@@ -43,7 +48,6 @@ gem 'postmark-rails'
 gem 'figaro'
 gem 'analytics-ruby'
 gem 'bcrypt-ruby'
-gem 'cancan'
 gem 'uuidtools'
 gem 'oj'
 gem 'lru_redux'

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :user_stat, dependent: :destroy
   has_many :email_tokens, dependent: :destroy
   belongs_to :approved_by, class_name: 'User'
+  has_many :user_open_ids, dependent: :destroy
 
   validates_presence_of :username
   validate :username_validator
@@ -22,6 +23,8 @@ class User < ActiveRecord::Base
 
   scope :banned,      -> { where('banned_till IS NOT NULL AND banned_till > ?', Time.zone.now) }
   scope :not_banned,  -> { where('banned_till IS NULL') }
+
+  EMAIL = %r{([^@]+)@([^\.]+)}
 
   def self.username_length
     3..15

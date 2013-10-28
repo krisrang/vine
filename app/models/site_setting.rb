@@ -13,7 +13,7 @@ class SiteSetting < ActiveRecord::Base
   setting(:api_key, '')
 
   client_setting(:must_approve_users, false)
-  client_setting(:login_required, false)
+  client_setting(:login_required, true)
 
   client_setting(:enable_local_logins, true)
   client_setting(:enable_local_account_create, true)

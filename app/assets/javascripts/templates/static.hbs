@@ -1,9 +1,6 @@
 <div class='container'>
   {{#if content}}
-    <blockquote class="pull-right">
-      <p>{{{content}}}</p>
-      <small>Someone famous in <cite title="The Adventures of Sites That Require Authentication">The Adventures of Sites That Require Authentication</cite></small>
-    </blockquote>
+    {{{content}}}
   {{else}}
     <div class='spinner'>{{i18n loading}}</div>
   {{/if}}

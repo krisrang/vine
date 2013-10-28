@@ -30,4 +30,5 @@
 //= require ./router
 
 //= require ./routes/route
+//= require ./routes/authenticated_route
 //= require_tree ./routes

@@ -31,11 +31,11 @@ html lang="#{SiteSetting.default_locale}"
       window.client = new Faye.Client('/faye');
 
     noscript data-path="#{request.env['PATH_INFO']}"
-      header class="d-header"
+      header
         a href="/"
           = SiteSetting.title
 
-      div#main-outlet class="container"
+      div#main-outlet.container
         /! preload-content:
         == yield
         /! :preload-content

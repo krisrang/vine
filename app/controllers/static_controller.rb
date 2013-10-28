@@ -4,6 +4,11 @@ class StaticController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:enter]
 
   def show
+    if current_user && request.path.match(login_path)
+      redirect_to root_path
+      return
+    end
+
     page = params[:id]
 
     # Don't allow paths like ".." or "/" or anything hacky like that

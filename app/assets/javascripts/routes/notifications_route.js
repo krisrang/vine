@@ -1,0 +1,1 @@
+Vine.NotificationsRoute = Vine.AuthenticatedRoute.extend({});

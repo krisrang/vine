@@ -53,6 +53,10 @@ module Vine
     end
   end
 
+  def self.authenticators
+    Users::OmniauthCallbacksController::BUILTIN_AUTH
+  end
+
   def self.current_user_provider
     @current_user_provider || Auth::LocalUserProvider
   end

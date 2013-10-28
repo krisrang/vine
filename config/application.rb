@@ -30,6 +30,13 @@ module Vine
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = "sha256"
 
+    require 'auth'
+
+    config.after_initialize do
+      # So open id logs somewhere sane
+      OpenID::Util.logger = Rails.logger
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

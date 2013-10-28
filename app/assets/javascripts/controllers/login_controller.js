@@ -103,7 +103,6 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
     createAccountController.setProperties({
       accountEmail: options.email,
       accountUsername: options.username,
-      accountName: options.name,
       authOptions: Em.Object.create(options)
     });
     this.send('showCreateAccount');

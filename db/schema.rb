@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028100510) do
+ActiveRecord::Schema.define(version: 20131028144815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 20131028100510) do
   end
 
   add_index "site_settings", ["name"], name: "index_site_settings_on_name", using: :btree
+
+  create_table "user_open_ids", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "email",      null: false
+    t.string   "url",        null: false
+    t.boolean  "active",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_open_ids", ["url"], name: "index_user_open_ids_on_url", using: :btree
 
   create_table "user_stats", force: true do |t|
     t.integer "user_id",                  null: false
