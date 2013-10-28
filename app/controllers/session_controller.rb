@@ -41,6 +41,7 @@ class SessionController < ApplicationController
           render json: {
             error: I18n.t("login.not_activated"),
             reason: 'not_activated',
+            username: @user.username,
             sent_to_email: @user.email_logs.where(email_type: 'signup').order('created_at DESC').first.try(:to_address) || @user.email,
             current_email: @user.email
           }

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028144815) do
+ActiveRecord::Schema.define(version: 20131028153924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "email_logs", force: true do |t|
+    t.string   "to_address", null: false
+    t.string   "email_type", null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "email_logs", ["created_at", "user_id"], name: "index_email_logs_on_created_at_and_user_id", using: :btree
+  add_index "email_logs", ["created_at"], name: "index_email_logs_on_created_at", using: :btree
 
   create_table "email_tokens", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -80,6 +91,7 @@ ActiveRecord::Schema.define(version: 20131028144815) do
     t.boolean  "approved",                     default: false, null: false
     t.integer  "approved_by_id"
     t.datetime "approved_at"
+    t.datetime "last_emailed_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree

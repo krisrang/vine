@@ -16,7 +16,8 @@ class UsersController < ApplicationController
                                                             :get_honeypot_value,
                                                             :activate_account,
                                                             :authorize_email,
-                                                            :password_reset]
+                                                            :password_reset,
+                                                            :send_activation_email]
 
   # Used for checking availability of a username and will return suggestions
   # if the username is not available.
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
     if user.save
       activator = UserActivator.new(user, request, session, cookies)
       message = activator.activation_message
-      # create_third_party_auth_records(user, auth)
+      create_third_party_auth_records(user, auth)
 
       # Clear authentication session.
       session[:authentication] = nil
@@ -115,6 +116,16 @@ class UsersController < ApplicationController
     render layout: 'no_js'
   end
 
+  def send_activation_email
+    @user = fetch_user_from_params
+    @email_token = @user.email_tokens.unconfirmed.active.first
+    if @user
+      @email_token ||= @user.email_tokens.create(email: @user.email)
+      UserEmail.perform_async({type: :signup, user_id: @user.id, email_token: @email_token.token})
+    end
+    render nothing: true
+  end
+
 
   private
 
@@ -177,10 +188,10 @@ class UsersController < ApplicationController
     auth && auth[:email] == email && auth[:email_valid]
   end
 
-  # def create_third_party_auth_records(user, auth)
-  #   return unless auth && auth[:authenticator_name]
+  def create_third_party_auth_records(user, auth)
+    return unless auth && auth[:authenticator_name]
 
-  #   authenticator = Users::OmniauthCallbacksController.find_authenticator(auth[:authenticator_name])
-  #   authenticator.after_create_account(user, auth)
-  # end
+    authenticator = Users::OmniauthCallbacksController.find_authenticator(auth[:authenticator_name])
+    authenticator.after_create_account(user, auth)
+  end
 end

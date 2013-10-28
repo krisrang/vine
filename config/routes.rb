@@ -33,6 +33,8 @@ Vine::Application.routes.draw do
   get 'users/:username' => 'users#show', constraints: {username: USERNAME_ROUTE_FORMAT}
   put 'users/:username' => 'users#update', constraints: {username: USERNAME_ROUTE_FORMAT}
 
+  post 'users/:username/send_activation_email' => 'users#send_activation_email', constraints: {username: USERNAME_ROUTE_FORMAT}
+
   match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
   match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
 

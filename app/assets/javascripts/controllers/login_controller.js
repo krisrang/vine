@@ -28,7 +28,7 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
         loginController.set('loggingIn', false);
         if( result.reason === 'not_activated' ) {
           loginController.send('showNotActivated', {
-            username: loginController.get('loginName'),
+            username: result.username,
             sentTo: result.sent_to_email,
             currentEmail: result.current_email
           });
@@ -59,24 +59,6 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
       return method.get('message');
     }
   }).property('authenticate'),
-
-  externalLogin: function(loginMethod){
-    var name = loginMethod.get("name");
-    var customLogin = loginMethod.get("customLogin");
-
-    if(customLogin){
-      customLogin();
-    } else {
-      this.set('authenticate', name);
-      var left = this.get('lastX') - 400;
-      var top = this.get('lastY') - 200;
-
-      var height = loginMethod.get("frameHeight") || 400;
-      var width = loginMethod.get("frameWidth") || 800;
-      window.open(Vine.getURL("/auth/" + name), "_blank",
-          "menubar=no,status=no,height=" + height + ",width=" + width +  ",left=" + left + ",top=" + top);
-    }
-  },
 
   authenticationComplete: function(options) {
     if (options.awaiting_approval) {

@@ -1,3 +1,5 @@
+require_dependency 'email/sender'
+
 class UserEmail
   include Sidekiq::Worker
 
@@ -22,6 +24,6 @@ class UserEmail
       message.to = [args['to_address']]
     end
 
-    message.deliver
+    Email::Sender.new(message, args['type'], user).send
   end
 end

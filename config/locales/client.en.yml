@@ -1,5 +1,7 @@
 en:
   js:
+    close: "Close"
+    
     user:
       log_in: "Log In"
       log_out: "Log Out"
