@@ -59,7 +59,7 @@ faye = Faye::RackAdapter.new(
     uri: VineRedis.faye_url
 })
 
-Faye.logger = Logger.new(File.join(Rails.root, 'log/faye.log'))
+# Faye.logger = Logger.new(File.join(Rails.root, 'log/faye.log'))
 Faye.ensure_reactor_running!
 
 $fayerack = faye
