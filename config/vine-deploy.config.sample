@@ -1,0 +1,24 @@
+# initctl emit vine-deploy TAG=v1.2.3
+description "Vine deploy"
+setuid deploy
+
+on vine-deploy
+
+task
+
+console log
+
+env RBENV_ROOT=/home/deploy/.rbenv
+env PATH=/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH
+env RAILS_ENV=production
+
+chdir /home/deploy/vine
+
+script
+  git fetch --all --tags origin
+  git checkout --force --detach $TAG
+  bundle install --deployment
+  bundle clean
+  # touch ./tmp/restart.txt
+  # kill -USR2 `cat ./run/unicorn.pid`
+end script
