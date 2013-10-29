@@ -86,5 +86,5 @@ Vine::Application.configure do
   # a comma delimited list of emails your devs have
   # developers have god like rights and may impersonate anyone in the system
   # normal admins may only impersonate other moderators (not admins)
-  config.developer_emails = []
+  config.developer_emails = ['mail@rang.ee']
 end

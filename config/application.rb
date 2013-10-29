@@ -26,6 +26,8 @@ module Vine
       config.assets.precompile << "locales/#{file.match(/([a-z_A-Z]+\.js)\.erb$/)[1]}"
     end
 
+    config.assets.precompile << ['preload_store.js']
+
     # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = "sha256"
