@@ -12,8 +12,6 @@ development:
 test:
   <<: *defaults
 
-staging:
-  <<: *defaults
-
 production:
   <<: *defaults
+  cache_db: 0
