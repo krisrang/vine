@@ -1,5 +1,4 @@
 require_dependency 'enum'
-require 'eventmachine'
 
 module SiteSettingExtension
   def types

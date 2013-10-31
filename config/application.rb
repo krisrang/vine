@@ -19,6 +19,9 @@ module Vine
     # nginx does whatever caching necessary
     config.action_dispatch.rack_cache = nil
 
+    # route all exceptions via our router
+    config.exceptions_app = self.routes
+
     require 'js_locale_helper'
     config.assets.paths += %W(#{config.root}/config/locales)
 
@@ -27,6 +30,9 @@ module Vine
     end
 
     config.assets.precompile << ['preload_store.js']
+
+    config.handlebars.templates_root = 'app/templates'
+    config.ember.variant = :development
 
     # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
     config.pbkdf2_iterations = 64000

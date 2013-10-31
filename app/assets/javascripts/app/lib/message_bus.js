@@ -69,9 +69,7 @@ Vine.MessageBus = (function() {
           cache: false,
           dataType: 'json',
           type: 'POST',
-          headers: {
-            'X-SILENCE-LOGGER': 'true'
-          },
+          headers: {},
           success: function(messages) {
             failCount = 0;
             _.each(messages,function(message) {

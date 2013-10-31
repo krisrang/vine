@@ -10,28 +10,29 @@
 //= require bootstrap
 
 //= require ./init
-//= require ./helpers/i18n
-//= require ./mixins/ajax
+//= require_tree ./app/ember
+//= require ./app/helpers/i18n
+//= require ./app/mixins/ajax
 //= require ./vine
 //= require ./store
 
 // Load first
-//= require_tree ./lib
-//= require_tree ./mixins
-//= require ./models/model
-//= require ./controllers/controller
-//= require ./views/view
-//= require ./views/modal/modal_view
-//= require ./views/modal/modal_body_view
-//= require ./routes/route
-//= require ./routes/authenticated_route
+//= require_tree ./app/lib
+//= require_tree ./app/mixins
+//= require ./app/models/model
+//= require ./app/controllers/controller
+//= require ./app/views/view
+//= require ./app/views/modal/modal_view
+//= require ./app/views/modal/modal_body_view
+//= require ./app/routes/route
+//= require ./app/routes/authenticated_route
 
-//= require_tree ./components
-//= require_tree ./models
-//= require_tree ./controllers
-//= require_tree ./views
-//= require_tree ./helpers
-//= require_tree ./templates
-//= require_tree ./routes
+//= require_tree ./app/components
+//= require_tree ./app/models
+//= require_tree ./app/controllers
+//= require_tree ./app/views
+//= require_tree ./app/helpers
+//= require_tree ./app/templates
+//= require_tree ./app/routes
 
 //= require ./router

@@ -1,6 +1,10 @@
 Vine = Ember.Application.createWithMixins(Vine.Ajax, {
   hasFocus: true,
 
+  Resolver: Vine.Resolver,
+
+  URL_FIXTURES: {},
+
   getURL: function(url) {
     // If it's a non relative URL, return it.
     if (url.indexOf('http') === 0) return url;
@@ -29,9 +33,9 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
 
   faviconChanged: function() {
     if(Vine.User.currentProp('dynamic_favicon')) {
-      new Favcount(Vine.SiteSettings.favicon_url).set(
-        this.get('notifyCount')
-      );
+      // new Favcount(Vine.SiteSettings.favicon_url).set(
+      //   this.get('notifyCount')
+      // );
     }
   }.observes('notifyCount'),
 

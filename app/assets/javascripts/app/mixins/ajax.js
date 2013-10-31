@@ -1,4 +1,5 @@
 Vine.Ajax = Em.Mixin.create({
+
   ajax: function() {
     var url, args;
 
@@ -16,6 +17,19 @@ Vine.Ajax = Em.Mixin.create({
       args = arguments[1];
     }
 
+    if (args.success) {
+      console.warning("DEPRECATION: Vine.ajax should use promises, received 'success' callback");
+    }
+    if (args.error) {
+      console.warning("DEPRECATION: Vine.ajax should use promises, received 'error' callback");
+    }
+
+    // If we have URL_FIXTURES, load from there instead (testing)
+    var fixture = Vine.URL_FIXTURES && Vine.URL_FIXTURES[url];
+    if (fixture) {
+      return Ember.RSVP.resolve(fixture);
+    }
+
     var performAjax = function(promise) {
       var oldSuccess = args.success;
       args.success = function(xhr) {
@@ -25,6 +39,7 @@ Vine.Ajax = Em.Mixin.create({
 
       var oldError = args.error;
       args.error = function(xhr) {
+
         // note: for bad CSRF we don't loop an extra request right away.
         //  this allows us to eliminate the possibility of having a loop.
         if (xhr.status === 403 && xhr.responseText === "['BAD CSRF']") {

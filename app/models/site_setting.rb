@@ -24,6 +24,7 @@ class SiteSetting < ActiveRecord::Base
   client_setting(:email_domains_blacklist, 'mailinator.com')
   client_setting(:email_domains_whitelist)
 
+  client_setting(:polling_interval, 3000)
   client_setting(:enable_long_polling, true)
   setting(:long_polling_interval, 15000)
 
@@ -32,7 +33,7 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:analytics_code, 'urza14xmgm')
 
-  setting(:hostname, 'forum.rang.ee')
+  setting(:hostname, Rails.env.development? ? 'localhost' : 'forum.rang.ee')
   setting(:port, Rails.env.development? ? 5000 : '')
   setting(:use_ssl, false)
 

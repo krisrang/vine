@@ -6,7 +6,7 @@ Vine.ModalView = Vine.View.extend({
   backdrop: 'static',
 
   click: function(e) {
-    if (e.target !== e.currentTarget) return
+    if (e.target !== e.currentTarget) return;
       
     e.stopPropagation();
     e.preventDefault();

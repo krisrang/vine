@@ -9,9 +9,30 @@ Vine.User = Vine.Model.extend({
   // fullName: ( -> 
   //   return this.get('firstName') + ' ' + this.get('lastName')
   // ).property('firstName', 'lastName')
+
+  findDetails: function() {
+    var user = this;
+
+    return PreloadStore.getAndRemove("user_" + user.get('username'), function() {
+      return Vine.ajax("/users/" + user.get('username') + '.json');
+    }).then(function (json) {
+
+      // if (json.user.invited_by) {
+      //   json.user.invited_by = Vine.User.create(json.user.invited_by);
+      // }
+
+      user.setProperties(json.user);
+      return user;
+    });
+  }
 });
 
 Vine.User.reopenClass(Vine.Singleton, {
+  findByUsername: function(username) {
+    var user = Vine.User.create({username: username});
+    return user.findDetails();
+  },
+
   createCurrent: function() {
     var userJson = PreloadStore.get('currentUser');
     if (userJson) { return Vine.User.create(userJson); }

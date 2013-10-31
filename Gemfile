@@ -33,7 +33,6 @@ gem 'omniauth-openid'
 gem 'openid-redis-store'
 gem 'omniauth-oauth2', require: false
 gem 'omniauth-browserid', git: 'https://github.com/callahad/omniauth-browserid.git', branch: 'observer_api'
-gem 'sentry-raven', github: "getsentry/raven-ruby"
 gem 'active_model_serializers'
 gem 'sidekiq'
 gem 'sidetiq'
@@ -48,25 +47,38 @@ gem 'uuidtools'
 gem 'oj'
 gem 'lru_redux'
 gem 'fast_xor'
+gem 'seed-fu'
 
 group :development do
   gem 'foreman'
   gem 'letter_opener'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
+  gem 'fabrication', require: false
+  gem 'mocha', require: false
+  gem 'listen', '0.7.3', require: false
+  gem 'certified', require: false
+  gem 'qunit-rails'
   gem 'quiet_assets'
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
-  gem 'turnip'
-  gem 'poltergeist'
   gem 'guard-rspec'
+  gem 'rspec-rails'
+  gem 'pry-rails'
+  gem 'rspec-given'
+  gem 'shoulda', require: false
+  gem 'simplecov', require: false
+  gem 'spork-rails', :github => 'sporkrb/spork-rails'
+  gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
+  gem 'rb-inotify', '~> 0.9', require: RUBY_PLATFORM =~ /linux/i ? 'rb-inotify' : false
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'fakeweb'
 end
 
 group :production do
   gem 'rails_12factor'
+  gem 'sentry-raven', github: "getsentry/raven-ruby"
 end
