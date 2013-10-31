@@ -10,18 +10,13 @@ gem 'pg'
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
-
-gem 'eventmachine'
-gem 'faye'
-gem 'faye-redis'
-
 gem 'message_bus', github: 'SamSaffron/message_bus'
 
 
 ### FRONTEND
 
-gem 'less'
-gem 'sass-rails', '~> 4.0.1'
+gem 'less-rails'
+gem 'sass-rails'
 gem 'uglifier'
 gem 'bourbon'
 gem 'jquery-rails'
@@ -29,6 +24,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'jbuilder'
 gem 'ember-rails'
+
 
 ### MISC
 
@@ -52,10 +48,6 @@ gem 'uuidtools'
 gem 'oj'
 gem 'lru_redux'
 gem 'fast_xor'
-
-group :doc do
-  gem 'sdoc', require: false # rake doc:rails generates the API under doc/api.
-end
 
 group :development do
   gem 'foreman'

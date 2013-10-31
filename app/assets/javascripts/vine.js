@@ -44,6 +44,7 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
 
   start: function() {
     Vine.initDom();
-    Vine.SiteSettings = PreloadStore.get('settings');
+    Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
+    Vine.MessageBus.start();
   }
 });
