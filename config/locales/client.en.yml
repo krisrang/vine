@@ -1,7 +1,7 @@
 en:
   js:
     close: "Close"
-    
+
     user:
       log_in: "Log In"
       log_out: "Log Out"
@@ -28,6 +28,12 @@ en:
         title: "Password"
         too_short: "Your password is too short."
         ok: "Your password looks good."
+        hint: "A good password is easy to remember but hard for a stranger to guess. Uncommon words work well, but only if you use several. Also helpful: non-standard uPPercasing, creative spelllling, personal neologisms, and non-obvious numbers and symbols (using $ for s or 0 for o is too obvious!)"
+        very_strong: "Very strong"
+        strong: "Strong"
+        medium: "Medium"
+        weak: "Weak"
+        very_weak: "Very weak"
 
       password_confirmation:
         title: "Password Again"

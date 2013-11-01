@@ -167,10 +167,56 @@ Vine.CreateAccountController = Vine.Controller.extend(Vine.ModalFunctionality, {
 
     // Looks good!
     return Vine.InputValidation.create({
-      ok: true,
-      reason: I18n.t('user.password.ok')
+      ok: true
+      // reason: I18n.t('user.password.ok')
     });
   }.property('accountPassword'),
+
+  passwordStrengthMessage: function() {
+    var score;
+    score = this.passwordStrength();
+
+    switch(score) {
+      case 4:
+        return I18n.t('user.password.very_strong');
+      case 3:
+        return I18n.t('user.password.strong');
+      case 2:
+        return I18n.t('user.password.medium');
+      case 1:
+        return I18n.t('user.password.weak');
+      default:
+        return I18n.t('user.password.very_weak');
+    };
+  }.property('accountPassword'),
+
+  passwordStrengthClass: function() {
+    var score;
+    score = this.passwordStrength();
+
+    return "strength-" + score;
+  }.property('accountPassword'),
+
+  passwordStrength: function() {
+    var strength, password;
+    var inputs = [];
+
+    password = this.get("accountPassword");
+    if (this.blank('accountPassword')) {
+      return 0;
+    }
+
+    if (!this.blank('accountUsername')) {
+      inputs.push(this.get('accountUsername'));
+    }
+
+    if (!this.blank('accountEmail')) {
+      inputs.push(this.get('accountEmail'));
+    }
+
+    strength = zxcvbn(this.get('accountPassword'), inputs);
+    return strength.score;
+  },
 
   fetchConfirmationValue: function() {
     var createAccountController = this;

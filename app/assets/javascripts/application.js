@@ -8,6 +8,7 @@
 //= require ember
 //= require ember-data
 //= require bootstrap
+//= require zxcvbn-async
 
 //= require ./init
 //= require_tree ./app/ember

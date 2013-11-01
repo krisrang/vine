@@ -14,6 +14,8 @@ Vine.CreateAccountView = Vine.ModalBodyView.extend({
           createAccountController.createAccount();
         }
       });
+
+      $('.password_strength_desc i').popover({trigger: 'hover', container: '.modal-dialog', placement: 'left'});
     });
   }
 });

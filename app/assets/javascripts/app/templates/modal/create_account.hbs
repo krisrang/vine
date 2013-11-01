@@ -30,6 +30,18 @@
       <label for='new-account-password' class="col-lg-3">{{i18n user.password.title}}&nbsp;</label>
       <div class="col-lg-9">
         {{textField type="password" value=accountPassword id="new-account-password" class="form-control"}}
+        <div class="password_strength_container">
+          <div class="password_strength_bg"></div>
+          <div class="password_strength" {{bindAttr class="passwordStrengthClass"}}></div>
+          <div class="password_strength_separator" style="left: 20%;"></div>
+          <div class="password_strength_separator" style="left: 40%;"></div>
+          <div class="password_strength_separator" style="left: 60%;"></div>
+          <div class="password_strength_separator" style="left: 80%;"></div>
+          <div class="password_strength_desc" {{bindAttr class="passwordStrengthClass"}}>
+            {{passwordStrengthMessage}} <i class="fa fa-info-circle" data-content="{{i18n user.password.hint}}"></i>
+          </div>
+          <div class="clearfix"></div>
+        </div>
         &nbsp;{{inputTip validation=passwordValidation}}
       </div>
     </div>
