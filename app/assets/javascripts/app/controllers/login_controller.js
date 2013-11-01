@@ -15,7 +15,7 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
     return this.get('loggingIn') || this.blank('loginName') || this.blank('loginPassword');
   }.property('loginName', 'loginPassword', 'loggingIn'),
 
-  login: function() {
+  loginAction: function() {
     this.set('loggingIn', true);
 
     var loginController = this;
@@ -50,6 +50,25 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
     });
 
     return false;
+  },
+
+  externalLoginAction: function(loginMethod){
+    var name = loginMethod.get("name");
+    var customLogin = loginMethod.get("customLogin");
+
+    this.set('authenticate', name);
+
+    if (customLogin) {
+      customLogin();
+    } else {
+      var left = this.get('lastX') - 400;
+      var top = this.get('lastY') - 200;
+
+      var height = loginMethod.get("frameHeight") || 400;
+      var width = loginMethod.get("frameWidth") || 800;
+      window.open(Vine.getURL("/auth/" + name), "_blank",
+          "menubar=no,status=no,height=" + height + ",width=" + width +  ",left=" + left + ",top=" + top);
+    }
   },
 
   authMessage: (function() {

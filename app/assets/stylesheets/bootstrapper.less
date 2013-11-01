@@ -1,5 +1,9 @@
 @import "bootstrap/bootstrap";
 
+// 
+// BUTTONS
+// 
+
 @border-radius-base:  3px;
 @border-radius-large: 4px;
 @border-radius-small: 3px;
@@ -7,6 +11,11 @@
 .btn-lg {
   .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-base);
 }
+
+
+// 
+// MODAL REDESIGN
+// 
 
 .modal-header, .modal-footer {
   border: none;
@@ -30,11 +39,15 @@
 .modal-content {
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .modal-footer {
   text-align: center;
+}
+
+.modal-backdrop {
+  &.in { .opacity(.7); }
 }
 
 @media screen and (min-width: @screen-tablet) {
@@ -44,10 +57,15 @@
 
   .modal.create-account {
     .modal-dialog {
-      width: 600px;
+      width: 500px;
     }
   }
 }
+
+
+// 
+// MISC
+// 
 
 .alert-error {
   .alert-danger;

@@ -13,22 +13,42 @@ a {
 }
 
 input:-moz-placeholder {
-  color: #9ba8b6;
+  color: #888;
   font-size: 15px;
   letter-spacing: 0px;
   font-style: italic;
 }
 input:-ms-input-placeholder {
-  color: #9ba8b6;
+  color: #888;
   font-style: italic;
   letter-spacing: 0px;
   font-size: 15px;
 }
 input::-webkit-input-placeholder {
-  color: #9ba8b6;
+  color: #888;
   font-style: italic;
   letter-spacing: 0px;
   font-size: 15px;
+}
+
+.form-group {
+  label {
+    margin: 5px 0;
+  }
+}
+
+.form-control.borderless {
+  background: none;
+  border: none;
+  border-radius: 0;
+  @include box-shadow(none);
+  border-bottom: 1px solid #888;
+
+  &:focus, &:hover {
+    border-radius: 0;
+    @include box-shadow(none);
+    border-bottom: 1px solid #222;
+  }
 }
 
 // 
