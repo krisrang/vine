@@ -9,9 +9,5 @@ Vine.Controller = Ember.Controller.extend(Vine.Presence, Vine.HasCurrentUser, {
     } else {
       this.afterFirstHit = true;
     }
-  }.observes('currentPath'),
-
-  hideWithoutLogin: function() {
-    return !Vine.get('loginRequired');
-  }.property('Vine.loginRequired')
+  }.observes('currentPath')
 });

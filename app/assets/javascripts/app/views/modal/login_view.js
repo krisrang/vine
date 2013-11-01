@@ -53,10 +53,12 @@ Vine.LoginView = Vine.ModalBodyView.extend({
       });
     });
 
-    var view = this;
-    // load persona if needed
-    if (Vine.SiteSettings.enable_persona_logins) {
-      $LAB.script("https://login.persona.org/include.js").wait(view.initPersona);
-    }
+    this.initPersona();
+
+    // var view = this;
+    // // load persona if needed
+    // if (Vine.SiteSettings.enable_persona_logins) {
+    //   $LAB.script("https://login.persona.org/include.js").wait(view.initPersona);
+    // }
   }
 });

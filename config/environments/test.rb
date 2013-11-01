@@ -33,4 +33,7 @@ Vine::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.pbkdf2_iterations = 10
+  config.ember.variant = :development
 end

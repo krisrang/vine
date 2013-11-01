@@ -1,53 +1,32 @@
 Vine.debounce = function(func, wait) {
-  var timeout = null;
+  var self, args;
+  var later = function() {
+    func.apply(self, args);
+  };
 
   return function() {
-    var context = this;
-    var args = arguments;
+    self = this;
+    args = arguments;
 
-    var later = function() {
-      timeout = null;
-      return func.apply(context, args);
-    };
-
-    if (timeout) return;
-
-    var currentWait;
-    if (typeof wait === "function") {
-      currentWait = wait();
-    } else {
-      currentWait = wait;
-    }
-
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-
-    timeout = setTimeout(later, currentWait);
-    return timeout;
+    Ember.run.debounce(null, later, wait);
   };
 };
 
 Vine.debouncePromise = function(func, wait) {
-  var timeout = null;
-  var args = null;
-  var context = null;
+  var self, args, promise;
+  var later = function() {
+    func.apply(self, args).then(function (funcResult) {
+      promise.resolve(funcResult);
+    });
+  };
 
   return function() {
-    context = this;
-    var promise = Ember.Deferred.create();
+    self = this;
     args = arguments;
+    promise = Ember.Deferred.create();
 
-    if (!timeout) {
-      timeout = Em.run.later(function () {
-        timeout = null;
-        func.apply(context, args).then(function (y) {
-          promise.resolve(y);
-        });
-      }, wait);
-    }
+    Ember.run.debounce(null, later, wait);
 
     return promise;
   };
 };
-

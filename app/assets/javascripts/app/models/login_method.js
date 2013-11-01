@@ -32,7 +32,7 @@ Vine.LoginMethod.reopenClass({
 
         if(name === "persona") {
           params.customLogin = function(){
-            navigator.id.request();
+            navigator.id.request({siteName: Vine.SiteSettings.title, siteLogo: assetPath('logo100w.png.uri')});
           };
           params.icon = "fa fa-envelope";
           params.color = "info";

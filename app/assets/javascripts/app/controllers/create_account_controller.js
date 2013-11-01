@@ -187,7 +187,7 @@ Vine.CreateAccountController = Vine.Controller.extend(Vine.ModalFunctionality, {
         return I18n.t('user.password.weak');
       default:
         return I18n.t('user.password.very_weak');
-    };
+    }
   }.property('accountPassword'),
 
   passwordStrengthClass: function() {

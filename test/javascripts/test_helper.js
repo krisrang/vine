@@ -5,6 +5,8 @@
 //= require preload_store
 //= require application
 
+//= require sinon
+//= require sinon-qunit
 //= require jshint
 
 //= require helpers/qunit_helpers
@@ -14,6 +16,16 @@
 //= require_tree .
 //= require_self
 //= require jshint_all
+
+sinon.config = {
+  injectIntoThis: true,
+  injectInto: null,
+  properties: ["spy", "stub", "mock", "clock", "sandbox"],
+  useFakeTimers: false,
+  useFakeServer: false
+};
+
+window.assetPath = function() { return null; };
 
 var oldAjax = $.ajax;
 $.ajax = function() {

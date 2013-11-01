@@ -7,28 +7,24 @@
       <span class="icon-bar"></span>
     </button>
     
-    {{#linkTo "index" href=false class="navbar-brand"}}{{title}}{{/linkTo}}
+    {{#linkTo "index" href=false class="navbar-brand"}}
+      {{title}} <img {{bindAttr src=icon}}" alt="">
+    {{/linkTo}}
   </div>
 
   <div class="collapse navbar-collapse navbar-ex1-collapse">
-    {{#if hideWithoutLogin}}
-    <ul class="nav navbar-nav">
-      {{#linkTo "notifications" tagName="li" href=false class="notification-tab"}}<a {{bindAttr href="view.href"}}><i class="fa fa-dot-circle-o"></i></a>{{/linkTo}}
+    {{#if currentUser}}
+    <ul class="nav navbar-nav navbar-left">
+      {{#linkTo "index" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}
+      {{#linkTo "media" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Media</a>{{/linkTo}}
     </ul>
 
-    <form class="navbar-form navbar-left" role="search">
+    <form class="nav navbar-form navbar-left" role="search">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search">
       </div>
     </form>
-    {{/if}}
 
-{{!--     <ul class="nav navbar-nav">
-      {{#linkTo "index" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}
-      {{#linkTo "things" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Things</a>{{/linkTo}}
-    </ul> --}}
-    
-    {{#if currentUser}}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         
@@ -39,6 +35,13 @@
         </ul>
       </li>
     </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      {{#linkTo "notifications" tagName="li" href=false class="notification-tab"}}
+        <a {{bindAttr href="view.href"}}><i class="fa fa-dot-circle-o"></i></a>
+      {{/linkTo}}
+    </ul>
+
     {{else}}
     <form class="navbar-form navbar-right">
       <button {{action showLogin}} class='btn btn-primary btn-small'>{{i18n user.log_in}}</button>

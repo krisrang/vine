@@ -64,6 +64,10 @@ Vine.User.reopenClass(Vine.Singleton, {
       type: 'DELETE'
     }).then(function () {
       vineUserClass.currentUser = null;
+
+      if (navigator.id !== undefined) {
+        navigator.id.logout();
+      }
     });
   }
 });

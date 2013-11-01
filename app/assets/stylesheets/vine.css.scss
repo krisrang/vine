@@ -53,7 +53,11 @@ input::-webkit-input-placeholder {
 
 // 
 //// HEADER
-// 
+//
+
+.navbar-brand img {
+  vertical-align: top;
+}
 
 .navbar-nav li.notification-tab > a{
   color: #AAA;
