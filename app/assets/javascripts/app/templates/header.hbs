@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
     </button>
     
-    {{#linkTo "messages" href=false class="navbar-brand"}}
+    {{#linkTo "index" href=false class="navbar-brand"}}
       {{title}} <img {{bindAttr src=icon}}" alt="">
     {{/linkTo}}
   </div>
@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     {{#if currentUser}}
     <ul class="nav navbar-nav navbar-left">
-      {{#linkTo "messages" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}
+      {{#linkTo "index" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}
       {{#linkTo "media" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Media</a>{{/linkTo}}
     </ul>
 

@@ -6,7 +6,7 @@
 //= require jquery.html5-placeholder-shim
 //= require handlebars
 //= require ember
-//= require ember-data-beta
+//= require ember-data
 //= require bootstrap
 //= require zxcvbn-async
 

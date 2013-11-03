@@ -1,12 +1,10 @@
-var attr = DS.attr;
-
-Vine.User = DS.Model.extend({
-  username: attr(),
-  email: attr(),
-  created_at: attr('date'),
-  updated_at: attr('date'),
-  admin: attr('boolean'),
-  // messages: hasMany('Vine.Message')
+Vine.User = Vine.Model.extend({
+  // username: DS.attr('string'),
+  // email: DS.attr('string'),
+  // created_at: DS.attr('date'),
+  // updated_at: DS.attr('date'),
+  // admin: DS.attr('boolean'),
+  // messages: DS.hasMany('Vine.Message')
 
   // fullName: ( -> 
   //   return this.get('firstName') + ' ' + this.get('lastName')
@@ -31,13 +29,13 @@ Vine.User = DS.Model.extend({
 
 Vine.User.reopenClass(Vine.Singleton, {
   findByUsername: function(username) {
-    var user = store.createRecord('user', {username: username});
+    var user = Vine.User.create({username: username});
     return user.findDetails();
   },
 
   createCurrent: function() {
     var userJson = PreloadStore.get('currentUser');
-    if (userJson) { return store.createRecord('user', userJson); }
+    if (userJson) { return Vine.User.create(userJson); }
     return null;
   },
 

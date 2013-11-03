@@ -1,1 +1,4 @@
-// Vine.Store = DS.Store.extend();
+Vine.Store = DS.Store.extend({
+  revision: 11,
+  adapter: DS.RESTAdapter.create()
+});
