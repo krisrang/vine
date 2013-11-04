@@ -37,6 +37,17 @@ Vine.ApplicationRoute = Em.Route.extend({
     externalLogin: function(loginMethod){
       var controller = this.controllerFor('login');
       controller.externalLoginAction(loginMethod);
+    },
+
+    logout: function() {
+      Vine.User.logout().then(function() {
+        window.location.pathname = Vine.getURL('/');
+      });
+    },
+
+    createAccount: function() {
+      var controller = this.controllerFor('createAccount');
+      controller.createAccountAction();
     }
   }
 });

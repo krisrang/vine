@@ -1,3 +1,5 @@
 Vine.AuthenticatedRoute = Vine.Route.extend({
-  redirect: function() { Vine.redirectIfLoginRequired(this); }
+  redirect: function() {
+    if (Vine.SiteSettings.login_required && !Vine.User.current()) { route.transitionTo('login'); }
+  }
 });

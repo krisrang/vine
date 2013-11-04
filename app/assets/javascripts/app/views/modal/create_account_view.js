@@ -11,7 +11,7 @@ Vine.CreateAccountView = Vine.ModalBodyView.extend({
     Em.run.schedule('afterRender', function() {
       $("input[type='text'], input[type='password']").keydown(function(e) {
         if (createAccountController.get('submitDisabled') === false && e.keyCode === 13) {
-          createAccountController.createAccount();
+          createAccountController.createAccountAction();
         }
       });
 

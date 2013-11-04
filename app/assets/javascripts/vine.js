@@ -20,7 +20,7 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
     $('title').text(title);
 
     var notifyCount = this.get('notifyCount');
-    if (notifyCount > 0 && !Vine.User.currentProp('dynamic_favicon')) {
+    if (notifyCount > 0) {
       title = "(" + notifyCount + ") " + title;
     }
 
@@ -31,38 +31,14 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
     }, 200);
   }.observes('title', 'hasFocus', 'notifyCount'),
 
-  faviconChanged: function() {
-    if(Vine.User.currentProp('dynamic_favicon')) {
-      // new Favcount(Vine.SiteSettings.favicon_url).set(
-      //   this.get('notifyCount')
-      // );
-    }
-  }.observes('notifyCount'),
-
   notifyTitle: function(count) {
     this.set('notifyCount', count);
-  },
-
-  logout: function() {
-    Vine.User.logout().then(function() {
-      window.location.pathname = Vine.getURL('/');
-    });
   },
 
   authenticationComplete: function(options) {
     // TODO, how to dispatch this to the controller without the container?
     var loginController = Vine.__container__.lookup('controller:login');
     return loginController.authenticationComplete(options);
-  },
-
-  loginRequired: function() {
-    return (
-      Vine.SiteSettings.login_required && !Vine.User.current()
-    );
-  }.property(),
-
-  redirectIfLoginRequired: function(route) {
-    if(this.get('loginRequired')) { route.transitionTo('login'); }
   },
 
   initDom: function() {

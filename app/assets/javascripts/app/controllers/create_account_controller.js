@@ -226,7 +226,7 @@ Vine.CreateAccountController = Vine.Controller.extend(Vine.ModalFunctionality, {
     });
   },
 
-  createAccount: function() {
+  createAccountAction: function() {
     var createAccountController = this;
     this.set('formSubmitted', true);
     var email = this.get('accountEmail');
