@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   belongs_to :approved_by, class_name: 'User'
   has_many :user_open_ids, dependent: :destroy
   has_many :email_logs, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   validates_presence_of :username
   validate :username_validator

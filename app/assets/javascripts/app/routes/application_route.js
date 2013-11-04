@@ -40,9 +40,7 @@ Vine.ApplicationRoute = Em.Route.extend({
     },
 
     logout: function() {
-      Vine.User.logout().then(function() {
-        window.location.pathname = Vine.getURL('/');
-      });
+      Vine.User.logout();
     },
 
     createAccount: function() {

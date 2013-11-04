@@ -26,7 +26,6 @@
 //= require ./app/views/modal/modal_view
 //= require ./app/views/modal/modal_body_view
 //= require ./app/routes/route
-//= require ./app/routes/authenticated_route
 
 //= require_tree ./app/components
 //= require_tree ./app/models

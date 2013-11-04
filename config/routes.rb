@@ -38,10 +38,12 @@ Vine::Application.routes.draw do
   match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
   match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
 
+  resources :messages
+
   resources :static
   post 'login' => 'static#enter'
   get 'login' => 'static#show', id: 'login'
-  get 'notifications' => 'static#show', id: 'notifications'
+  get 'media' => 'static#enter', id: 'media'
 
-  root 'home#index'
+  root 'messages#index'
 end

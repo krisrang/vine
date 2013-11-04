@@ -1,1 +1,1 @@
-Vine.IndexRoute = Vine.AuthenticatedRoute.extend({});
+Vine.IndexRoute = Vine.Route.extend({});

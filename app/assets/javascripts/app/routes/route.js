@@ -1,4 +1,8 @@
-Vine.Route = Em.Route.extend({});
+Vine.Route = Em.Route.extend({
+  redirect: function() {
+    if (Vine.SiteSettings.login_required && !Vine.User.current()) { route.transitionTo('login'); }
+  }
+});
 
 Vine.Route.reopenClass({
   showModal: function(router, name, model) {

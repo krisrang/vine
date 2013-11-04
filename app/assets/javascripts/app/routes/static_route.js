@@ -1,6 +1,8 @@
 Vine.StaticController.pages.forEach(function(page) {
 
   Vine[(page.capitalize()) + "Route"] = Vine.Route.extend({
+    redirect: function() {},
+    
     renderTemplate: function() {
       this.render('static');
     },

@@ -1,1 +1,1 @@
-Vine.NotificationsRoute = Vine.AuthenticatedRoute.extend({});
+Vine.NotificationsRoute = Vine.Route.extend({});
