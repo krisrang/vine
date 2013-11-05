@@ -1,12 +1,12 @@
-var attr = DS.attr;
+// var attr = DS.attr;
 
-Vine.User = DS.Model.extend({
-  username: attr(),
-  email: attr(),
-  created_at: attr('date'),
-  updated_at: attr('date'),
-  admin: attr('boolean')
-  // messages: DS.hasMany('Vine.Message')
+Vine.User = Vine.Model.extend({
+  // username: attr(),
+  // email: attr(),
+  // created_at: attr('date'),
+  // updated_at: attr('date'),
+  // admin: attr('boolean'),
+  // messages: DS.hasMany('message')
 });
 
 Vine.User.reopenClass({
@@ -16,7 +16,6 @@ Vine.User.reopenClass({
     });
   },
 
-  // We do this as a regular ajax request since we don't need to push it into store here
   createAccount: function(email, password, username, passwordConfirm, challenge) {
     return Vine.ajax("/users", {
       data: {

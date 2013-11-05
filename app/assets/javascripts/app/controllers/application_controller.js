@@ -25,9 +25,9 @@ Vine.ApplicationController = Vine.Controller.extend({
     Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
     Vine.MessageBus.start();
 
-    var user = this.get('currentUser');
+    var loggedIn = this.get('currentUser.isSignedIn');
 
-    if (user) {
+    if (loggedIn) {
       var bus = Vine.MessageBus;
       bus.callbackInterval = Vine.SiteSettings.polling_interval;
       bus.enableLongPolling = true;

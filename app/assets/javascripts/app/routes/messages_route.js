@@ -1,5 +1,6 @@
 Vine.MessagesRoute = Vine.Route.extend({
   model: function() {
-    return Vine.Message.getLatest();
+    return Em.A();
+    // return this.store.findAll('message');
   }
 });
