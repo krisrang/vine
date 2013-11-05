@@ -62,26 +62,12 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
       backdrop: true
     });
   },
-
-  subscribeToNotifications: function() {
-    var user = Vine.User.current();
-
-    if (user) {
-      var bus = Vine.MessageBus;
-      bus.callbackInterval = Vine.SiteSettings.polling_interval;
-      bus.enableLongPolling = true;
-
-      bus.subscribe("/refresh-browser", function(data){
-        return document.location.reload(true);
-      });
-    }
-  },
-
+  
   start: function() {
     Vine.initDom();
     Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
     Vine.MessageBus.start();
 
-    Vine.subscribeToNotifications();
+    // Vine.subscribeToNotifications();
   }
 });

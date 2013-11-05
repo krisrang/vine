@@ -1,6 +1,7 @@
 Vine.Route = Em.Route.extend({
   redirect: function() {
-    if (Vine.SiteSettings.login_required && !Vine.User.current()) { route.transitionTo('login'); }
+    var signedIn = this.get('currentUser.isSignedIn');
+    if (Vine.SiteSettings.login_required && !signedIn) { this.transitionTo('login'); }
   }
 });
 

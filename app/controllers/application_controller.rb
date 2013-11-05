@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
     return if request.xhr?
 
     preload_anonymous_data
-
+    
     if current_user
       preload_current_user_data
     end

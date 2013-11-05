@@ -40,12 +40,26 @@ Vine.ApplicationRoute = Em.Route.extend({
     },
 
     logout: function() {
-      Vine.User.logout();
+      this.get('currentUser').logout();
     },
 
     createAccount: function() {
       var controller = this.controllerFor('createAccount');
       controller.createAccountAction();
+    }
+  },
+
+  setupController: function(controller) {
+    var user = this.get('currentUser');
+
+    if (user) {
+      var bus = Vine.MessageBus;
+      bus.callbackInterval = Vine.SiteSettings.polling_interval;
+      bus.enableLongPolling = true;
+
+      bus.subscribe("/refresh-browser", function(data){
+        return document.location.reload(true);
+      });
     }
   }
 });

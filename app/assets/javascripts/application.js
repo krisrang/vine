@@ -6,7 +6,7 @@
 //= require jquery.html5-placeholder-shim
 //= require handlebars
 //= require ember
-//= require ember-data
+//= require ember-data-beta
 //= require bootstrap
 //= require zxcvbn-async
 
@@ -20,6 +20,7 @@
 // Load first
 //= require_tree ./app/lib
 //= require_tree ./app/mixins
+//= require_tree ./app/initializers
 //= require ./app/models/model
 //= require ./app/controllers/controller
 //= require ./app/views/view
