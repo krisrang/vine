@@ -9,6 +9,7 @@ Vine.CurrentUserController = Ember.ObjectController.extend({
       type: 'DELETE'
     }).then(function () {
       vineUserController.set('content', null);
+      vineUserController.transitionToRoute('/login');
       window.location.pathname = Vine.getURL('/');
     });
   }

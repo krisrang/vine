@@ -8,6 +8,7 @@
 //= require ember
 //= require ember-data-beta
 //= require bootstrap
+//= require spin
 //= require zxcvbn-async
 
 //= require ./assets
