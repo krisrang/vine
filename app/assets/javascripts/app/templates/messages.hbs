@@ -1,6 +1,7 @@
-messages
-
-{{#each}}
-  {{source}}
-  {{user}}
-{{/each}}
+<div id="messages">
+  <ul>
+    {{#each}}
+      {{render message this}}
+    {{/each}}
+  </ul>
+</div>

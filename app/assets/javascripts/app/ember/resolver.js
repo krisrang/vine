@@ -12,10 +12,10 @@ Vine.Resolver = Ember.DefaultResolver.extend({
   },
 
   findMobileTemplate: function(parsedName) {
-    // if (Vine.Mobile.mobileView) {
-    //   var mobileParsedName = this.parseName(parsedName.fullName.replace("template:", "template:mobile/"));
-    //   return this.findTemplate(mobileParsedName);
-    // }
+    if (Vine.Mobile.mobileView) {
+      var mobileParsedName = this.parseName(parsedName.fullName.replace("template:", "template:mobile/"));
+      return this.findTemplate(mobileParsedName);
+    }
   },
 
   findTemplate: function(parsedName) {

@@ -41,4 +41,22 @@ module ApplicationHelper
     base64 = Base64.encode64(asset.to_s).gsub(/\s+/, "")
     "data:#{asset.content_type};base64,#{Rack::Utils.escape(base64)}"
   end
+
+  def html_classes
+    "#{mobile_view? ? 'mobile-view' : 'desktop-view'} #{mobile_device? ? 'mobile-device' : 'not-mobile-device'}"
+  end
+
+  def mobile_view?
+    return false unless SiteSetting.enable_mobile_theme
+    if session[:mobile_view]
+      session[:mobile_view] == '1'
+    else
+      mobile_device?
+    end
+  end
+
+  def mobile_device?
+    # TODO: this is dumb. user agent matching is a doomed approach. a better solution is coming.
+    request.user_agent =~ /Mobile|webOS|Nexus 7/ and !(request.user_agent =~ /iPad/)
+  end
 end

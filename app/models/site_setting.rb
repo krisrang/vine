@@ -45,6 +45,8 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:email_editable, true)
 
+  client_setting(:enable_mobile_theme, true)
+
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)
   end
