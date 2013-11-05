@@ -12,11 +12,7 @@
         <label for='login-account-password' class="sr-only">{{i18n login.password}}&nbsp;</label>
         <div class="col-lg-12">
           {{textField value=loginPassword placeholderKey="login.password_placeholder" type="password" id="login-account-password" class="form-control"}}
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-lg-12">
-          <a id="forgot-password-link" {{action showForgotPassword}}>{{i18n forgot_password.action}}</a>
+          <a id="forgot-password-link" {{action showForgotPassword}}>({{i18n forgot_password.action}})</a>
         </div>
       </div>
     </form>
@@ -24,20 +20,23 @@
     
   <div class="login-action">
     {{#if Vine.SiteSettings.enable_local_logins}}
-    <button class='btn btn-lg btn-primary btn-login'
-      {{bindAttr disabled="loginDisabled"}}
-      {{action login}}>
-        {{loginButtonText}}
-    </button>
+    <div class="login-buttons">
+      <button class='btn btn-lg btn-primary btn-login'
+        {{bindAttr disabled="loginDisabled"}}
+        {{action login}}>
+          {{loginButtonText}}
+      </button>
 
-    <p>
-      {{i18n create_account.question}} <a {{action showCreateAccount}}>{{i18n create_account.action}}</a>
-    </p>
+      <button class='btn btn-lg btn-default btn-create'
+        {{action showCreateAccount}}>
+          {{i18n create_account.action}}
+      </button>
+    </div>
     {{/if}}
 
     {{#if hasAtLeastOneLoginButton}}
       <h4 style="text-align:center; margin:50px 0 20px 0;">{{i18n login.or}}</h4>
-      <div id="login-buttons" class="well">
+      <div class="connect-buttons">
         {{#each Vine.LoginMethod.all}}
           <button class="btn btn-{{unbound color}} btn-social {{unbound name}}" {{action externalLogin this}}>
             {{#if icon}}<i class="{{unbound icon}}"></i>{{/if}}

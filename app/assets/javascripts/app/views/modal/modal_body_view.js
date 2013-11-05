@@ -1,16 +1,16 @@
 Vine.ModalBodyView = Vine.View.extend({
-  // Focus on first element
   didInsertElement: function() {
     $('#vine-modal').modal('show');
 
     $('#modal-alert').hide();
 
-    // if (!Discourse.Mobile.mobileView) {
+    if (!Vine.Mobile.mobileView) {
       var modalBodyView = this;
       Em.run.schedule('afterRender', function() {
+        var test = modalBodyView.$('input:first');
         modalBodyView.$('input:first').focus();
       });
-    // }
+    }
 
     var title = this.get('title');
     if (title) {

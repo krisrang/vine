@@ -1,0 +1,1 @@
+Vine.MessageController = Vine.ObjectController.extend({});

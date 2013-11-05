@@ -16,19 +16,19 @@ input:-moz-placeholder {
   color: #888;
   font-size: 15px;
   letter-spacing: 0px;
-  font-style: italic;
+  font-style: normal;
 }
 input:-ms-input-placeholder {
   color: #888;
-  font-style: italic;
-  letter-spacing: 0px;
   font-size: 15px;
+  letter-spacing: 0px;
+  font-style: normal;
 }
 input::-webkit-input-placeholder {
   color: #888;
-  font-style: italic;
-  letter-spacing: 0px;
   font-size: 15px;
+  letter-spacing: 0px;
+  font-style: normal;
 }
 
 .form-group {
@@ -123,7 +123,9 @@ input::-webkit-input-placeholder {
   }
 
   #forgot-password-link {
-    float: right;
+    position: absolute;
+    right: 20px;
+    top: 12px;
   }
 
   .instruction label {
@@ -134,10 +136,6 @@ input::-webkit-input-placeholder {
     text-align: center;
     margin-top: 20px;
 
-    .btn-login {
-      text-transform: uppercase;
-    }
-
     p {
       margin: 10px 0;
     }
@@ -145,14 +143,17 @@ input::-webkit-input-placeholder {
     .login-buttons {
       margin-top: 20px;
 
-      .btn-social {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 0 5px;
+      .btn {
+        display: inline-block;
+        width: 47.5%;
+      }
 
-        i {
-          font-size: 18px;
-        }
+      .btn-login {
+        margin-right: 5%;
+        float: left;
+      }
+
+      .btn-create {
       }
     }
   }

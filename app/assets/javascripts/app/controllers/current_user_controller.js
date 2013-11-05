@@ -1,6 +1,6 @@
-Vine.CurrentUserController = Ember.ObjectController.extend({
+Vine.CurrentUserController = Vine.ObjectController.extend({
   isSignedIn: function() {
-    return this.get('content') && !Ember.isEmpty(this.get('content'));
+    return this.get('content') && this.present('content');
   }.property('content'),
 
   logout: function() {

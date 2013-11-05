@@ -23,7 +23,6 @@
 
 .modal-title {
   text-align: center;
-  text-transform: uppercase;
 }
 
 .modal-dialog {
@@ -31,15 +30,14 @@
     border-radius: 0;
   }
 
-  h4 {
-    text-transform: uppercase;
+  h1, h2, h3, h4 {
+    color: #546673;
   }
 }
 
 .modal-content {
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.9);
 }
 
 .modal-footer {
@@ -52,13 +50,29 @@
 
 @media screen and (min-width: @screen-tablet) {
   .modal-dialog {
-    width: 400px;
+    width: 500px;
   }
+}
 
-  .modal.create-account {
-    .modal-dialog {
-      width: 500px;
-    }
+// 
+// INPUTS & BUTTONS
+//
+
+.btn-default {
+  .button-variant(#80919f; #e3e6ec; @btn-default-border);
+}
+
+.form-control {
+  height: auto;
+  padding: 10px 12px;
+  border: 2px solid #e4e7ee;
+  .transition("0.5s background, 0.5s border-color");
+
+  &:focus {
+    outline: medium none;
+    background: rgba(46, 159, 255, 0.1);
+    border-color: #8ccafe;
+    .box-shadow(none);
   }
 }
 
