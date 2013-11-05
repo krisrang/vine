@@ -26,20 +26,8 @@ html lang="#{SiteSetting.default_locale}"
     = render_analytics
     
     javascript:
-      window.assetPath = (function(){
-        var map = {
-          'logo20w.png': #{asset_path('logo20w.png').inspect.html_safe},
-          'logo100w.png': #{asset_path('logo100w.png').inspect.html_safe},
-          'logo100w.png.uri': #{asset_data_uri('logo100w.png').inspect.html_safe}
-        };
-
-        var assetPath = function(asset){ return map[asset]; };
-        return assetPath;
-      })();
-
       Vine.Environment = '#{Rails.env}';
       Vine.SiteSettings = PreloadStore.get('settings');
-      Vine.start()
 
     noscript data-path="#{request.env['PATH_INFO']}"
       header

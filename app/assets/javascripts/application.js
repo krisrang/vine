@@ -10,6 +10,7 @@
 //= require bootstrap
 //= require zxcvbn-async
 
+//= require ./assets
 //= require ./init
 //= require_tree ./app/ember
 //= require ./app/helpers/i18n

@@ -1,0 +1,40 @@
+Vine.ApplicationController = Vine.Controller.extend({
+  setupDOM: function() {
+    $(window).focus(function() {
+      Vine.set('hasFocus', true);
+      Vine.set('notify', false);
+    }).blur(function() {
+      Vine.set('hasFocus', false);
+    });
+
+    Vine.csrfToken = $('meta[name=csrf-token]').attr('content');
+
+    $.ajaxPrefilter(function(options, originalOptions, xhr) {
+      if (!options.crossDomain) {
+        xhr.setRequestHeader('X-CSRF-Token', Vine.csrfToken);
+      }
+    });
+
+    bootbox.setDefaults({
+      animate: false,
+      backdrop: true
+    });
+  },
+
+  setupMessageBus: function() {
+    Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
+    Vine.MessageBus.start();
+
+    var user = this.get('currentUser');
+
+    if (user) {
+      var bus = Vine.MessageBus;
+      bus.callbackInterval = Vine.SiteSettings.polling_interval;
+      bus.enableLongPolling = true;
+
+      bus.subscribe("/refresh-browser", function(data){
+        return document.location.reload(true);
+      });
+    }
+  }
+});

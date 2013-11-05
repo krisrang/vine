@@ -1,9 +1,8 @@
 Vine = Ember.Application.createWithMixins(Vine.Ajax, {
-  hasFocus: true,
-
   Resolver: Vine.Resolver,
-
   URL_FIXTURES: {},
+
+  hasFocus: true,
 
   getURL: function(url) {
     // If it's a non relative URL, return it.
@@ -39,35 +38,5 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
     // TODO, how to dispatch this to the controller without the container?
     var loginController = Vine.__container__.lookup('controller:login');
     return loginController.authenticationComplete(options);
-  },
-
-  initDom: function() {
-    $(window).focus(function() {
-      Vine.set('hasFocus', true);
-      Vine.set('notify', false);
-    }).blur(function() {
-      Vine.set('hasFocus', false);
-    });
-
-    Vine.csrfToken = $('meta[name=csrf-token]').attr('content');
-
-    $.ajaxPrefilter(function(options, originalOptions, xhr) {
-      if (!options.crossDomain) {
-        xhr.setRequestHeader('X-CSRF-Token', Vine.csrfToken);
-      }
-    });
-
-    bootbox.setDefaults({
-      animate: false,
-      backdrop: true
-    });
-  },
-  
-  start: function() {
-    Vine.initDom();
-    Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
-    Vine.MessageBus.start();
-
-    // Vine.subscribeToNotifications();
   }
 });
