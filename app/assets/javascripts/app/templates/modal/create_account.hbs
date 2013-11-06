@@ -2,34 +2,25 @@
 <div class="modal-body">
   <form id='login-form' method='post' class="form-horizontal" role="form">
     <div class="form-group">
-      <label for='new-account-email' class="col-lg-3">{{i18n user.email.title}}&nbsp;</label>
-      <div class="col-lg-9">
-        {{textField value=accountEmail id="new-account-email" class="form-control"}}
+      <label for='new-account-email' class="sr-only">{{i18n user.email.title}}&nbsp;</label>
+      <div class="col-lg-12">
+        {{textField value=accountEmail placeholderKey="create_account.email_placeholder" id="new-account-name" class="form-control" autofocus="autofocus"}}
         &nbsp;{{inputTip validation=emailValidation}}
       </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-3"></div>
-      <div class="col-lg-9 instruction"><label>{{i18n user.email.instructions}}</label></div>
-    </div>
-
-    <div class="form-group">
-      <label for='new-account-username' class="col-lg-3">{{i18n user.username.title}}&nbsp;</label>
-      <div class="col-lg-9">
-        {{textField value=accountUsername id="new-account-username" class="form-control" maxlength="15"}}
+      <label for='new-account-username' class="sr-only">{{i18n user.username.title}}&nbsp;</label>
+      <div class="col-lg-12">
+        {{textField value=accountUsername placeholderKey="create_account.username_placeholder" id="new-account-username" maxlength="15" class="form-control"}}
         &nbsp;{{inputTip validation=usernameValidation}}
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-3"></div>
-      <div class="col-lg-9 instruction"><label>{{i18n user.username.instructions}}</label></div>
     </div>
 
     {{#if passwordRequired}}
     <div class="form-group">
-      <label for='new-account-password' class="col-lg-3">{{i18n user.password.title}}&nbsp;</label>
-      <div class="col-lg-9">
-        {{textField type="password" value=accountPassword id="new-account-password" class="form-control"}}
+      <label for='new-account-password' class="sr-only">{{i18n login.password.title}}&nbsp;</label>
+      <div class="col-lg-12">
+        {{textField value=accountPassword placeholderKey="create_account.password_placeholder" type="password" id="new-account-password" class="form-control"}}
         <div class="password_strength_container">
           <div class="password_strength_bg"></div>
           <div class="password_strength" {{bindAttr class="passwordStrengthClass"}}></div>
@@ -56,6 +47,19 @@
     </div>
   </form>
 
-  <button class='btn btn-large btn-primary' {{bindAttr disabled="submitDisabled"}} {{action createAccount}}>{{i18n create_account.title}}</button>
+  <div class="create-account-action">
+    <div class="create-account-buttons">
+      <button class='btn btn-lg btn-primary'
+        {{bindAttr disabled="submitDisabled"}}
+        {{action createAccount}}>
+          {{i18n create_account.title}}
+      </button>
+
+      <button class='btn btn-lg btn-default'
+        {{action showLogin}}>
+          {{i18n user.log_in}}
+      </button>
+    </div>
+  </div>
 </div>
 {{/unless}}

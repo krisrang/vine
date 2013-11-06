@@ -55,8 +55,14 @@
 }
 
 // 
-// INPUTS & BUTTONS
+// FORMS
 //
+
+.form-group {
+  label {
+    margin: 5px 0;
+  }
+}
 
 .btn-default {
   .button-variant(#80919f; #e3e6ec; @btn-default-border);
@@ -74,6 +80,12 @@
     border-color: #8ccafe;
     .box-shadow(none);
   }
+}
+
+// default
+.navbar .nav .form-control {
+  height: @input-height-base;
+  padding: @padding-base-vertical @padding-base-horizontal;
 }
 
 

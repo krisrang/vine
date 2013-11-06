@@ -80,14 +80,14 @@ Vine.LoginController = Vine.Controller.extend(Vine.ModalFunctionality, {
   }).property('authenticate'),
 
   authenticationComplete: function(options) {
+    this.set('authenticate', null);
+
     if (options.awaiting_approval) {
       this.flash(I18n.t('login.awaiting_approval'), 'success');
-      this.set('authenticate', null);
       return;
     }
     if (options.awaiting_activation) {
       this.flash(I18n.t('login.awaiting_confirmation'), 'success');
-      this.set('authenticate', null);
       return;
     }
     // Reload the page if we're authenticated

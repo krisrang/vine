@@ -43,6 +43,9 @@ en:
       question: "Don't have an account?"
       action: "Sign up"
       failed: "Something went wrong, perhaps this email is already registered, try the forgot password link"
+      email_placeholder: "Email"
+      password_placeholder: "Password"
+      username_placeholder: "Username"
 
     forgot_password:
       title: "Forgot Password"

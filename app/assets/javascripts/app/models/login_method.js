@@ -34,13 +34,11 @@ Vine.LoginMethod.reopenClass({
           params.customLogin = function(){
             navigator.id.request({siteName: Vine.SiteSettings.title, siteLogo: assetPath('logo100w.png.uri')});
           };
-          params.icon = "fa fa-envelope";
-          params.color = "info";
+          params.icon = "fa fa-user";
         }
 
         if(name === "google") {
-          params.color = "success";
-          params.icon = "fa fa-google-plus-square";
+          params.icon = "fa fa-google-plus";
           params.frameWidth = 850;
           params.frameHeight = 500;
         }

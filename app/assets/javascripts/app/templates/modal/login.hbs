@@ -38,9 +38,10 @@
       <h4 style="text-align:center; margin:50px 0 20px 0;">{{i18n login.or}}</h4>
       <div class="connect-buttons">
         {{#each Vine.LoginMethod.all}}
-          <button class="btn btn-{{unbound color}} btn-social {{unbound name}}" {{action externalLogin this}}>
+          <button class="btn btn-social {{unbound name}}" {{action externalLogin this}}>
+            <span>
             {{#if icon}}<i class="{{unbound icon}}"></i>{{/if}}
-            {{unbound title}}
+            </span>
           </button>
         {{/each}}
       </div>
