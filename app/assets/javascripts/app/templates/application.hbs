@@ -3,3 +3,7 @@
 <div class="main">{{outlet}}</div>
 
 {{render modal}}
+
+{{#if currentUser.isSignedIn}}
+  {{render editor}}
+{{/if}}

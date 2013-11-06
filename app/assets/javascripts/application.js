@@ -9,7 +9,12 @@
 //= require ember-data-beta
 //= require bootstrap
 //= require spin
+//= require Markdown.Converter.js
+//= require Markdown.Editor.js
+//= require better_markdown.js
+//= require rsvp
 //= require zxcvbn-async
+//= require sanitizer-bundle
 
 //= require ./assets
 //= require ./init
@@ -29,7 +34,9 @@
 //= require ./app/views/modal/modal_view
 //= require ./app/views/modal/modal_body_view
 //= require ./app/routes/route
+//= require ./app/dialects/dialect
 
+//= require_tree ./app/dialects
 //= require_tree ./app/components
 //= require_tree ./app/models
 //= require_tree ./app/controllers

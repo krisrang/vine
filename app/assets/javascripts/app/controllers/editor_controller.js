@@ -1,0 +1,1 @@
+Vine.EditorController = Vine.Controller.extend({});

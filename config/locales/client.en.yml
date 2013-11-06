@@ -77,3 +77,53 @@ en:
       persona:
         title: "Persona"
         message: "Authenticating with Mozilla Persona (make sure pop up blockers are not enabled)"
+
+    composer:
+      saving_draft_tip: "saving"
+      saved_draft_tip: "saved"
+      saved_local_draft_tip: "saved locally"
+      drafts_offline: "drafts offline"
+
+      min_length:
+        need_more_for_reply: "{{n}} to go for the post"
+
+      error:
+        post_missing: "Post can't be empty."
+        post_length: "Post must be at least {{min}} characters long."
+
+      save_edit: "Save Edit"
+      reply: "Reply"
+      cancel: "Cancel"
+
+      reply_placeholder: "Type here. Use Markdown or BBCode to format. Drag or paste an image to upload it."
+      saving: "Saving..."
+      saved: "Saved!"
+      saved_draft: "You have a post draft in progress. Click anywhere in this box to resume editing."
+      show_preview: 'show preview &raquo;'
+      hide_preview: '&laquo; hide preview'
+
+      quote_post_title: "Quote whole post"
+      bold_title: "Strong"
+      bold_text: "strong text"
+      italic_title: "Emphasis"
+      italic_text: "emphasized text"
+      link_title: "Hyperlink"
+      link_description: "enter link description here"
+      link_dialog_title: "Insert Hyperlink"
+      link_optional_text: "optional title"
+      quote_title: "Blockquote"
+      quote_text: "Blockquote"
+      code_title: "Preformatted text"
+      code_text: "enter preformatted text here"
+      upload_title: "Upload"
+      upload_description: "enter upload description here"
+      olist_title: "Numbered List"
+      ulist_title: "Bulleted List"
+      list_item: "List item"
+      heading_title: "Heading"
+      heading_text: "Heading"
+      hr_title: "Horizontal Rule"
+      undo_title: "Undo"
+      redo_title: "Redo"
+      help: "Markdown Editing Help"
+      toggler: "hide or show the composer panel"
