@@ -1,12 +1,16 @@
-<div class='wmd-controls'>
-  <div class='textarea-wrapper'>
-    <div class='wmd-button-bar' id='wmd-button-bar'></div>
-    {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" id="wmd-input" placeholderKey="composer.reply_placeholder"}}
-  </div>
-  <div class='preview-wrapper'>
-    <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
-  </div>
+<div class="controls">
+  <a href='#' class='toggler' {{action toggle bubbles=false}} title='{{i18n composer.toggler}}'></a>
+  
+  <div class='wmd-controls'>
+    <div class='textarea-wrapper'>
+      <div class='wmd-button-bar' id='wmd-button-bar'></div>
+      {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" valueBinding="model.reply" id="wmd-input" placeholderKey="composer.reply_placeholder"}}
+    </div>
+    <div class='preview-wrapper'>
+      <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
+    </div>
 
-  <a href="#" {{action togglePreview}} class='toggle-preview'>Toggle</a>
-  <div id='draft-status'></div>
+    <a href="#" {{action togglePreview}} class='toggle-preview'>{{{model.toggleText}}}</a>
+    <div id='draft-status'></div>
+  </div>
 </div>

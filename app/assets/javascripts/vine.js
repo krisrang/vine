@@ -38,5 +38,12 @@ Vine = Ember.Application.createWithMixins(Vine.Ajax, {
     // TODO, how to dispatch this to the controller without the container?
     var loginController = Vine.__container__.lookup('controller:login');
     return loginController.authenticationComplete(options);
+  },
+
+  start: function() {
+    Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
+    Vine.MessageBus.start();
+
+    Vine.KeyValueStore.init("vine_", Vine.MessageBus);
   }
 });

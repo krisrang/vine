@@ -7,13 +7,90 @@
 #editor {
   width: 100%;
   z-index: 1032;
-  // height: 0px;
+  height: 250px;
   background-color: rgba(220, 223, 224, 0.96);
   bottom: 0px;
   font-size: 14px;
   position: fixed;
+  @include transition(height 0.4s ease);
 
-  &.open { height: 300px; }
+  .toggler {
+    display: block;
+    width: 13px;
+    height: 13px;
+    right: 13px;
+    position: absolute;
+    font-size: 15px;
+    color: #888;
+    text-decoration: none;
+
+    &:before {
+      font-family: "FontAwesome";
+      content: "\f078";
+    }
+  }
+
+  .toggle-preview, #draft-status, #file-uploading {
+    position: absolute;
+    bottom: -31px;
+    margin-top: 0px;
+  }
+  .toggle-preview {
+    right: 5px;
+    text-decoration: underline;
+  }
+
+  .controls {
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+
+  .grippie {
+    display: none;
+  }
+
+  &.open { 
+    height: 300px;
+
+    .grippie {
+      display: block;
+    }
+  }
+
+  &.closed {
+    height: 0px !important;
+  }
+
+  &.draft {
+    height: 40px !important;
+    cursor: pointer;
+    border-top: 1px solid #AAA;
+    .draft-text {
+      display: block;
+    }
+    .toggler {
+      &:before {
+        font-family: "FontAwesome";
+        content: "\f077";
+      }
+    }
+  }
+
+  &.saving {
+    height: 40px !important;
+    border-top: 1px solid #AAA;
+    .saving-text {
+      display: block;
+    }
+    .toggler {
+      &:before {
+        font-family: "FontAwesome";
+        content: "\f00d";
+      }
+    }
+  }
 
   #wmd-preview {
     border: 1px dashed #CCC;
@@ -25,6 +102,117 @@
     &.hidden {
       width: 0;
       visibility: hidden;
+    }
+  }
+
+  &.hide-preview {
+    .wmd-controls {
+      #wmd-input {
+        width: 100%;
+      }
+      .preview-wrapper {
+        display: none;
+      }
+      .textarea-wrapper {
+        width: 100%;
+      }
+    }
+  }
+
+  .wmd-controls {
+    left: 30px;
+    right: 30px;
+    position: absolute;
+    top: 20px;
+    bottom: 48px;
+
+    // this removes the topmost margin;
+    // if we don't have this, all posts would have extra space at the top
+    #wmd-preview > *:first-child {
+      margin-top: 0px !important;
+    }
+
+    #wmd-input, #wmd-preview {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      padding: 7px;
+      margin: 0;
+      background-color: #FFF;
+      word-wrap: break-word;
+
+      // set up proper header margins in post preview
+      h1, h2, h3, h4, h5, h6 {
+        margin: 20px 0 10px;
+      }
+    }
+    #wmd-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      min-height: 100%;
+      box-sizing: border-box;
+      border: 2px solid transparent;
+      border-top: 38px solid transparent;
+      border-radius: 0px;
+      transition: none;
+      resize: none;
+
+      &:focus { 
+        outline: none;
+        border: 2px solid #8CCAFE;
+        border-top: 38px solid #8CCAFE;
+      }
+    }
+    .textarea-wrapper, .preview-wrapper {
+      position: relative;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 50%;
+    }
+    .textarea-wrapper {
+      padding-right: 5px;
+      float: left;
+      .popup-tip {
+        margin-top: 3px;
+        right: 4px;
+      }
+    }
+    .preview-wrapper {
+      padding-left: 5px;
+      float: right;
+      img, svg {
+        max-width: 100%;
+      }
+    }
+  }
+  #wmd-button-bar {
+    top: 0;
+    position: absolute;
+    border-bottom: 1px solid #D4D4D4;
+    background-color: #FFF;
+    z-index: 100;
+  }
+}
+
+.control-row.reply-area {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (min-width: 1550px) {
+  #editor {
+    .wmd-controls {
+      width: 1450px;
+      left: auto;
+      right: auto;
     }
   }
 }
@@ -146,4 +334,47 @@
 
 #wmd-quote-post:before {
   content:  "\f0e5";
+}
+
+.wmd-prompt-background {
+  background-color: black;
+}
+
+.wmd-prompt-dialog {
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background-color: #FFF;
+
+  & > div {
+    text-align: center;
+    color: #BBB;
+
+    p:first-child {
+      font-size: 18px;
+      color: #546673;
+    }
+  }
+
+  & > form {
+    & > input[type="text"] {
+      height: auto;
+      padding: 10px 12px;
+      border: 2px solid #e4e7ee;
+      @include transition(0.5s background, 0.5s border-color);
+
+      &:focus {
+        outline: medium none;
+        background: rgba(46, 159, 255, 0.1);
+        border-color: #8ccafe;
+        box-shadow: none;
+      }
+    }
+
+    & > input[type="button"] {
+      border: 1px solid #888888;
+      font-family: trebuchet MS, helvetica, sans-serif;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
 }

@@ -51,6 +51,6 @@ Vine.ApplicationRoute = Em.Route.extend({
 
   setupController: function(controller) {
     controller.setupDOM();
-    controller.setupMessageBus();
+    controller.setupListeners();
   }
 });

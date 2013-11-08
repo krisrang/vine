@@ -21,10 +21,7 @@ Vine.ApplicationController = Vine.Controller.extend({
     });
   },
 
-  setupMessageBus: function() {
-    Vine.MessageBus.alwaysLongPoll = Vine.Environment === "development";
-    Vine.MessageBus.start();
-
+  setupListeners: function() {
     var loggedIn = this.get('currentUser.isSignedIn');
 
     if (loggedIn) {

@@ -8,6 +8,7 @@ Vine.CurrentUserController = Vine.ObjectController.extend({
     return Vine.ajax("/session/" + this.get('content').get('username'), {
       type: 'DELETE'
     }).then(function () {
+      Vine.KeyValueStore.abandonLocal();
       vineUserController.set('content', null);
       vineUserController.transitionToRoute('/login');
       window.location.pathname = Vine.getURL('/');
