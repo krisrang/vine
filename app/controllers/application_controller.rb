@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :block_if_maintenance_mode
+  before_filter :authorize_mini_profiler
   before_filter :preload_json
   before_filter :set_locale
   before_filter :redirect_to_login_if_required
@@ -104,6 +105,15 @@ class ApplicationController < ActionController::Base
     guardian.ensure_can_see!(user)
     user
   end
+
+  def mini_profiler_enabled?
+      defined?(Rack::MiniProfiler) && current_user.try(:admin?)
+    end
+
+    def authorize_mini_profiler
+      return unless mini_profiler_enabled?
+      Rack::MiniProfiler.authorize_request
+    end
 
   private
 

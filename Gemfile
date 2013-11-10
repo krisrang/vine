@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 ### REAR END
 
-gem 'puma', require: false
-
 gem 'rails', github: 'rails/rails', branch: '4-0-stable'
 gem 'pg'
 
@@ -82,3 +80,8 @@ group :production do
   gem 'rails_12factor'
   gem 'sentry-raven', github: "getsentry/raven-ruby"
 end
+
+gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git', require: false
+gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false, ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
+
+gem 'puma', require: false

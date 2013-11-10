@@ -29,6 +29,8 @@ Vine::Application.configure do
 
   config.action_mailer.delivery_method = :letter_opener
 
+  config.enable_mini_profiler = true
+
   require 'middleware/turbo_dev'
   config.middleware.insert 0, Middleware::TurboDev
 end

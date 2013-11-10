@@ -87,4 +87,7 @@ Vine::Application.configure do
   config.developer_emails = ['mail@rang.ee']
 
   config.handlebars.precompile = true
+
+  # allows admins to use mini profiler
+  config.enable_mini_profiler = true
 end

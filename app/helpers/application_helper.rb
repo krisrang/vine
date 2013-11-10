@@ -59,4 +59,8 @@ module ApplicationHelper
     # TODO: this is dumb. user agent matching is a doomed approach. a better solution is coming.
     request.user_agent =~ /Mobile|webOS|Nexus 7/ and !(request.user_agent =~ /iPad/)
   end
+
+  def mini_profiler_enabled?
+    defined?(Rack::MiniProfiler) && admin?
+  end
 end
