@@ -1,6 +1,44 @@
 @import "bootstrap/bootstrap";
 
 // 
+// MIXINS
+//
+
+.btn-shadow(@color) {
+  #gradient > .vertical-three-colors(lighten(@color, 10%), @color, 6%, darken(@color, 4%));
+  filter: none;
+  border: 1px solid darken(@color, 10%);
+} 
+
+// 
+// NAVBAR
+//
+
+// @navbar-default-bg: #5E686B;
+
+.navbar {
+  .box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+  // .btn-shadow(@navbar-default-bg);
+}
+
+.navbar-brand {
+  padding: 15px 30px;
+}
+
+.navbar-nav {
+  li {
+    border-left: 1px solid darken(@navbar-default-bg, 10%);
+    box-shadow: inset 1px 0 0 rgba(255,255,255,0.15),1px 0 0 rgba(255,255,255,0.15);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:last-child {
+      border-right: 1px solid darken(@navbar-default-bg, 10%);
+    }
+  }
+}
+
+// 
 // BUTTONS
 // 
 
@@ -10,6 +48,36 @@
 
 .btn-lg {
   .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-base);
+}
+
+.btn-default,
+.btn-default:hover {
+  .btn-shadow(@btn-default-bg);
+}
+
+.btn-primary,
+.btn-primary:hover {
+  .btn-shadow(@btn-primary-bg);
+}
+
+.btn-success,
+.btn-success:hover {
+  .btn-shadow(@btn-success-bg);
+}
+
+.btn-info,
+.btn-info:hover {
+  .btn-shadow(@btn-info-bg);
+}
+
+.btn-warning,
+.btn-warning:hover {
+  .btn-shadow(@btn-warning-bg);
+}
+
+.btn-danger,
+.btn-danger:hover {
+  .btn-shadow(@btn-danger-bg);
 }
 
 
@@ -102,24 +170,6 @@
   color: #FFF;
   margin: 0;
 }
-
-.navbar-brand {
-  padding: 15px 30px;
-}
-
-.navbar-nav {
-  li {
-    border-left: 1px solid #e5e5e5;
-    box-shadow: inset 1px 0 0 rgba(255,255,255,0.15),1px 0 0 rgba(255,255,255,0.15);
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    &:last-child {
-      border-right: 1px solid #e5e5e5;
-    }
-  }
-}
-
 
 // 
 // WMD DIALOG
