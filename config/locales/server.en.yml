@@ -50,3 +50,23 @@ en:
     title: "The page you requested doesn't exist or may have been deleted."
     search_title: "Search for this page"
     search_google: "Search Google"
+
+  password_reset:
+    no_token: "Sorry, your token has expired. Please try resetting your password again."
+    choose_new: "Please choose a new password"
+    update: 'update password'
+    title: 'reset password'
+    success: "You successfully changed your password and are now logged in."
+    success_unapproved: "You successfully changed your password."
+    continue: "Continue to %{site_name}"
+
+  change_email:
+    confirmed: "Your email has been updated."
+    please_continue: "Please continue to %{link}"
+    error: "There was an error changing your email address. Perhaps the address is already in use?"
+
+  activation:
+    already_done: "Sorry, this account confirmation link is no longer valid. Perhaps your account is already active?"
+    please_continue: "Your new account is confirmed, and you are now logged in. Continue to %{link}"
+    welcome_to: "Welcome to %{site_name}!"
+    approval_required: "A moderator must manually approve your new account before you can access this forum. You'll get an email when your account is approved!"

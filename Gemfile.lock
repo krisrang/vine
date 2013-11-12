@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 085a847fec3b2b61d7e79a1f387860217a72fe9e
+  revision: a54d229daca92ed1a117b3cc8398ef56feca6358
   branch: 4-0-stable
   specs:
     actionmailer (4.0.1)
@@ -224,7 +224,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    oj (2.1.7)
+    oj (2.2.0)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack

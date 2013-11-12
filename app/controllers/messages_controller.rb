@@ -1,15 +1,15 @@
 class MessagesController < ApplicationController
   # App root, load latest messages
   def index
-    messages = Message.latest
-    serializer = ArraySerializer.new(messages)
+    @messages = Message.latest
+
     respond_to do |format|
       format.html do
-        store_preloaded("messages_latest", MultiJson.dump(serializer))
+        store_preloaded_json("messages_latest", @messages)
       end
 
       format.json do
-        render_json_dump(serializer)
+        render json: @messages
       end
     end
   end

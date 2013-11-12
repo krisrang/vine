@@ -227,30 +227,38 @@ Vine.CreateAccountController = Vine.Controller.extend(Vine.ModalFunctionality, {
   },
 
   createAccountAction: function() {
+    var store = this.get('store'); 
     var createAccountController = this;
     this.set('formSubmitted', true);
-    var email = this.get('accountEmail');
-    var password = this.get('accountPassword');
-    var username = this.get('accountUsername');
-    var passwordConfirm = this.get('accountPasswordConfirm');
-    var challenge = this.get('accountChallenge');
-    return Vine.User.createAccount(email, password, username, passwordConfirm, challenge).then(function(result) {
-      if (result.success) {
-        createAccountController.flash(result.message);
-        createAccountController.set('complete', true);
-      } else {
-        createAccountController.flash(result.message || I18n.t('create_account.failed'), 'error');
-        if (result.errors && result.errors.email && result.values) {
-          createAccountController.get('rejectedEmails').pushObject(result.values.email);
-        }
-        createAccountController.set('formSubmitted', false);
+
+    var user = store.createRecord('user', {
+      email: this.get('accountEmail'),
+      password: this.get('accountPassword'),
+      username: this.get('accountUsername'),
+      password_confirmation: this.get('accountPasswordConfirm'),
+      challenge: this.get('accountChallenge')
+    });
+
+    var test = user.save();
+
+    return test.then(function(result) {
+      createAccountController.set('complete', true);
+
+      if (result.get('message')) {
+        createAccountController.flash(result.get('message'));
       }
-      if (result.active) {
+
+      if (result.get('active')) {
         return window.location.reload();
       }
-    }, function() {
+    }, function(result) {
+      var errors = result.errors;
+
       createAccountController.set('formSubmitted', false);
-      return createAccountController.flash(I18n.t('create_account.failed'), 'error');
+      if (errors.values && errors.values.email) {
+        createAccountController.get('rejectedEmails').pushObject(errors.values.email);
+      }
+      return createAccountController.flash(errors.message || I18n.t('create_account.failed'), 'error');
     });
   }
 });

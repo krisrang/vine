@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   after_create :create_email_token
   after_create :create_user_stat
 
+  attr_accessor :message
+
   scope :banned,      -> { where('banned_till IS NOT NULL AND banned_till > ?', Time.zone.now) }
   scope :not_banned,  -> { where('banned_till IS NULL') }
 
@@ -131,6 +133,13 @@ class User < ActiveRecord::Base
     if (@raw_password && @raw_password.length < 6) || (@password_required && !@raw_password)
       errors.add(:password, "must be 6 letters or longer")
     end
+  end
+
+  def errors_hash
+    { 
+      message: I18n.t("login.errors", errors: self.errors.full_messages.join("\n")),
+      values: self.attributes.slice("name", "username", "email")
+    }
   end
 
   def email_confirmed?

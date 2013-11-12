@@ -1,9 +1,13 @@
-class UserSerializer < BasicUserSerializer
+class UserSerializer < ApplicationSerializer
 
-  attributes :email,
+  attributes :id, 
+             :username,
+             :email,
              :last_seen_at,
              :created_at,
-             :admin
+             :admin,
+             :message,
+             :active
 
   # def self.private_attributes(*attrs)
   #   attributes *attrs

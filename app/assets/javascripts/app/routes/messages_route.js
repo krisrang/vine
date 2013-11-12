@@ -1,18 +1,17 @@
 Vine.MessagesRoute = Vine.Route.extend({
   setupController: function(controller) {
-    var messages = Em.A();
+    var store = this.get('store');
 
-    var finder = function() {
-      var url = Vine.getURL("/messages") + ".json";
-      return Vine.ajax(url);
-    };
+    PreloadStore.getAndRemove("messages_latest").then(function(result) {
+      if (result && result.messages) {
+        _.each(result.messages, function(message) {
+          store.push('message', message);
+        });
 
-    PreloadStore.getAndRemove("messages_latest", finder).then(function(result) {
-      _.each(result, function(message){
-        messages.addObject(Vine.Message.create(message));
-      });
+        controller.set('model', store.all('message'));
+      } else {
+        controller.set('model', store.findAll('message'));
+      }      
     });
-    
-    controller.set('model', messages);
   }
 });

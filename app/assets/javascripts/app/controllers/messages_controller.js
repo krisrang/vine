@@ -1,7 +1,7 @@
 Vine.MessagesController = Vine.ArrayController.extend({
   needs: ['editor'],
 
-  sortProperties: ['created_at'],
+  sortProperties: ['createdAt'],
   sortAscending: false,
 
   actions: {

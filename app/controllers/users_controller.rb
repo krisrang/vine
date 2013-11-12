@@ -36,27 +36,22 @@ class UsersController < ApplicationController
   end
 
   def create
-    return fake_success_response if suspicious? params
+    return fake_success_response if suspicious? params[:user]
 
-    user = User.new_from_params(params)
-    auth = authenticate_user(user, params)
+    user = User.new_from_params(params[:user])
+    auth = authenticate_user(user, params[:user])
 
     if user.save
       activator = UserActivator.new(user, request, session, cookies)
-      message = activator.activation_message
+      user.message = activator.activation_message
       create_third_party_auth_records(user, auth)
 
       # Clear authentication session.
       session[:authentication] = nil
 
-      render json: { success: true, active: user.active?, message: message }
+      render json: user
     else
-      render json: {
-        success: false,
-        message: I18n.t("login.errors", errors: user.errors.full_messages.join("\n")),
-        errors: user.errors.to_hash,
-        values: user.attributes.slice("name", "username", "email")
-      }
+      render json: user, meta: user.errors_hash, meta_key: 'errors', status: 422
     end
   end
 
@@ -170,13 +165,8 @@ class UsersController < ApplicationController
   end
 
   def fake_success_response
-    render(
-      json: {
-        success: true,
-        active: false,
-        message: I18n.t("login.activate_email", email: params[:email])
-      }
-    )
+    user = User.new(active: false, message: I18n.t("login.activate_email", email: params[:user][:email]))
+    render json: user
   end
 
   def honeypot_or_challenge_fails?(params)

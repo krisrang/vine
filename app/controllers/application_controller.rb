@@ -62,6 +62,11 @@ class ApplicationController < ActionController::Base
     @preloaded[key] = json.gsub("</", "<\\/")
   end
 
+  def store_preloaded_json(key, data)
+    serializer = ActiveModel::ArraySerializer.new(data)
+    store_preloaded(key, MultiJson.dump(serializer))
+  end
+
   def preload_json
     return if request.xhr?
 
@@ -74,25 +79,6 @@ class ApplicationController < ActionController::Base
 
   def guardian
     @guardian ||= Guardian.new(current_user)
-  end
-
-  def serialize_data(obj, serializer, opts={})
-    # If it's an array, apply the serializer as an each_serializer to the elements
-     serializer_opts = {scope: guardian}.merge!(opts)
-    if obj.is_a?(Array)
-      serializer_opts[:each_serializer] = serializer
-      ActiveModel::ArraySerializer.new(obj, serializer_opts).as_json
-    else
-      serializer.new(obj, serializer_opts).as_json
-    end
-  end
-
-  def render_serialized(obj, serializer, opts={})
-    render_json_dump(serialize_data(obj, serializer, opts))
-  end
-
-  def render_json_dump(obj)
-    render json: MultiJson.dump(obj)
   end
 
   def fetch_user_from_params
