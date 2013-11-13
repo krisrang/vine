@@ -8,13 +8,18 @@ Vine.User = DS.Model.extend({
   lastSeenAt: attr('date'),
   admin: attr('boolean'),
   active: attr('boolean'),
+  avatars: attr(),
 
   // Fake attributes for hp handling on create
   password_confirmation: attr(),
   challenge: attr(),
   message: attr(),
 
-  messages: DS.hasMany('message')
+  messages: DS.hasMany('message'),
+
+  thumbAvatar: function() {
+    return this.get('avatars').thumb;
+  }.property('avatars')
 });
 
 Vine.User.reopenClass({

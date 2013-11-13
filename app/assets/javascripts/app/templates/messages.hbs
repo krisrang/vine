@@ -1,9 +1,21 @@
-<button {{action newMessage}} class="btn btn-primary">New Message</button>
+<div class="container">
+  <div class="row">
 
-<div id="messages">
-  <ul>
-    {{#each}}
-      {{render message this}}
-    {{/each}}
-  </ul>
+    <div class="col-sm-10">
+      <div id="messages">
+        <ul>
+          {{#each}}
+            {{render message this}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  
+    <div class="col-sm-2">
+      <button {{action newMessage}} class="btn btn-lg btn-primary">New Message</button>
+
+      <p>Online Users</p>
+    </div>
+
+  </div>
 </div>

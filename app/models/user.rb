@@ -3,6 +3,8 @@ require_dependency 'email'
 require_dependency 'vine'
 
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
+  
   has_many :user_visits, dependent: :destroy
   has_one :user_stat, dependent: :destroy
   has_many :email_tokens, dependent: :destroy

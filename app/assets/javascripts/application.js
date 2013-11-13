@@ -18,6 +18,7 @@
 
 //= require ./assets
 //= require ./init
+//= require ./debug
 //= require_tree ./app/ember
 //= require ./app/helpers/i18n
 //= require ./app/mixins/ajax

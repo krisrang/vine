@@ -3,9 +3,14 @@
 $fa-font-path: "/font";
 @import "font-awesome/font-awesome";
 
+html {
+  overflow-y: scroll;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
-  padding-top: 70px;
+  padding-top: 80px;
 }
 
 a {
@@ -182,6 +187,37 @@ input::-webkit-input-placeholder {
         }
       }
     }
+  }
+}
+
+// 
+// MESSAGES
+// 
+
+.message-view {
+  border-top: 1px solid #EEE;
+  list-style: none;
+  padding: 15px 10px;
+
+  &:first-child {
+    border: none;
+  }
+
+  .userbit {
+    text-align: center;
+
+    h3 {
+      font-size: 20px;
+      margin: 2px 0;
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .button-row {
+    text-align: right;
   }
 }
 

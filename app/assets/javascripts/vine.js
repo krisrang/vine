@@ -1,4 +1,8 @@
 Vine = Ember.Application.createWithMixins(Vine.Ajax, {
+  // LOG_TRANSITIONS: true,
+  // LOG_TRANSITIONS_INTERNAL: true,
+  // LOG_ACTIVE_GENERATION: true,
+
   Resolver: Vine.Resolver,
   URL_FIXTURES: {},
 

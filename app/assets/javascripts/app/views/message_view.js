@@ -1,6 +1,6 @@
 Vine.MessageView = Vine.View.extend({
   tagName: 'li',
-  classNameBindings: ['idClass'],
+  classNameBindings: ['idClass', ':message-view'],
 
   idClass: function() {
     return "message-" + this.get("controller.content.id");

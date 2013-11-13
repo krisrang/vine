@@ -7,7 +7,15 @@ class UserSerializer < ApplicationSerializer
              :created_at,
              :admin,
              :message,
-             :active
+             :active,
+             :avatars
+
+  def avatars
+    { 
+      thumb: object.avatar.thumb.url,
+      full: object.avatar.url
+    }
+  end
 
   # def self.private_attributes(*attrs)
   #   attributes *attrs

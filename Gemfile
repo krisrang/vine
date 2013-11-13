@@ -46,6 +46,9 @@ gem 'oj'
 gem 'lru_redux'
 gem 'fast_xor'
 gem 'seed-fu'
+gem 'carrierwave'
+gem 'fog'
+gem 'mini_magick'
 
 group :development do
   gem 'foreman'

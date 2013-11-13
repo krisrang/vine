@@ -1,2 +1,22 @@
-{{cooked}} {{id}} {{this.content.id}}
-<button {{action editMessage}}>Edit</button>
+<div class="row">
+  <div class="col-sm-2">
+    <div class="userbit">
+      {{#linkTo "user" user}}
+        <img {{bindAttr src="user.thumbAvatar"}} />
+      {{/linkTo}}
+
+      <h3>
+        {{#linkTo "user" user}}{{user.username}}{{/linkTo}}
+      </h3>
+    </div>
+  </div>
+
+  <div class="col-sm-10">
+    {{cooked}}
+  </div>
+</div>
+
+<div class="row button-row">
+  <button {{action editMessage}} class="btn btn-sm btn-success">Edit</button>
+  <button {{action editMessage}} class="btn btn-sm btn-primary">Reply</button>
+</div>

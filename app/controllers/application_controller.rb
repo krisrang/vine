@@ -93,13 +93,13 @@ class ApplicationController < ActionController::Base
   end
 
   def mini_profiler_enabled?
-      defined?(Rack::MiniProfiler) && current_user.try(:admin?)
-    end
+    defined?(Rack::MiniProfiler) && current_user.try(:admin?)
+  end
 
-    def authorize_mini_profiler
-      return unless mini_profiler_enabled?
-      Rack::MiniProfiler.authorize_request
-    end
+  def authorize_mini_profiler
+    return unless mini_profiler_enabled?
+    Rack::MiniProfiler.authorize_request
+  end
 
   private
 

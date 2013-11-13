@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104133959) do
+ActiveRecord::Schema.define(version: 20131113093640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,25 +81,27 @@ ActiveRecord::Schema.define(version: 20131104133959) do
   add_index "user_visits", ["user_id", "visited_at"], name: "index_user_visits_on_user_id_and_visited_at", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",          limit: 20,                 null: false
-    t.string   "username_lower",    limit: 20,                 null: false
-    t.string   "email",                                        null: false
-    t.string   "password_hash",     limit: 64
-    t.string   "salt",              limit: 32
-    t.string   "auth_token",        limit: 32
+    t.string   "username",            limit: 20,                 null: false
+    t.string   "username_lower",      limit: 20,                 null: false
+    t.string   "email",                                          null: false
+    t.string   "password_hash",       limit: 64
+    t.string   "salt",                limit: 32
+    t.string   "auth_token",          limit: 32
     t.string   "ip_address"
     t.datetime "last_seen_at"
     t.datetime "previous_visit_at"
-    t.boolean  "admin",                        default: false, null: false
+    t.boolean  "admin",                          default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "banned_at"
     t.datetime "banned_till"
     t.boolean  "active"
-    t.boolean  "approved",                     default: false, null: false
+    t.boolean  "approved",                       default: false, null: false
     t.integer  "approved_by_id"
     t.datetime "approved_at"
     t.datetime "last_emailed_at"
+    t.string   "avatar"
+    t.string   "avatar_secure_token"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree
