@@ -8,6 +8,9 @@ gem 'pg'
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
+
+gem 'faye'
+gem 'faye-redis'
 gem 'message_bus', github: 'SamSaffron/message_bus'
 
 
@@ -49,6 +52,7 @@ gem 'seed-fu'
 gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
+gem 'unf' 
 
 group :development do
   gem 'foreman'

@@ -54,3 +54,6 @@ module Vine
     # config.i18n.default_locale = :de
   end
 end
+
+require 'bus'
+Bus.setup_faye

@@ -4,6 +4,7 @@ html lang="#{SiteSetting.default_locale}" class="#{html_classes}"
   title Vine
   = stylesheet_link_tag     "application", media: "all"
   = javascript_include_tag  "preload_store"
+  = javascript_include_tag  "/faye/client.js"
   = javascript_include_tag  "locales/#{I18n.locale}"
   = javascript_include_tag  "https://login.persona.org/include.js"
   = stylesheet_link_tag     "http://fonts.googleapis.com/css?family=Open+Sans:normal,bold,italic,bolditalic"

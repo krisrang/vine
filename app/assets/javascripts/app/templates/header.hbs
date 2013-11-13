@@ -40,9 +40,11 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      {{#linkTo "notifications" tagName="li" href=false class="notification-tab"}}
-        <a {{bindAttr href="view.href"}}><i class="fa fa-dot-circle-o"></i></a>
-      {{/linkTo}}
+      {{#if currentUser.admin}}
+        <li><a href="/admin">{{i18n admin.title}}</a></li>
+      {{/if}}
+
+      <li><a><i class="fa fa-dot-circle-o"></i></a></li>
     </ul>
 
     {{else}}

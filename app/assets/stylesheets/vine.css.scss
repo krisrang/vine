@@ -195,13 +195,9 @@ input::-webkit-input-placeholder {
 // 
 
 .message-view {
-  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
   list-style: none;
   padding: 15px 10px;
-
-  &:first-child {
-    border: none;
-  }
 
   .userbit {
     text-align: center;
