@@ -23,11 +23,6 @@ class VineRedis
     "redis://#{(':' + config['password'] + '@') if config['password']}#{config['host']}:#{config['port']}/#{config['db']}"
   end
 
-  def self.faye_url
-    redis_config = self.config
-    return self.url(redis_config)
-  end
-
   def self.cache_url
     redis_config = self.config
     redis_config['db'] = redis_config['cache_db']

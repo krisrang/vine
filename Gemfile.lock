@@ -129,22 +129,11 @@ GEM
     coderay (1.1.0)
     commonjs (0.2.7)
     connection_pool (1.1.0)
-    cookiejar (0.3.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.0)
     dotenv (0.9.0)
-    em-hiredis (0.2.1)
-      hiredis (~> 0.4.0)
-    em-http-request (1.1.1)
-      addressable (>= 2.3.4)
-      cookiejar
-      em-socksify (>= 0.3)
-      eventmachine (>= 1.0.3)
-      http_parser.rb (>= 0.6.0.beta.2)
-    em-socksify (0.3.0)
-      eventmachine (>= 1.0.0.beta.4)
     ember-data-source (0.14)
       ember-source
     ember-rails (0.14.0)
@@ -174,21 +163,6 @@ GEM
     fast_xor (1.1.1)
       rake
       rake-compiler
-    faye (1.0.0)
-      cookiejar (>= 0.3.0)
-      em-http-request (>= 0.3.0)
-      eventmachine (>= 0.12.0)
-      faye-websocket (>= 0.7.0)
-      multi_json (>= 1.0.0)
-      rack (>= 1.0.0)
-      websocket-driver (>= 0.3.0)
-    faye-redis (0.2.0)
-      em-hiredis (>= 0.2.0)
-      eventmachine (>= 0.12.0)
-      multi_json (>= 1.0.0)
-    faye-websocket (0.7.0)
-      eventmachine (>= 0.12.0)
-      websocket-driver (>= 0.3.0)
     ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -222,7 +196,6 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
-    http_parser.rb (0.6.0.beta.2)
     httpauth (0.2.0)
     i18n (0.6.5)
     ice_cube (0.11.1)
@@ -413,7 +386,7 @@ GEM
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 2.0)
-    slop (3.4.6)
+    slop (3.4.7)
     sorcerer (1.0.2)
     spork (1.0.0rc4)
     sprockets (2.10.0)
@@ -450,7 +423,6 @@ GEM
       unf_ext
     unf_ext (0.0.6)
     uuidtools (2.1.4)
-    websocket-driver (0.3.0)
 
 PLATFORMS
   ruby
@@ -468,8 +440,6 @@ DEPENDENCIES
   fabrication
   fakeweb
   fast_xor
-  faye
-  faye-redis
   figaro
   flamegraph!
   fog
@@ -519,6 +489,7 @@ DEPENDENCIES
   slim-rails
   spork-rails!
   therubyracer
+  thin
   uglifier
   unf
   uuidtools

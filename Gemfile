@@ -9,8 +9,6 @@ gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
 
-gem 'faye'
-gem 'faye-redis'
 gem 'message_bus', github: 'SamSaffron/message_bus'
 
 
@@ -92,3 +90,5 @@ gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git', require: 
 gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false, ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
 
 gem 'puma', require: false
+gem 'thin', require: false
+

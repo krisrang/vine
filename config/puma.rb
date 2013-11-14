@@ -37,8 +37,12 @@ workers 3
 preload_app!
 
 on_worker_boot do
-  ActiveRecord::Base.establish_connection
-  $redis.client.reconnect
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
+  end
+
+  $redis = VineRedis.new
+  Vine::Application.config.cache_store.reconnect
   Rails.cache.reconnect
   MessageBus.after_fork
 end

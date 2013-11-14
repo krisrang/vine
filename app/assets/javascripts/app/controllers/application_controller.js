@@ -29,9 +29,9 @@ Vine.ApplicationController = Vine.Controller.extend({
       bus.callbackInterval = Vine.SiteSettings.polling_interval;
       bus.enableLongPolling = true;
 
-      // bus.subscribe("/refresh-browser", function(data){
-      //   return document.location.reload(true);
-      // });
+      bus.subscribe("/refresh-browser", function(data){
+        return document.location.reload(true);
+      });
     }
   }
 });
