@@ -7,7 +7,9 @@ Vine.MessagesController = Vine.ArrayController.extend({
   actions: {
     newMessage: function() {
       var editor = this.get('controllers.editor');
-      editor.open({});
+      editor.open({
+        draftKey: 'newMessage'
+      });
     }
   }
 });

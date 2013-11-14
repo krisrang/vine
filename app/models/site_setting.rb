@@ -47,6 +47,9 @@ class SiteSetting < ActiveRecord::Base
 
   client_setting(:enable_mobile_theme, true)
 
+  setting(:add_rel_nofollow_to_user_content, true)
+  setting(:exclude_rel_nofollow_domains, '')
+
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)
   end

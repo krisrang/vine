@@ -14,7 +14,6 @@
 //= require better_markdown.js
 //= require rsvp
 //= require zxcvbn-async
-//= require sanitizer-bundle
 
 //= require ./assets
 //= require ./init

@@ -86,8 +86,9 @@ group :production do
   gem 'sentry-raven', github: "getsentry/raven-ruby"
 end
 
-gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git', require: false
-gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false, ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
+
+gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git'
+gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git',  ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
 
 gem 'puma', require: false
 gem 'thin', require: false

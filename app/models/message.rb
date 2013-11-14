@@ -1,3 +1,5 @@
+require_dependency 'pretty_text'
+
 class Message < ActiveRecord::Base
   belongs_to :user
 

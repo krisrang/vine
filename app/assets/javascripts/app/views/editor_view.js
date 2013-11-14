@@ -33,12 +33,21 @@ Vine.EditorView = Vine.View.extend({
     return this.initEditor();
   },
 
+  focusIn: function() {
+    var controller = this.get('controller');
+    if (controller) controller.updateDraftStatus();
+  },
+
+  click: function() {
+    this.get('controller').openIfDraft();
+  },
+
   initEditor: function() {
     var $wmdInput, editor, editorView = this;
     this.wmdInput = $wmdInput = $('#wmd-input');
     if ($wmdInput.length === 0 || $wmdInput.data('init') === true) return;
 
-    // $LAB.script(assetPath('defer/html-sanitizer-bundle'));
+    $LAB.script(assetPath('sanitizer-bundle'));
     // Vine.ComposerView.trigger("initWmdEditor");
     // var template = Vine.UserSelector.templateFunction();
 
@@ -65,14 +74,14 @@ Vine.EditorView = Vine.View.extend({
     this.set('editor', this.editor);
     this.loadingChanged();
 
-    // var saveDraft = Vine.debounce((function() {
-    //   return composerView.get('controller').saveDraft();
-    // }), 2000);
+    var saveDraft = Vine.debounce((function() {
+      return editorView.get('controller').saveDraft();
+    }), 2000);
 
-    // $wmdInput.keyup(function() {
-    //   saveDraft();
-    //   return true;
-    // });
+    $wmdInput.keyup(function() {
+      saveDraft();
+      return true;
+    });
 
     // var $replyTitle = $('#reply-title');
 

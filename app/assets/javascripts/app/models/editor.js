@@ -1,9 +1,16 @@
 var CLOSED = 'closed',
     SAVING = 'saving',
     OPEN = 'open',
-    DRAFT = 'draft';
+    DRAFT = 'draft',
+
+    // The actions the editor can take
+    CREATE_MESSAGE = 'createMessage',
+    REPLY = 'reply',
+    EDIT = 'edit';
 
 Vine.Editor = Vine.Model.extend({
+  viewDraft: Em.computed.equal('editorState', DRAFT),
+
   init: function() {
     this._super();
     var val = (Vine.Mobile.mobileView ? false : (Vine.KeyValueStore.get('composer.showPreview') || 'true'));
@@ -31,6 +38,10 @@ Vine.Editor = Vine.Model.extend({
     return this.get('showPreview') ? I18n.t('composer.hide_preview') : I18n.t('composer.show_preview');
   }.property('showPreview'),
 
+  replyDirty: function() {
+    return true;
+  }.property('reply', 'originalText'),
+
   hidePreview: Em.computed.not('showPreview')
 });
 
@@ -39,6 +50,10 @@ Vine.Editor.reopenClass({
   SAVING: SAVING,
   OPEN: OPEN,
   DRAFT: DRAFT,
+
+  CREATE_MESSAGE: CREATE_MESSAGE,
+  REPLY: REPLY,
+  EDIT: EDIT,
   
   open: function(opts) {
     var editor = Vine.Editor.create();

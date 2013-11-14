@@ -2,7 +2,9 @@ window.assetPath = (function(){
   var map = {
     'logo20w.png': <%= asset_path('logo20w.png').inspect.html_safe %>,
     'logo100w.png': <%= asset_path('logo100w.png').inspect.html_safe %>,
-    'logo100w.png.uri': <%= asset_data_uri('logo100w.png').inspect.html_safe %>
+    'logo100w.png.uri': <%= asset_data_uri('logo100w.png').inspect.html_safe %>,
+
+    'sanitizer-bundle': <%= asset_path('sanitizer-bundle.js').inspect.html_safe %>
   };
 
   var assetPath = function(asset){ return map[asset]; };
