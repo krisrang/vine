@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :user_open_ids, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :drafts, dependent: :destroy
 
   validates_presence_of :username
   validate :username_validator

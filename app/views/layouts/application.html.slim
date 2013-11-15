@@ -30,6 +30,7 @@ html lang="#{SiteSetting.default_locale}" class="#{html_classes}"
       Vine.Environment = '#{Rails.env}';
       Vine.SiteSettings = PreloadStore.get('settings');
       Vine.BaseUrl = '#{Vine.base_url}';
+      Vine.Locale = '#{I18n.locale}';
       Vine.start();
 
     noscript data-path="#{request.env['PATH_INFO']}"

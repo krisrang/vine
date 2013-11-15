@@ -2,7 +2,7 @@ Vine.EditorView = Vine.View.extend({
   elementId: 'editor',
   classNameBindings: ['editorState',
                       'model.loading',
-                      'postMade',
+                      'messageMade',
                       'model.showPreview',
                       'model.hidePreview'],
 
@@ -13,6 +13,10 @@ Vine.EditorView = Vine.View.extend({
     if (state) return state;
     return Vine.Editor.CLOSED;
   }.property('model.editorState'),
+
+  draftStatus: function() {
+    $('#draft-status').text(this.get('model.draftStatus') || "");
+  }.observes('model.draftStatus'),
 
   // Disable fields when we're loading
   loadingChanged: function() {
@@ -26,7 +30,6 @@ Vine.EditorView = Vine.View.extend({
   didInsertElement: function() {
     var $editor = $('#editor');
     $editor.DivResizer({});
-    // this.get('controller').open({editorState: Vine.Editor.CLOSED});
   },
 
   childDidInsertElement: function(e) {
@@ -83,33 +86,10 @@ Vine.EditorView = Vine.View.extend({
       return true;
     });
 
-    // var $replyTitle = $('#reply-title');
-
-    // $replyTitle.keyup(function() {
-    //   saveDraft();
-    //   // removes the red background once the requirements are met
-    //   if (composerView.get('model.missingTitleCharacters') <= 0) {
-    //     $replyTitle.removeClass("requirements-not-met");
-    //   }
-    //   return true;
-    // });
-
-    // // when the title field loses the focus...
-    // $replyTitle.blur(function(){
-    //   // ...and the requirements are not met (ie. the minimum number of characters)
-    //   if (composerView.get('model.missingTitleCharacters') > 0) {
-    //     // then, "redify" the background
-    //     $replyTitle.toggleClass("requirements-not-met", true);
-    //   }
-    // });
-
-    // // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition
-    // // to finish.
-    // return Em.run.later(jQuery, (function() {
-    //   var replyTitle = $('#reply-title');
-    //   composerView.resize();
-    //   return replyTitle.length ? replyTitle.putCursorAtEnd() : $wmdInput.putCursorAtEnd();
-    // }), 300);
+    // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition to finish
+    return Em.run.later(jQuery, (function() {
+      return $wmdInput.putCursorAtEnd();
+    }), 300);
   },
 
   observeReplyChanges: function() {

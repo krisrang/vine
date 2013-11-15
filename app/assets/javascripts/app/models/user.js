@@ -16,6 +16,7 @@ Vine.User = DS.Model.extend({
   message: attr(),
 
   messages: DS.hasMany('message'),
+  drafts: DS.hasMany('draft'),
 
   thumbAvatar: function() {
     return this.get('avatars').thumb;

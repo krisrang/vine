@@ -62,40 +62,40 @@ Vine.Markdown = {
 
     var editorOptions = {
       strings: {
-        bold: I18n.t("composer.bold_title") + " <strong> Ctrl+B",
-        boldexample: I18n.t("composer.bold_text"),
+        bold: I18n.t("editor.bold_title") + " <strong> Ctrl+B",
+        boldexample: I18n.t("editor.bold_text"),
 
-        italic: I18n.t("composer.italic_title") + " <em> Ctrl+I",
-        italicexample: I18n.t("composer.italic_text"),
+        italic: I18n.t("editor.italic_title") + " <em> Ctrl+I",
+        italicexample: I18n.t("editor.italic_text"),
 
-        link: I18n.t("composer.link_title") + " <a> Ctrl+L",
-        linkdescription: I18n.t("composer.link_description"),
-        linkdialog: "<p><b>" + I18n.t("composer.link_dialog_title") + "</b></p><p>http://example.com/ \"" +
-            I18n.t("composer.link_optional_text") + "\"</p>",
+        link: I18n.t("editor.link_title") + " <a> Ctrl+L",
+        linkdescription: I18n.t("editor.link_description"),
+        linkdialog: "<p><b>" + I18n.t("editor.link_dialog_title") + "</b></p><p>http://example.com/ \"" +
+            I18n.t("editor.link_optional_text") + "\"</p>",
 
-        quote: I18n.t("composer.quote_title") + " <blockquote> Ctrl+Q",
-        quoteexample: I18n.t("composer.quote_text"),
+        quote: I18n.t("editor.quote_title") + " <blockquote> Ctrl+Q",
+        quoteexample: I18n.t("editor.quote_text"),
 
-        code: I18n.t("composer.code_title") + " <pre><code> Ctrl+K",
-        codeexample: I18n.t("composer.code_text"),
+        code: I18n.t("editor.code_title") + " <pre><code> Ctrl+K",
+        codeexample: I18n.t("editor.code_text"),
 
-        image: I18n.t("composer.upload_title") + " - Ctrl+G",
-        imagedescription: I18n.t("composer.upload_description"),
+        image: I18n.t("editor.upload_title") + " - Ctrl+G",
+        imagedescription: I18n.t("editor.upload_description"),
 
-        olist: I18n.t("composer.olist_title") + " <ol> Ctrl+O",
-        ulist: I18n.t("composer.ulist_title") + " <ul> Ctrl+U",
-        litem: I18n.t("composer.list_item"),
+        olist: I18n.t("editor.olist_title") + " <ol> Ctrl+O",
+        ulist: I18n.t("editor.ulist_title") + " <ul> Ctrl+U",
+        litem: I18n.t("editor.list_item"),
 
-        heading: I18n.t("composer.heading_title") + " <h1>/<h2> Ctrl+H",
-        headingexample: I18n.t("composer.heading_text"),
+        heading: I18n.t("editor.heading_title") + " <h1>/<h2> Ctrl+H",
+        headingexample: I18n.t("editor.heading_text"),
 
-        hr: I18n.t("composer.hr_title") + " <hr> Ctrl+R",
+        hr: I18n.t("editor.hr_title") + " <hr> Ctrl+R",
 
-        undo: I18n.t("composer.undo_title") + " - Ctrl+Z",
-        redo: I18n.t("composer.redo_title") + " - Ctrl+Y",
-        redomac: I18n.t("composer.redo_title") + " - Ctrl+Shift+Z",
+        undo: I18n.t("editor.undo_title") + " - Ctrl+Z",
+        redo: I18n.t("editor.redo_title") + " - Ctrl+Y",
+        redomac: I18n.t("editor.redo_title") + " - Ctrl+Shift+Z",
 
-        help: I18n.t("composer.help")
+        help: I18n.t("editor.help")
       }
     };
 

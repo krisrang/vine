@@ -4,6 +4,7 @@
 //= require lodash
 //= require lab
 //= require jquery.html5-placeholder-shim
+//= require jquery.putCursorAtEnd
 //= require handlebars
 //= require ember
 //= require ember-data-beta

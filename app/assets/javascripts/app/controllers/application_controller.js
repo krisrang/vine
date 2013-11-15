@@ -17,7 +17,8 @@ Vine.ApplicationController = Vine.Controller.extend({
 
     bootbox.setDefaults({
       animate: false,
-      backdrop: true
+      backdrop: true,
+      locale: Vine.Locale
     });
   },
 

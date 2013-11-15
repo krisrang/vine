@@ -28,6 +28,8 @@ class SiteSetting < ActiveRecord::Base
   client_setting(:enable_long_polling, true)
   setting(:long_polling_interval, 15000)
 
+  client_setting(:min_message_length, Rails.env.test? ? 5 : 20)
+
   setting(:active_user_rate_limit_secs, 60)
   setting(:previous_visit_timeout_hours, 1)
 

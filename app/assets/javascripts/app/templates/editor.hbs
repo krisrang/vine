@@ -1,16 +1,41 @@
 <div class="controls">
-  <a href='#' class='toggler' {{action toggle bubbles=false}} title='{{i18n composer.toggler}}'></a>
-  
-  <div class='wmd-controls'>
-    <div class='textarea-wrapper'>
-      <div class='wmd-button-bar' id='wmd-button-bar'></div>
-      {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" valueBinding="model.reply" id="wmd-input" placeholderKey="composer.reply_placeholder"}}
-    </div>
-    <div class='preview-wrapper'>
-      <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
+  <a href='#' class='toggler' {{action toggle bubbles=false}} title='{{i18n editor.toggler}}'></a>
+
+  {{#if model.viewOpen}}  
+    <div class='wmd-controls'>
+      <div class='textarea-wrapper'>
+        <div class='wmd-button-bar' id='wmd-button-bar'></div>
+        {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" valueBinding="model.reply" id="wmd-input" placeholderKey="editor.reply_placeholder"}}
+      </div>
+      <div class='preview-wrapper'>
+        <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
+      </div>
+
+      <a href="#" {{action togglePreview}} class='toggle-preview'>{{{model.toggleText}}}</a>
+      <div id='draft-status'>{{draftStatus}}</div>
     </div>
 
-    <a href="#" {{action togglePreview}} class='toggle-preview'>{{{model.toggleText}}}</a>
-    <div id='draft-status'>{{draftStatus}}</div>
-  </div>
+    {{#if currentUser.isSignedIn}}
+      <div class="submit-panel">
+        <button {{action save}} tabindex="4" {{bindAttr class=":btn :btn-primary :create model.cantSubmitMessage:disabled"}}>{{model.saveText}}</button>
+        <a href='#' {{action cancel}} class='cancel' tabindex="4">{{i18n cancel}}</a>
+      </div>
+    {{/if}}
+  {{else}}
+      <div class='row'>
+        <div class='span24'>
+          <div class='saving-text'>
+            {{#if model.createdPost}}
+              {{i18n editor.saved}} <a class='permalink' href="{{unbound createdPost.url}}" {{action viewNewReply}}>{{i18n editor.view_new_post}}</a>
+            {{else}}
+              {{i18n editor.saving}}
+            {{/if}}
+          </div>
+          <div class='draft-text'>
+            {{i18n editor.saved_draft}}
+          </div>
+        </div>
+
+      </div>
+    {{/if}}
 </div>

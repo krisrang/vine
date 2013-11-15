@@ -18,6 +18,16 @@
     @include transition(none !important);
   }
 
+  .submit-panel {
+    position: absolute;
+    display: block;
+    bottom: 8px;
+  }
+
+  .draft-text {
+    display: none;
+  }
+
   .toggler {
     display: block;
     width: 13px;
@@ -39,9 +49,18 @@
     bottom: -31px;
     margin-top: 0px;
   }
+
   .toggle-preview {
     right: 5px;
     text-decoration: underline;
+  }
+
+  #draft-status {
+    right: 51%;
+    color: lighten(#000, 60);
+    &.flash {
+      color: lighten(#FF2301, 20);
+    }
   }
 
   .controls {
@@ -49,6 +68,7 @@
     margin-left: auto;
     margin-right: auto;
     float: none;
+    padding: 10px;
   }
 
   .grippie {

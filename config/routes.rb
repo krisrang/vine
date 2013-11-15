@@ -40,6 +40,7 @@ Vine::Application.routes.draw do
 
   resources :messages
   resources :media
+  resource :drafts
 
   resources :static
   post 'login' => 'static#enter'
