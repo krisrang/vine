@@ -1,7 +1,7 @@
 <div class="controls">
   <a href='#' class='toggler' {{action toggle bubbles=false}} title='{{i18n editor.toggler}}'></a>
 
-  {{#if model.viewOpen}}  
+  {{#if viewOpen}}  
     <div class='wmd-controls'>
       <div class='textarea-wrapper'>
         <div class='wmd-button-bar' id='wmd-button-bar'></div>
@@ -11,13 +11,13 @@
         <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
       </div>
 
-      <a href="#" {{action togglePreview}} class='toggle-preview'>{{{model.toggleText}}}</a>
+      <a href="#" {{action togglePreview}} class='toggle-preview'>{{{toggleText}}}</a>
       <div id='draft-status'>{{draftStatus}}</div>
     </div>
 
     {{#if currentUser.isSignedIn}}
       <div class="submit-panel">
-        <button {{action save}} tabindex="4" {{bindAttr class=":btn :btn-primary :create model.cantSubmitMessage:disabled"}}>{{model.saveText}}</button>
+        <button {{action save}} tabindex="4" {{bindAttr class=":btn :btn-primary :create cantSubmitMessage:disabled"}}>{{saveText}}</button>
         <a href='#' {{action cancel}} class='cancel' tabindex="4">{{i18n cancel}}</a>
       </div>
     {{/if}}
@@ -25,8 +25,8 @@
       <div class='row'>
         <div class='span24'>
           <div class='saving-text'>
-            {{#if model.createdPost}}
-              {{i18n editor.saved}} <a class='permalink' href="{{unbound createdPost.url}}" {{action viewNewReply}}>{{i18n editor.view_new_post}}</a>
+            {{#if createdMessage}}
+              {{i18n editor.saved}} <a class='permalink' href="{{unbound createdMessage.url}}" {{action viewNewReply}}>{{i18n editor.view_new_post}}</a>
             {{else}}
               {{i18n editor.saving}}
             {{/if}}

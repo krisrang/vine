@@ -1,22 +1,96 @@
 Vine.EditorView = Vine.View.extend({
   elementId: 'editor',
-  classNameBindings: ['editorState',
-                      'model.loading',
-                      'messageMade',
-                      'model.showPreview',
-                      'model.hidePreview'],
+  classNameBindings: ['editorStateClass',
+                      'loading',
+                      'showPreview',
+                      'hidePreview'],
 
   model: Em.computed.alias('controller.model'),
 
-  editorState: function() {
-    var state = this.get('model.editorState');
+  hidePreview: Em.computed.not('showPreview'),
+
+  click: function() {
+    this.get('controller').openIfDraft();
+  },
+
+  editorStateClass: function() {
+    var state = this.get('controller.editorState');
     if (state) return state;
-    return Vine.Editor.CLOSED;
-  }.property('model.editorState'),
+    return Vine.EditorController.CLOSED;
+  }.property('controller.editorState'),
 
   draftStatus: function() {
-    $('#draft-status').text(this.get('model.draftStatus') || "");
-  }.observes('model.draftStatus'),
+    var $reply = $('#wmd-input');
+
+    if ($reply.is(':focus')) {
+      var replyDiff = this.get('missingReplyCharacters');
+      if (replyDiff > 0) {
+        return I18n.t('editor.min_length.need_more_for_reply', { n: replyDiff });
+      }
+    }
+
+    // hide the counters if the currently focused text field is OK
+    return "";
+
+  }.property('missingReplyCharacters'),
+
+  missingReplyCharacters: function() {
+    return this.get('minimumMessageLength') - this.get('model.replyLength');
+  }.property('minimumMessageLength', 'model.replyLength'),
+
+  minimumMessageLength: function() {
+    return Vine.SiteSettings.min_message_length;
+  }.property(),
+
+  didInsertElement: function() {
+    var val = (Vine.Mobile.mobileView ? false : (Vine.KeyValueStore.get('editor.showPreview') || 'true'));
+    this.set('showPreview', val === 'true');
+    this.set('controller.editorState', Vine.EditorController.CLOSED);
+
+    var $editor = $('#editor');
+    $editor.DivResizer({resize: this.resize});
+  },
+
+  childDidInsertElement: function(e) {
+    return this.initEditor();
+  },
+
+  resize: function() {
+    // this still needs to wait on animations, need a clean way to do that
+    return Em.run.schedule('afterRender', function() {
+      var editor = $('#editor');
+      var h = editor.height() || 0;
+      var sizePx = "" + h + "px";
+      $('#messages').css('padding-bottom', sizePx);
+    });
+  }.observes('controller.editorState'),
+
+  cantSubmitMessage: function() {
+    // Can't submit while loading
+    if (this.get('loading')) return true;
+
+    // reply is always required
+    if (this.get('missingReplyCharacters') > 0) return true;
+
+    return false;
+  }.property('loading', 'model.replyLength', 'missingReplyCharacters'),
+
+  // The text for the save button
+  saveText: function() {
+    switch (this.get('model.action')) {
+      case EDIT: return I18n.t('editor.save_edit');
+      case REPLY: return I18n.t('editor.reply');
+    }
+  }.property('action'),
+
+  togglePreview: function() {
+    this.toggleProperty('showPreview');
+    Vine.KeyValueStore.set({ key: 'editor.showPreview', value: this.get('showPreview') });
+  },
+
+  toggleText: function() {
+    return this.get('showPreview') ? I18n.t('editor.hide_preview') : I18n.t('editor.show_preview');
+  }.property('showPreview'),
 
   // Disable fields when we're loading
   loadingChanged: function() {
@@ -26,24 +100,6 @@ Vine.EditorView = Vine.View.extend({
       $('#wmd-input').prop('disabled', '');
     }
   }.observes('loading'),
-
-  didInsertElement: function() {
-    var $editor = $('#editor');
-    $editor.DivResizer({resize: this.resize});
-  },
-
-  childDidInsertElement: function(e) {
-    return this.initEditor();
-  },
-
-  focusIn: function() {
-    var controller = this.get('controller');
-    if (controller) controller.updateDraftStatus();
-  },
-
-  click: function() {
-    this.get('controller').openIfDraft();
-  },
 
   initEditor: function() {
     var $wmdInput, editor, editorView = this;
@@ -99,6 +155,7 @@ Vine.EditorView = Vine.View.extend({
     Ember.run.next(function() {
       if (self.editor) {
         self.editor.refreshPreview();
+
         // if the caret is on the last line ensure preview scrolled to bottom
         var caretPosition = Vine.Utilities.caretPosition(self.wmdInput[0]);
         if (!self.wmdInput.val().substring(caretPosition).match(/\n/)) {
@@ -109,33 +166,13 @@ Vine.EditorView = Vine.View.extend({
         }
       }
     });
-  }.observes('model.reply', 'model.hidePreview'),
-
-  resize: function() {
-    // this still needs to wait on animations, need a clean way to do that
-    return Em.run.schedule('afterRender', function() {
-      var editor = $('#editor');
-      var h = editor.height() || 0;
-      var sizePx = "" + h + "px";
-      $('#messages').css('padding-bottom', sizePx);
-    });
-  }.observes('model.composeState'),
+  }.observes('model.reply', 'hidePreview'),  
 
   afterRender: Vine.debounce(function() {
     var $wmdPreview = $('#wmd-preview');
     if ($wmdPreview.length === 0) return;
 
     // Discourse.SyntaxHighlighting.apply($wmdPreview);
-
-    var refresh = false;
-
-    // // Load the post processing effects
-    // $('a.onebox', $wmdPreview).each(function(i, e) {
-    //   Discourse.Onebox.load(e, refresh);
-    // });
-    // $('span.mention', $wmdPreview).each(function(i, e) {
-    //   Discourse.Mention.load(e, refresh);
-    // });
 
     this.trigger('previewRefreshed', $wmdPreview);
   }, 100)

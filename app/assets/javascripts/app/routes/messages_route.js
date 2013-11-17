@@ -1,6 +1,7 @@
 Vine.MessagesRoute = Vine.Route.extend({
   setupController: function(controller) {
-    var store = this.store;
+    var store = this.store,
+        route = this;
 
     PreloadStore.getAndRemove("messages_latest").then(function(result) {
       if (result && result.messages) {
@@ -17,8 +18,9 @@ Vine.MessagesRoute = Vine.Route.extend({
     PreloadStore.getAndRemove("draft").then(
       function(result) {
         if (result && result.draft) {
+          var editor = route.controllerFor('editor');
           var draft = store.push('draft', result.draft);
-          controller.set('draft', draft);
+          editor.openDraft(draft);
         }
       }
     );

@@ -4,7 +4,7 @@ Vine.MessageController = Vine.ObjectController.extend({
   actions: {
     editMessage: function() {
       var editor = this.get('controllers.editor');
-      editor.open({});
+      editor.editMessage(this.get('model'));
     }
   }
 });

@@ -1,5 +1,6 @@
 class Draft < ActiveRecord::Base
   belongs_to :user
+  belongs_to :message
 
   def self.get(user)
     Draft.where(user_id: user.id).first
