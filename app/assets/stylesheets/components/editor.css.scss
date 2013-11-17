@@ -8,7 +8,7 @@
   width: 100%;
   z-index: 1032;
   height: 250px;
-  background-color: rgba(220, 223, 224, 0.96);
+  background-color: #FAFAFA;
   bottom: 0px;
   font-size: 14px;
   position: fixed;
@@ -120,6 +120,7 @@
     border: 1px dashed #CCC;
     overflow: auto;
     visibility: visible;
+    background: #FFF;
 
     p { margin-top: 0; }
 
@@ -164,7 +165,6 @@
       min-height: 100%;
       padding: 7px;
       margin: 0;
-      background-color: #FFF;
       word-wrap: break-word;
 
       // set up proper header margins in post preview
@@ -179,16 +179,13 @@
       height: 100%;
       min-height: 100%;
       box-sizing: border-box;
-      border: 2px solid transparent;
-      border-top: 38px solid transparent;
+      border-top-width: 38px;
       border-radius: 0px;
-      transition: none;
       resize: none;
 
       &:focus { 
-        outline: none;
-        border: 2px solid #8CCAFE;
-        border-top: 38px solid #8CCAFE;
+        background: #FFF;
+        border-top-width: 38px;
       }
     }
     .textarea-wrapper, .preview-wrapper {
@@ -218,7 +215,9 @@
     }
   }
   #wmd-button-bar {
-    top: 0;
+    top: 2px;
+    left: 2px;
+    right: 2px;
     position: absolute;
     border-bottom: 1px solid #D4D4D4;
     background-color: #FFF;
@@ -246,10 +245,6 @@
   margin-right: 25%;
   width: 50%;
   min-width: 500px;
-}
-
-.wmd-button-bar {
-  width: 100%;
 }
 
 .wmd-button-row {

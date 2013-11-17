@@ -202,6 +202,11 @@ input::-webkit-input-placeholder {
   .userbit {
     text-align: center;
 
+    img {
+      width: 45px;
+      max-height: 45px;
+    }
+
     h3 {
       font-size: 20px;
       margin: 2px 0;

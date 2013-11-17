@@ -29,7 +29,7 @@ Vine.EditorView = Vine.View.extend({
 
   didInsertElement: function() {
     var $editor = $('#editor');
-    $editor.DivResizer({});
+    $editor.DivResizer({resize: this.resize});
   },
 
   childDidInsertElement: function(e) {
@@ -88,6 +88,7 @@ Vine.EditorView = Vine.View.extend({
 
     // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition to finish
     return Em.run.later(jQuery, (function() {
+      editorView.resize();
       return $wmdInput.putCursorAtEnd();
     }), 300);
   },
@@ -109,6 +110,16 @@ Vine.EditorView = Vine.View.extend({
       }
     });
   }.observes('model.reply', 'model.hidePreview'),
+
+  resize: function() {
+    // this still needs to wait on animations, need a clean way to do that
+    return Em.run.schedule('afterRender', function() {
+      var editor = $('#editor');
+      var h = editor.height() || 0;
+      var sizePx = "" + h + "px";
+      $('#messages').css('padding-bottom', sizePx);
+    });
+  }.observes('model.composeState'),
 
   afterRender: Vine.debounce(function() {
     var $wmdPreview = $('#wmd-preview');
