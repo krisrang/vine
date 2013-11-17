@@ -4,8 +4,8 @@
     <div class="col-sm-10">
       <div id="messages">
         <ul>
-          {{#each}}
-            {{render message this}}
+          {{#each message in filteredContent}}
+            {{render message message}}
           {{/each}}
         </ul>
       </div>

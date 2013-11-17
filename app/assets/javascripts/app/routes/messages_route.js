@@ -14,7 +14,7 @@ Vine.MessagesRoute = Vine.Route.extend({
       }      
     });
 
-    Vine.ajax('/drafts.json').then(
+    PreloadStore.getAndRemove("draft").then(
       function(result) {
         if (result && result.draft) {
           var draft = store.push('draft', result.draft);

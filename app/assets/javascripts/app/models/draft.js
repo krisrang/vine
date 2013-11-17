@@ -10,6 +10,6 @@ Vine.Draft = DS.Model.extend({
 
 Vine.Draft.reopenClass({
   clear: function(key, sequence) {
-    return Vine.ajax("/drafts.json", {type: 'DELETE'});
+    return Vine.ajax("/drafts", {type: 'DELETE'});
   }
 });

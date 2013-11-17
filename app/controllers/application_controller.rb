@@ -109,6 +109,9 @@ class ApplicationController < ActionController::Base
 
   def preload_current_user_data
     store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user, root: false)))
+
+    draft = Draft.get(current_user)
+    store_preloaded("draft", MultiJson.dump(DraftSerializer.new(draft))) if draft
   end
 
   def success_json
