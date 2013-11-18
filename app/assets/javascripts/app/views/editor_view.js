@@ -1,13 +1,11 @@
 Vine.EditorView = Vine.View.extend({
   elementId: 'editor',
   classNameBindings: ['editorStateClass',
-                      'loading',
-                      'showPreview',
-                      'hidePreview'],
+                      'model.loading',
+                      'model.showPreview',
+                      'model.hidePreview'],
 
   model: Em.computed.alias('controller.model'),
-
-  hidePreview: Em.computed.not('showPreview'),
 
   click: function() {
     this.get('controller').openIfDraft();
@@ -19,34 +17,8 @@ Vine.EditorView = Vine.View.extend({
     return Vine.EditorController.CLOSED;
   }.property('controller.editorState'),
 
-  draftStatus: function() {
-    var $reply = $('#wmd-input');
-
-    if ($reply.is(':focus')) {
-      var replyDiff = this.get('missingReplyCharacters');
-      if (replyDiff > 0) {
-        return I18n.t('editor.min_length.need_more_for_reply', { n: replyDiff });
-      }
-    }
-
-    // hide the counters if the currently focused text field is OK
-    return "";
-
-  }.property('missingReplyCharacters'),
-
-  missingReplyCharacters: function() {
-    return this.get('minimumMessageLength') - this.get('model.replyLength');
-  }.property('minimumMessageLength', 'model.replyLength'),
-
-  minimumMessageLength: function() {
-    return Vine.SiteSettings.min_message_length;
-  }.property(),
-
   didInsertElement: function() {
-    var val = (Vine.Mobile.mobileView ? false : (Vine.KeyValueStore.get('editor.showPreview') || 'true'));
-    this.set('showPreview', val === 'true');
-    this.set('controller.editorState', Vine.EditorController.CLOSED);
-
+    // this.set('controller.editorState', Vine.EditorController.CLOSED);
     var $editor = $('#editor');
     $editor.DivResizer({resize: this.resize});
   },
@@ -63,43 +35,16 @@ Vine.EditorView = Vine.View.extend({
       var sizePx = "" + h + "px";
       $('#messages').css('padding-bottom', sizePx);
     });
-  }.observes('controller.editorState'),
-
-  cantSubmitMessage: function() {
-    // Can't submit while loading
-    if (this.get('loading')) return true;
-
-    // reply is always required
-    if (this.get('missingReplyCharacters') > 0) return true;
-
-    return false;
-  }.property('loading', 'model.replyLength', 'missingReplyCharacters'),
-
-  // The text for the save button
-  saveText: function() {
-    switch (this.get('model.action')) {
-      case EDIT: return I18n.t('editor.save_edit');
-      case REPLY: return I18n.t('editor.reply');
-    }
-  }.property('action'),
-
-  togglePreview: function() {
-    this.toggleProperty('showPreview');
-    Vine.KeyValueStore.set({ key: 'editor.showPreview', value: this.get('showPreview') });
-  },
-
-  toggleText: function() {
-    return this.get('showPreview') ? I18n.t('editor.hide_preview') : I18n.t('editor.show_preview');
-  }.property('showPreview'),
+  }.observes('controller.editorState'),  
 
   // Disable fields when we're loading
   loadingChanged: function() {
-    if (this.get('loading')) {
+    if (this.get('model.loading')) {
       $('#wmd-input').prop('disabled', 'disabled');
     } else {
       $('#wmd-input').prop('disabled', '');
     }
-  }.observes('loading'),
+  }.observes('model.loading'),
 
   initEditor: function() {
     var $wmdInput, editor, editorView = this;
@@ -166,7 +111,7 @@ Vine.EditorView = Vine.View.extend({
         }
       }
     });
-  }.observes('model.reply', 'hidePreview'),  
+  }.observes('model.reply', 'model.hidePreview'),  
 
   afterRender: Vine.debounce(function() {
     var $wmdPreview = $('#wmd-preview');

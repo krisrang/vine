@@ -1,7 +1,7 @@
 class DraftsController < ApplicationController
   before_filter :ensure_logged_in
 
-  def show
+  def index
     @draft = Draft.get(current_user)
 
     respond_to do |format|

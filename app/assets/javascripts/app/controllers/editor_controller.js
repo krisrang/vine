@@ -37,7 +37,7 @@ Vine.EditorController = Vine.Controller.extend({
   openDraft: function(draft) {
     var controller = this;
 
-    if (draft.get('action') == EDIT && draft.get('message_id')) {
+    if (draft.get('action') == Vine.Draft.EDIT && draft.get('message_id')) {
       this.store.find('message', draft.get('message_id')).then(
         function(message) {
           return controller.editMessage(message);
@@ -47,17 +47,17 @@ Vine.EditorController = Vine.Controller.extend({
         }
       );
     } else {
-      return controller.newMessage();
+      return controller.open(draft);
     }
   },
 
   newMessage: function() {
-    var draft = this.store.createRecord('message', {action: Vine.Draft.REPLY});
+    var draft = Vine.Draft.create({action: Vine.Draft.REPLY});
     this.open(draft);
   },
 
   editMessage: function(message) {
-    var draft = this.store.createRecord('message', {action: Vine.Draft.EDIT});
+    var draft = Vine.Draft.create({action: Vine.Draft.EDIT});
     draft.set('message', message);
     this.open(draft);
   },
@@ -67,12 +67,12 @@ Vine.EditorController = Vine.Controller.extend({
   open: function(draft, opts) {
     if (!opts) opts = {};
     
-    // var promise = opts.promise || Ember.Deferred.create();
-    // opts.promise = promise;
+    var promise = opts.promise || Ember.Deferred.create();
+    opts.promise = promise;
 
-    // if (draft === void 0) {
-    //   return promise.reject();
-    // }
+    if (draft === void 0) {
+      return promise.reject();
+    }
 
     var editorController = this;
     var current = this.get('model');
@@ -89,8 +89,8 @@ Vine.EditorController = Vine.Controller.extend({
       if (current.get('action') === draft.get('action')
         && (draft.get('action') === Vine.Draft.Reply || (current.get('message_id') === draft.get('message_id')) )) {
         this.set('editorState', OPEN);
-        // promise.resolve();
-        return ;//promise;
+        promise.resolve();
+        return promise;
       } else {
         opts.tested = true;
         if (!opts.ignoreIfChanged) {
@@ -99,15 +99,14 @@ Vine.EditorController = Vine.Controller.extend({
             function() { return promise.reject(); }
           );
         }
-        return ;//promise;
+        return promise;
       }
     }
 
     this.set('model', draft);
     this.set('editorState', OPEN);
-    return;
-    // promise.resolve();
-    // return promise;
+    promise.resolve();
+    return promise;
   },
 
   openIfDraft: function() {
@@ -117,9 +116,9 @@ Vine.EditorController = Vine.Controller.extend({
   },
 
   close: function() {
-    var model = this.get('model');
-    if (model) { model.deleteRecord(); }
+    Vine.Draft.clear();
     this.set('model', null);
+    this.set('editorState', CLOSED);
   },
 
   collapse: function() {
@@ -160,7 +159,6 @@ Vine.EditorController = Vine.Controller.extend({
       if (editorController.get('model.replyDirty')) {
         bootbox.confirm(I18n.t("message.abandon"), function(result) {
           if (result) {
-            editorController.destroyDraft();
             editorController.close();
             promise.resolve();
           } else {
@@ -169,15 +167,10 @@ Vine.EditorController = Vine.Controller.extend({
         });
       } else {
         // it is possible there is some sort of crazy draft with no body ... just give up on it
-        editorController.destroyDraft();
         editorController.close();
         promise.resolve();
       }
     });
-  },
-
-  destroyDraft: function() {
-    Vine.Draft.clear();
   },
 
   toggle: function() {

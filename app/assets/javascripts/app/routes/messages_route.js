@@ -19,7 +19,7 @@ Vine.MessagesRoute = Vine.Route.extend({
       function(result) {
         if (result && result.draft) {
           var editor = route.controllerFor('editor');
-          var draft = store.push('draft', result.draft);
+          var draft = Vine.Draft.create(result.draft);
           editor.openDraft(draft);
         }
       }

@@ -8,16 +8,16 @@
         {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" valueBinding="model.reply" id="wmd-input" placeholderKey="editor.reply_placeholder" class="form-control"}}
       </div>
       <div class='preview-wrapper'>
-        <div id='wmd-preview' {{bindAttr class="hidePreview:hidden"}}></div>
+        <div id='wmd-preview' {{bindAttr class="model.hidePreview:hidden"}}></div>
       </div>
 
-      <a href="#" {{action togglePreview}} class='toggle-preview'>{{{toggleText}}}</a>
-      <div id='draft-status'>{{draftStatus}}</div>
+      <a href="#" {{action togglePreview}} class='toggle-preview'>{{{model.toggleText}}}</a>
+      <div id='draft-status'>{{{model.draftStatus}}}</div>
     </div>
 
     {{#if currentUser.isSignedIn}}
       <div class="submit-panel">
-        <button {{action save}} tabindex="4" {{bindAttr class=":btn :btn-primary :create cantSubmitMessage:disabled"}}>{{saveText}}</button>
+        <button {{action save}} tabindex="4" {{bindAttr class=":btn :btn-primary :create model.cantSubmitMessage:disabled"}}>{{model.saveText}}</button>
         <a href='#' {{action cancel}} class='cancel' tabindex="4">{{i18n cancel}}</a>
       </div>
     {{/if}}
