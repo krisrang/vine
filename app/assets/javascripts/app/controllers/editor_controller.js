@@ -37,13 +37,17 @@ Vine.EditorController = Vine.Controller.extend({
   openDraft: function(draft) {
     var controller = this;
 
-    if (draft.get('action') == Vine.Draft.EDIT && draft.get('message_id')) {
+    if (draft.get('message_id')) {
       this.store.find('message', draft.get('message_id')).then(
         function(message) {
-          return controller.editMessage(message);
+          if (draft.get('action') == Vine.Draft.EDIT) {
+            return controller.editMessage(message, draft);
+          } else {
+            return controller.replyMessage(message, draft);
+          }
         },
         function(error) {
-          return controller.newMessage();
+          return controller.newMessage(draft);
         }
       );
     } else {
@@ -51,19 +55,27 @@ Vine.EditorController = Vine.Controller.extend({
     }
   },
 
-  newMessage: function() {
-    var draft = Vine.Draft.create({action: Vine.Draft.REPLY});
-    this.open(draft);
+  newMessage: function(draft) {
+    var model = draft || Vine.Draft.create({action: Vine.Draft.REPLY});
+    this.open(model);
   },
 
-  editMessage: function(message) {
-    var draft = Vine.Draft.create({action: Vine.Draft.EDIT});
-    draft.set('message', message);
-    this.open(draft);
+  editMessage: function(message, draft) {
+    var model = draft || Vine.Draft.create({action: Vine.Draft.EDIT});
+    model.set('message', message);
+    model.set('message_id', message.get('id'));
+    if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')); }
+    this.open(model);
   },
 
-  // new: null, true, true
-  // edit: id, false, false
+  replyMessage: function(message, draft) {
+    var model = draft || Vine.Draft.create({action: Vine.Draft.REPLY});
+    model.set('message', message);
+    model.set('message_id', message.get('id'));
+    if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')); }
+    this.open(model);
+  },
+
   open: function(draft, opts) {
     if (!opts) opts = {};
     
@@ -76,13 +88,6 @@ Vine.EditorController = Vine.Controller.extend({
 
     var editorController = this;
     var current = this.get('model');
-
-    // collapsed draft, cancel and open clean editor
-    if (current && this.get('editorState') === DRAFT) {
-      this.close();
-      current = null;
-    }
-
     if (current && !opts.tested && current.get('replyDirty')) {
 
       // current draft is making new reply or it's editing the same message we want to edit again
@@ -109,21 +114,47 @@ Vine.EditorController = Vine.Controller.extend({
     return promise;
   },
 
+  save: function() {
+    var message,
+        model = this.get('model'),
+        editorController = this;
+
+    if (model) {
+      if (this.get('model.cantSubmitMessage')) return;
+
+      this.set('disableDrafts', true);
+
+      if (model.get('action') === Vine.Draft.EDIT) {
+        message = model.get('message');        
+      } else if (model.get('action') === Vine.Draft.REPLY) {
+        message = this.store.createRecord('message', {});
+      }
+
+      if (message) {
+        message.set('source', model.get('reply'));
+        message.save().then(
+          function(result) {
+            editorController.set('createdMessage', message);
+            editorController.set('disableDrafts', false);
+            editorController.close();
+          },
+          function(error) {
+            editorController.set('disableDrafts', false);
+            var errorMsg = error.responseText || error;
+            bootbox.alert(errorMsg);          
+          }
+        );
+      } else {
+        this.set('disableDrafts', false);
+        bootbox.alert(I18n.t('editor.cant_save'));
+      }
+    }
+  },
+
   openIfDraft: function() {
     if (this.get('viewDraft')) {
       this.set('editorState', OPEN);
     }
-  },
-
-  close: function() {
-    Vine.Draft.clear();
-    this.set('model', null);
-    this.set('editorState', CLOSED);
-  },
-
-  collapse: function() {
-    this.saveDraft();
-    this.set('editorState', DRAFT);
   },
 
   saveDraft: function() {
@@ -136,17 +167,17 @@ Vine.EditorController = Vine.Controller.extend({
       // Do not save when the reply's length is too small
       if (this.get('model.replyLength') < Vine.SiteSettings.min_post_length) return;
 
-      this.set('draftStatus', I18n.t('editor.saving_draft_tip'));
+      this.set('model.draftStatus', I18n.t('editor.saving_draft_tip'));
 
       var editor = this;
 
       // try to save the draft
       return model.save().then(
           function() { 
-            editor.set('draftStatus', I18n.t('editor.saved_draft_tip')); 
+            editor.set('model.draftStatus', I18n.t('editor.saved_draft_tip')); 
           },
           function() { 
-            editor.set('draftStatus', I18n.t('editor.drafts_offline'));  
+            editor.set('model.draftStatus', I18n.t('editor.drafts_offline'));  
           }
       );
     }
@@ -198,7 +229,18 @@ Vine.EditorController = Vine.Controller.extend({
     } else {
       this.close();
     }
-  } 
+  },
+
+  close: function() {
+    Vine.Draft.clear();
+    this.set('model', null);
+    this.set('editorState', CLOSED);
+  },
+
+  collapse: function() {
+    this.saveDraft();
+    this.set('editorState', DRAFT);
+  }
 });
 
 Vine.EditorController.reopenClass({

@@ -29,10 +29,11 @@ module Vine
       config.assets.precompile << "locales/#{file.match(/([a-z_A-Z]+\.js)\.erb$/)[1]}"
     end
 
-    config.assets.precompile << ['preload_store.js zxcvbn.js sanitizer-bundle.js']
+    config.assets.precompile << ['preload_store.js zxcvbn.js sanitizer-bundle.js highlight.pack.js']
 
     config.handlebars.templates_root = 'app/templates'
     config.ember.variant = :development
+    config.ember.handlebars_location = "#{Rails.root}/vendor/assets/javascripts/handlebars.js"
 
     # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
     config.pbkdf2_iterations = 64000

@@ -8,11 +8,9 @@ class Draft < ActiveRecord::Base
 
   def self.set(user, draft)
     d = self.get(user)
-    if d
-      d.update_columns(action: draft[:action], reply: draft[:reply])
-    else
-      Draft.create(user_id: user.id, action: draft[:action], reply: draft[:reply])
-    end
+    data = {action: draft[:action], reply: draft[:reply], message_id: draft[:message_id]}
+    
+    d ? d.update_columns(data) : Draft.create(data.merge(user_id: user.id))
   end
 
   def self.clear(user)

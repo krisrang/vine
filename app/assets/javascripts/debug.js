@@ -9,6 +9,6 @@ Ember.LOG_STACKTRACE_ON_DEPRECATION = true;
 //   });
 // }
 
-Ember.RSVP.configure('onerror', function(error) {
-  Ember.Logger.assert(false, error);
-});
+// Ember.RSVP.configure('onerror', function(error) {
+//   Ember.Logger.assert(false, error);
+// });

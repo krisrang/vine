@@ -8,7 +8,7 @@
   width: 100%;
   z-index: 1032;
   height: 250px;
-  background-color: #FAFAFA;
+  background-color: #EFF3F5;
   bottom: 0px;
   font-size: 14px;
   position: fixed;
@@ -25,6 +25,10 @@
   }
 
   .draft-text {
+    display: none;
+  }
+
+  .saving-text {
     display: none;
   }
 
@@ -91,6 +95,8 @@
     height: 40px !important;
     cursor: pointer;
     border-top: 1px solid #AAA;
+    background: #FFEEBA;
+    
     .draft-text {
       display: block;
     }

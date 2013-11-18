@@ -1,6 +1,7 @@
 Vine.EditorView = Vine.View.extend({
   elementId: 'editor',
   classNameBindings: ['editorStateClass',
+                      'controller.createdMessage',
                       'model.loading',
                       'model.showPreview',
                       'model.hidePreview'],
@@ -18,7 +19,6 @@ Vine.EditorView = Vine.View.extend({
   }.property('controller.editorState'),
 
   didInsertElement: function() {
-    // this.set('controller.editorState', Vine.EditorController.CLOSED);
     var $editor = $('#editor');
     $editor.DivResizer({resize: this.resize});
   },
@@ -45,6 +45,11 @@ Vine.EditorView = Vine.View.extend({
       $('#wmd-input').prop('disabled', '');
     }
   }.observes('model.loading'),
+
+  focusIn: function() {
+    var model = this.get('model');
+    if (model) model.updateDraftStatus();
+  },
 
   initEditor: function() {
     var $wmdInput, editor, editorView = this;
@@ -89,6 +94,7 @@ Vine.EditorView = Vine.View.extend({
 
     // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition to finish
     return Em.run.later(jQuery, (function() {
+      editor.refreshPreview(); // loaded draft
       editorView.resize();
       return $wmdInput.putCursorAtEnd();
     }), 300);
@@ -117,7 +123,7 @@ Vine.EditorView = Vine.View.extend({
     var $wmdPreview = $('#wmd-preview');
     if ($wmdPreview.length === 0) return;
 
-    // Discourse.SyntaxHighlighting.apply($wmdPreview);
+    Vine.SyntaxHighlighting.apply($wmdPreview);
 
     this.trigger('previewRefreshed', $wmdPreview);
   }, 100)

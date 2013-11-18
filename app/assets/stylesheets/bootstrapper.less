@@ -10,11 +10,29 @@
 // NAVBAR
 //
 
-.navbar.navbar-default {
-  background-color: #FFF;
-  border: none;
-  .box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+@navbar-default-color:             #EEEEEE;
+@navbar-default-bg:                #083F58;
 
+// Navbar links
+@navbar-default-link-color:                #EEEEEE;
+@navbar-default-link-hover-color:          #2E9FFF;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         #2E9FFF;
+@navbar-default-link-active-bg:            transparent;
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         darken(@navbar-default-link-color, 10%);
+@navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           #ddd;
+@navbar-default-toggle-icon-bar-bg:        #ccc;
+@navbar-default-toggle-border-color:       #ddd;
+
+.navbar.navbar-default {
   .navbar-brand {
     padding: 15px 30px;
   }
@@ -25,14 +43,29 @@
     font-size: 18px;
   }
 
-  .navbar-nav > li.active > a {
-    color: #2E9FFF;
-    background: none;
-  }
-
   .nav > li > a > img {
     max-width: 20px;
   }
+}
+
+.navbar .nav .form-control {
+  background: rgba(46, 159, 255, 0.1);
+  border-color: lighten(@navbar-default-bg, 10%);
+
+  &:focus {
+    color: @navbar-default-color;
+    border-color: #8CCAFE;
+  }
+}
+
+.navbar .nav input:-moz-placeholder {
+  color: darken(@navbar-default-color, 20%);
+}
+.navbar .nav input:-ms-input-placeholder {
+  color: darken(@navbar-default-color, 20%);
+}
+.navbar .nav input::-webkit-input-placeholder {
+  color: darken(@navbar-default-color, 20%);
 }
 
 // 

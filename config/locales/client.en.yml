@@ -89,11 +89,11 @@ en:
       drafts_offline: "drafts offline"
 
       min_length:
-        need_more_for_reply: "{{n}} to go for the post"
+        need_more_for_reply: "{{n}} to go for the message"
 
       error:
-        post_missing: "Post can't be empty."
-        post_length: "Post must be at least {{min}} characters long."
+        post_missing: "Message can't be empty."
+        post_length: "Message must be at least {{min}} characters long."
 
       save_edit: "Save Edit"
       reply: "Post"
@@ -102,11 +102,12 @@ en:
       reply_placeholder: "Type here. Use Markdown or BBCode to format. Drag or paste an image to upload it."
       saving: "Saving..."
       saved: "Saved!"
-      saved_draft: "You have a post draft in progress. Click anywhere in this box to resume editing."
+      saved_draft: "You have a message draft in progress. Click anywhere in this box to resume editing."
       show_preview: 'show preview &raquo;'
       hide_preview: '&laquo; hide preview'
+      cant_save: "Can't save message"
 
-      quote_post_title: "Quote whole post"
+      quote_post_title: "Quote whole message"
       bold_title: "Strong"
       bold_text: "strong text"
       italic_title: "Emphasis"

@@ -1,6 +1,5 @@
 require 'v8'
 require 'nokogiri'
-# require_dependency 'post'
 
 module PrettyText
 
@@ -52,7 +51,8 @@ module PrettyText
               "vendor/assets/javascripts/lodash.js",
               "vendor/assets/javascripts/Markdown.Converter.js",
               "lib/headless_ember.js",
-              "vendor/assets/javascripts/rsvp.js")
+              "vendor/assets/javascripts/rsvp.js",
+              Rails.configuration.ember.handlebars_location)
 
     ctx.eval("var Vine = {}; Vine.SiteSettings = #{SiteSetting.client_settings_json};")
     ctx.eval("var window = {}; window.devicePixelRatio = 2;") # hack to make code think stuff is retina
@@ -73,13 +73,10 @@ module PrettyText
       end
     end
 
-    # quote
-    # ctx['quoteTemplate'] = File.open(app_root + 'app/assets/javascripts/discourse/templates/quote.js.shbrs') {|f| f.read}
-    # ctx['quoteEmailTemplate'] = File.open(app_root + 'lib/assets/quote_email.js.shbrs') {|f| f.read}
-    # ctx.eval("HANDLEBARS_TEMPLATES = {
-    #   'quote': Handlebars.compile(quoteTemplate),
-    #   'quote_email': Handlebars.compile(quoteEmailTemplate),
-    #  };")
+    ctx['quoteTemplate'] = File.open(app_root + 'app/assets/javascripts/app/templates/quote.hbs') {|f| f.read}
+    ctx.eval("HANDLEBARS_TEMPLATES = {
+      'quote': Handlebars.compile(quoteTemplate)
+     };")
 
     ctx
   end
@@ -116,7 +113,6 @@ module PrettyText
       #   end
       # end
 
-      # quote
       # context.eval('opts["mentionLookup"] = function(u){return helpers.is_username_valid(u);}')
       # context.eval('opts["lookupAvatar"] = function(p){return Vine.Utilities.avatarImg({size: "tiny", avatarTemplate: helpers.avatar_template(p)});}')
 

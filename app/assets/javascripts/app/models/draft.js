@@ -49,11 +49,13 @@ Vine.Draft = Vine.Model.extend({
     // Can't submit while loading
     if (this.get('loading')) return true;
 
+    if (!this.get('replyDirty')) return true;
+
     // reply is always required
     if (this.get('missingReplyCharacters') > 0) return true;
 
     return false;
-  }.property('loading', 'replyLength', 'missingReplyCharacters'),  
+  }.property('loading', 'replyLength', 'missingReplyCharacters', 'replyDirty'),  
 
   togglePreview: function() {
     this.toggleProperty('showPreview');
@@ -64,19 +66,20 @@ Vine.Draft = Vine.Model.extend({
     return this.get('showPreview') ? I18n.t('editor.hide_preview') : I18n.t('editor.show_preview');
   }.property('showPreview'),
 
-  draftStatus: function() {
+  updateDraftStatus: function() {
     var $reply = $('#wmd-input');
 
     if ($reply.is(':focus')) {
       var replyDiff = this.get('missingReplyCharacters');
       if (replyDiff > 0) {
-        return I18n.t('editor.min_length.need_more_for_reply', { n: replyDiff });
+        return this.set('draftStatus', I18n.t('editor.min_length.need_more_for_reply', { n: replyDiff }));
       }
     }
 
     // hide the counters if the currently focused text field is OK
-    return "";
-  }.property('missingReplyCharacters'),
+    this.set('draftStatus', null);
+
+  }.observes('missingReplyCharacters'),
 
   missingReplyCharacters: function() {
     return this.get('minimumMessageLength') - this.get('replyLength');
