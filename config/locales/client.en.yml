@@ -5,6 +5,10 @@ en:
     no_value: "No"
     yes_value: "Yes"
 
+    nav:
+      messages: "Messages"
+      media: "Links"
+
     admin:
       title: "Admin"
 

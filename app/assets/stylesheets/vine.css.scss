@@ -17,6 +17,11 @@ a {
   cursor: pointer;
 }
 
+ ul {
+  margin: 0;
+  padding: 0;
+}
+
 input:-moz-placeholder {
   color: #888;
   font-size: 15px;
@@ -192,15 +197,16 @@ input::-webkit-input-placeholder {
 
 // 
 // MESSAGES
-// 
+//
 
 .message-view {
-  border-bottom: 1px solid #EEE;
+  border-top: 1px solid #EEE;
   list-style: none;
-  padding: 15px 10px;
+  padding: 15px 10px 5px 10px;
 
   .userbit {
     text-align: center;
+    min-width: 92px;
 
     img {
       width: 45px;
@@ -219,6 +225,89 @@ input::-webkit-input-placeholder {
 
   .button-row {
     text-align: right;
+    margin-right: -10px;
+  }
+}
+
+.btn-message {
+  border-radius: 0;
+  opacity: 0.7;
+  @include transition(all 0.2s ease 0s);
+
+  &:hover {
+    opacity: 1.0;
+  }
+}
+
+.messages-controls {
+  &.affix-top {
+    margin-bottom: 20px;
+
+    .btn {
+      margin-top: 5px;
+      float: right;
+    }
+    
+    .online-users {
+      h5 {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .btn {
+    float: left;
+  }
+
+  .online-users {
+    h5 {
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .messages-controls {
+    &.affix {
+      position: relative;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .messages-controls {
+    &.affix {
+      top: 5px;
+      left: 550px;
+      right: 200px;
+      z-index: 1031;
+
+      .btn {
+        margin-top: 3px;
+      }
+
+      .online-users {
+        margin-left: 130px;
+      }
+
+      h5 {
+        color: #66C2FF;
+        font-weight: normal;
+      }
+    }
   }
 }
 

@@ -15,8 +15,8 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     {{#if currentUser.isSignedIn}}
     <ul class="nav navbar-nav navbar-left">
-      {{#linkTo "messages" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Messages</a>{{/linkTo}}
-      {{#linkTo "media" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>Media</a>{{/linkTo}}
+      {{#linkTo "messages" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>{{i18n nav.messages}}</a>{{/linkTo}}
+      {{#linkTo "media" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>{{i18n nav.media}}</a>{{/linkTo}}
     </ul>
 
     <form class="nav navbar-form navbar-left" role="search">

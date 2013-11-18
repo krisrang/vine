@@ -40,7 +40,7 @@ Vine.EditorController = Vine.Controller.extend({
     if (draft.get('message_id')) {
       this.store.find('message', draft.get('message_id')).then(
         function(message) {
-          if (draft.get('action') == Vine.Draft.EDIT) {
+          if (draft.get('action') === Vine.Draft.EDIT) {
             return controller.editMessage(message, draft);
           } else {
             return controller.replyMessage(message, draft);
@@ -91,8 +91,8 @@ Vine.EditorController = Vine.Controller.extend({
     if (current && !opts.tested && current.get('replyDirty')) {
 
       // current draft is making new reply or it's editing the same message we want to edit again
-      if (current.get('action') === draft.get('action')
-        && (draft.get('action') === Vine.Draft.Reply || (current.get('message_id') === draft.get('message_id')) )) {
+      if (current.get('action') === draft.get('action') &&
+          (draft.get('action') === Vine.Draft.Reply || (current.get('message_id') === draft.get('message_id')) )) {
         this.set('editorState', OPEN);
         promise.resolve();
         return promise;

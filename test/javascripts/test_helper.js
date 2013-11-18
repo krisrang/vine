@@ -45,7 +45,6 @@ d.write('<style>#ember-testing-container { position: absolute; background: white
 Vine.rootElement = '#ember-testing';
 Vine.setupForTesting();
 Vine.injectTestHelpers();
-Vine.initDom();
 
 QUnit.testStart(function() {
   // Allow our tests to change site settings and have them reset before the next test

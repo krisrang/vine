@@ -1,21 +1,32 @@
 <div class="container">
   <div class="row">
+    <div class="messages-controls clearfix">
+      <button {{action newMessage}} class="btn btn-primary">New Message</button>
 
-    <div class="col-sm-10">
-      <div id="messages">
+      <div class="online-users">
+        <h5>Online Users</h5>
         <ul>
-          {{#each message in filteredContent}}
-            {{render message message}}
-          {{/each}}
+          <li>
+            <img src="http://localhost:5000/assets/avatar/thumb_default.png" alt="">
+          </li>
+          <li>
+            <img src="http://localhost:5000/assets/avatar/thumb_default.png" alt="">
+          </li>
+          <li>
+            <img src="http://localhost:5000/assets/avatar/thumb_default.png" alt="">
+          </li>
         </ul>
       </div>
-    </div>
-  
-    <div class="col-sm-2">
-      <button {{action newMessage}} class="btn btn-lg btn-primary">New Message</button>
 
-      <p>Online Users</p>
+      <div class="clearfix"></div>
     </div>
 
+    <div id="messages">
+      <ul>
+        {{#each message in filteredContent}}
+          {{render message message}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>

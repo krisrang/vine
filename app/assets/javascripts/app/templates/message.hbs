@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-1">
     <div class="userbit">
       {{#linkTo "user" user}}
         <img {{bindAttr src="user.thumbAvatar"}} width="45" height="45" />
@@ -11,12 +11,11 @@
     </div>
   </div>
 
-  <div class="col-sm-10">
+  <div class="col-sm-11">
     {{{cooked}}}
   </div>
 </div>
 
 <div class="row button-row">
-  <button {{action editMessage}} class="btn btn-sm btn-success">Edit</button>
-  <button {{action replyMessage}} class="btn btn-sm btn-primary">Reply</button>
+  <button {{action editMessage}} class="btn btn-sm btn-success btn-message">Edit</button><button {{action replyMessage}} class="btn btn-sm btn-primary btn-message">Reply</button>
 </div>
