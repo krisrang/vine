@@ -65,6 +65,7 @@ Vine.EditorController = Vine.Controller.extend({
     var model = draft || Vine.Draft.create({action: Vine.Draft.EDIT});
     model.set('message', message);
     model.set('message_id', message.get('id'));
+    if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')) }
     this.open(model);
   },
 
