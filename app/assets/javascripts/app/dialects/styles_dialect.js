@@ -30,4 +30,4 @@ replaceMarkdown('__', 'strong');
 replaceMarkdown('*', 'em');
 replaceMarkdown('_', 'em');
 
-
+replaceMarkdown('~~', 'del');

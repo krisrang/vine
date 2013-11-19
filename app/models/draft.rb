@@ -11,7 +11,8 @@ class Draft < ActiveRecord::Base
 
   def self.set(user, draft)
     d = self.get(user)
-    data = {action: draft[:action], reply: draft[:reply], message_id: draft[:message_id]}
+    data = {action: draft[:action], reply: draft[:reply]}
+    data.merge(message_id: draft[:message_id]) if !draft[:message_id].blank?
     
     d ? d.update_columns(data) : Draft.create(data.merge(user_id: user.id))
   end

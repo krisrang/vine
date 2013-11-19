@@ -3,8 +3,8 @@ Todo
 
 * ~~Message deleting and authorization~~
 * Message quoting
-* Image upload
 * Smilies & autocomplete
+* Image upload
 * User preferences
 * Infinite scrolling
 * Search

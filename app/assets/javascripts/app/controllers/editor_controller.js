@@ -41,6 +41,7 @@ Vine.EditorController = Vine.Controller.extend({
       this.store.find('message', draft.get('message_id')).then(
         function(message) {
           if (draft.get('action') === Vine.Draft.EDIT) {
+            draft.set('reply', message.get('source'));
             return controller.editMessage(message, draft);
           } else {
             return controller.replyMessage(message, draft);
@@ -64,7 +65,6 @@ Vine.EditorController = Vine.Controller.extend({
     var model = draft || Vine.Draft.create({action: Vine.Draft.EDIT});
     model.set('message', message);
     model.set('message_id', message.get('id'));
-    if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')); }
     this.open(model);
   },
 
@@ -72,7 +72,6 @@ Vine.EditorController = Vine.Controller.extend({
     var model = draft || Vine.Draft.create({action: Vine.Draft.REPLY});
     model.set('message', message);
     model.set('message_id', message.get('id'));
-    if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')); }
     this.open(model);
   },
 
@@ -165,7 +164,7 @@ Vine.EditorController = Vine.Controller.extend({
       // Do not save when there is no reply
       if (!this.get('model.replyDirty')) return;
       // Do not save when the reply's length is too small
-      if (this.get('model.replyLength') < Vine.SiteSettings.min_post_length) return;
+      if (this.get('model.replyLength') < Vine.SiteSettings.min_message_length) return;
 
       this.set('model.draftStatus', I18n.t('editor.saving_draft_tip'));
 

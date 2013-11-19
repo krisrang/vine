@@ -24,6 +24,7 @@
 //= require ./app/mixins/ajax
 //= require ./vine
 //= require ./store
+//= require ./pagedown_custom
 
 // Load first
 //= require_tree ./app/lib

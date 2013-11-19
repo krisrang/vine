@@ -7,10 +7,11 @@ class SiteSetting < ActiveRecord::Base
   validates_presence_of :data_type
 
   setting(:default_locale, 'en', enum: 'LocaleSiteSetting')
-
   client_setting(:title, "Vine")
 
   setting(:api_key, '')
+
+  client_setting(:traditional_markdown_linebreaks, false)
 
   client_setting(:must_approve_users, false)
   client_setting(:login_required, true)

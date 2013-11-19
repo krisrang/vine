@@ -58,7 +58,7 @@ module Vine
   end
 
   def self.current_user_provider
-    @current_user_provider || Auth::LocalUserProvider
+    @current_user_provider ||= Auth::LocalUserProvider
   end
 
   def self.current_user_provider=(val)
