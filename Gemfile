@@ -50,7 +50,8 @@ gem 'seed-fu'
 gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
-gem 'unf' 
+gem 'unf'
+gem 'authority'
 
 group :development do
   gem 'foreman'

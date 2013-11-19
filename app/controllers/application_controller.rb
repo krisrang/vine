@@ -2,8 +2,6 @@ require 'current_user'
 
 class ApplicationController < ActionController::Base
   include CurrentUser
-
-  serialization_scope :guardian
   
   protect_from_forgery
 
@@ -43,6 +41,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authority_forbidden(error)
+    Authority.logger.warn(error.message)
+    raise Vine::InvalidAccess.new(error.message)
+  end
+
   def build_not_found_page(status=404, layout=false)
     @slug =  params[:slug].class == String ? params[:slug] : ''
     @slug =  (params[:id].class == String ? params[:id] : '') if @slug.blank?
@@ -77,10 +80,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def guardian
-    @guardian ||= Guardian.new(current_user)
-  end
-
   def fetch_user_from_params
     username_lower = params[:username].downcase
     username_lower.gsub!(/\.json$/, '')
@@ -88,7 +87,6 @@ class ApplicationController < ActionController::Base
     user = User.where(username_lower: username_lower).first
     raise Vine::NotFound.new if user.blank?
 
-    guardian.ensure_can_see!(user)
     user
   end
 

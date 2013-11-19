@@ -26,9 +26,9 @@ class Auth::LocalUserProvider
       current_user = User.where(auth_token: auth_token).first
     end
 
-    # if current_user && current_user.is_banned?
-    #   current_user = nil
-    # end
+    if current_user && current_user.is_banned?
+      current_user = nil
+    end
 
     if current_user
       current_user.update_last_seen!

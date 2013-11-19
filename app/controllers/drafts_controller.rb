@@ -1,4 +1,5 @@
 class DraftsController < ApplicationController
+  authorize_actions_for Draft
   before_filter :ensure_logged_in
 
   def index

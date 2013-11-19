@@ -77,7 +77,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     end
 
     # log on any account that is active with forum access
-    if Guardian.new(user).can_access_messages? && user.active
+    if user.approved? && user.active
       log_on_user(user)
       # don't carry around old auth info, perhaps move elsewhere
       session[:authentication] = nil

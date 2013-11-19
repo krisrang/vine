@@ -3,6 +3,10 @@ Vine.CurrentUserController = Vine.ObjectController.extend({
     return this.get('content') && this.present('content');
   }.property('content'),
 
+  isAdmin: function() {
+    return this.get('content') && this.get('content.admin');
+  }.property('content'),
+
   logout: function() {
     var vineUserController = this;
     return Vine.ajax("/session/" + this.get('content').get('username'), {

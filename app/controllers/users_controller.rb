@@ -70,7 +70,7 @@ class UsersController < ApplicationController
         @user.password = params[:password]
         if @user.save
 
-          if Guardian.new(@user).can_access_messages?
+          if @user.approved?
             # Log in the user
             log_on_user(@user)
             flash[:success] = I18n.t('password_reset.success')
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
     if @user = EmailToken.confirm(params[:token])
 
       # Log in the user unless they need to be approved
-      if Guardian.new(@user).can_access_messages?
+      if @user.approved?
         log_on_user(@user)
       else
         @needs_approval = true

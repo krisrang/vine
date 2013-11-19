@@ -139,3 +139,7 @@ en:
 
     message:
       abandon: "Are you sure you want to abandon your message?"
+      delete: "Delete"
+      edit: "Edit"
+      reply: "Reply"
+      destroy: "Are you sure you want to destroy this message?"

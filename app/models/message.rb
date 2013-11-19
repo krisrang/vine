@@ -1,6 +1,9 @@
 require_dependency 'pretty_text'
 
 class Message < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'MessageAuthorizer'
+
   belongs_to :user
 
   scope :latest, -> { order('created_at DESC').limit(10) }

@@ -1,10 +1,10 @@
 Todo
 ===
 
+* ~~Message deleting and authorization~~
 * Message quoting
 * Image upload
 * Smilies & autocomplete
-* Message deleting and authorization
 * User preferences
 * Infinite scrolling
 * Search

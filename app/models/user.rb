@@ -3,6 +3,11 @@ require_dependency 'email'
 require_dependency 'vine'
 
 class User < ActiveRecord::Base
+  include Authority::UserAbilities
+
+  include Authority::Abilities
+  self.authorizer_name = 'UserAuthorizer'
+  
   mount_uploader :avatar, AvatarUploader
   
   has_many :user_visits, dependent: :destroy
@@ -84,6 +89,16 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def developer?
+    admin? &&
+    (Rails.env.development? ||
+      (
+        Rails.configuration.respond_to?(:developer_emails) &&
+        Rails.configuration.developer_emails.include?(email)
+      )
+    )
+  end
+
   def is_banned?
     banned_till && banned_till > DateTime.now
   end
@@ -147,6 +162,13 @@ class User < ActiveRecord::Base
 
   def email_confirmed?
     email_tokens.where(email: email, confirmed: true).present? || email_tokens.empty?
+  end
+
+  def approved?
+    return true unless SiteSetting.must_approve_users?
+    return true if self.admin?
+
+    self.approved
   end
 
   def activate

@@ -141,7 +141,7 @@ Vine.EditorController = Vine.Controller.extend({
           function(error) {
             editorController.set('disableDrafts', false);
             var errorMsg = error.responseText || error;
-            bootbox.alert(errorMsg);          
+            bootbox.alert(errorMsg);
           }
         );
       } else {
