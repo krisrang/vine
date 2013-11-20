@@ -231,9 +231,13 @@ input::-webkit-input-placeholder {
     font-size: 13px;
   }
 
-  .action-row a:hover {
-    color: rgba(34,59,74,.7);
-    text-decoration: none;
+  .action-row {
+    text-align: right;
+    
+    a:hover {
+      color: rgba(34,59,74,.7);
+      text-decoration: none;
+    }
   }
 }
 

@@ -2,7 +2,7 @@ require 'net/http'
 
 desc "Import data from legacy KrisBB"
 task import: :environment do
-  token = ENV['TOKEN']
+  token = ENV['KRISBB_TOKEN']
   next if token.nil?
 
   User.destroy_all

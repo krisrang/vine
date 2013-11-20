@@ -2,7 +2,7 @@ Todo
 ===
 
 * ~~Message deleting and authorization~~
-* Message quoting
+* ~~Message quoting~~
 * Smilies & autocomplete
 * Hotkeys in editor
 * Image upload

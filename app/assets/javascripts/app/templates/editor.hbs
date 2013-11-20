@@ -1,8 +1,10 @@
 <div class="controls">
   <a href='#' class='toggler' {{action toggle bubbles=false}} title='{{i18n editor.toggler}}'></a>
 
-  {{#if viewOpen}}  
-    <div class='wmd-controls'>
+  {{#if viewOpen}}
+    <div class='reply-to'>{{{model.actionTitle}}}:</div>
+    
+    <div class='wmd-controls'>     
       <div class='textarea-wrapper'>
         <div class='wmd-button-bar' id='wmd-button-bar'></div>
         {{view Vine.NotifyingTextArea parentBinding="view" tabindex="3" valueBinding="model.reply" id="wmd-input" placeholderKey="editor.reply_placeholder" class="form-control"}}

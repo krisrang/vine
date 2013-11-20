@@ -58,7 +58,7 @@ Vine.EditorController = Vine.Controller.extend({
 
   newMessage: function(draft) {
     var model = draft || Vine.Draft.create({action: Vine.Draft.REPLY});
-    this.open(model);
+    return this.open(model);
   },
 
   editMessage: function(message, draft) {
@@ -66,14 +66,14 @@ Vine.EditorController = Vine.Controller.extend({
     model.set('message', message);
     model.set('message_id', message.get('id'));
     if (Em.isEmpty(model.get('reply'))) { model.set('reply', message.get('source')) }
-    this.open(model);
+    return this.open(model);
   },
 
   replyMessage: function(message, draft) {
     var model = draft || Vine.Draft.create({action: Vine.Draft.REPLY});
     model.set('message', message);
     model.set('message_id', message.get('id'));
-    this.open(model);
+    return this.open(model);
   },
 
   open: function(draft, opts) {
@@ -244,6 +244,11 @@ Vine.EditorController = Vine.Controller.extend({
   collapse: function() {
     this.saveDraft();
     this.set('editorState', DRAFT);
+  },
+
+  appendText: function(text) {
+    var m = this.get('model');
+    if (m) { m.appendText(text); }
   }
 });
 

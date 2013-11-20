@@ -32,5 +32,32 @@ Vine.Utilities = {
       return rc.text.length;
     }
     return 0;
+  },
+
+  selectedText: function() {
+    var html = '';
+
+    if (typeof window.getSelection !== "undefined") {
+        var sel = window.getSelection();
+        if (sel.rangeCount) {
+            var container = document.createElement("div");
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+        }
+    } else if (typeof document.selection !== "undefined") {
+        if (document.selection.type === "Text") {
+            html = document.selection.createRange().htmlText;
+        }
+    }
+
+    // Strip out any .click elements from the HTML before converting it to text
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    $('.clicks', $(div)).remove();
+    var text = div.textContent || div.innerText || "";
+
+    return String(text).trim();
   }
 };

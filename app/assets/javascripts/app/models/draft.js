@@ -22,7 +22,7 @@ Vine.Draft = Vine.Model.extend({
       return this.get('reply') !== this.get('message.source');
     }
 
-    return false;
+    return true;
   }.property('reply'),
 
   replyLength: function() {
@@ -38,6 +38,26 @@ Vine.Draft = Vine.Model.extend({
       case REPLY: return I18n.t('editor.reply');
     }
   }.property('action'),
+
+  actionTitle: function() {
+    var messageDescription,
+        message = this.get('message');
+
+    if (message) {
+      var messageNumber = this.get('message.id');
+      messageLink = "<a href='/message/" + messageNumber + "'>" +
+        I18n.t("message.message_number", { number: messageNumber }) + "</a>";
+
+      messageDescription = I18n.t('message.' +  this.get('action') + '_action', {
+        link: messageLink,
+        username: this.get('message.user.username')
+      });
+
+      return messageDescription
+    } else {
+      return I18n.t('message.create_long');
+    }
+  }.property('action', 'message'),
 
   cantSubmitMessage: function() {
     // Can't submit while loading

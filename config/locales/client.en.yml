@@ -144,3 +144,8 @@ en:
       edit: "Edit"
       reply: "Reply"
       destroy: "Are you sure you want to destroy this message?"
+      quote_reply: "quote message"
+      reply_action: "Replying to {{link}} by {{username}}"
+      edit_action: "Editing {{link}} by {{username}}"
+      message_number: "message {{number}}"
+      create_long: "Creating new message"
