@@ -112,7 +112,7 @@ en:
       hide_preview: '&laquo; hide preview'
       cant_save: "Can't save message"
 
-      quote_post_title: "Quote whole message"
+      quote_message_title: "Quote whole message"
       bold_title: "Strong"
       bold_text: "strong text"
       italic_title: "Emphasis"

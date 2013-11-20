@@ -92,7 +92,11 @@ Vine.EditorController = Vine.Controller.extend({
 
       // current draft is making new reply or it's editing the same message we want to edit again
       if (current.get('action') === draft.get('action') &&
-          (draft.get('action') === Vine.Draft.Reply || (current.get('message_id') === draft.get('message_id')) )) {
+          (current.get('action') === Vine.Draft.REPLY || (current.get('message_id') === draft.get('message_id')) )) {
+
+        // if replying just replace source message with the newly selected one
+        if (current.get('action') === Vine.Draft.REPLY) { this.set('model.message', draft.get('message')) }
+        
         this.set('editorState', OPEN);
         promise.resolve();
         return promise;

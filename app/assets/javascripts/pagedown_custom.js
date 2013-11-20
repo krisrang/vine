@@ -1,12 +1,10 @@
 window.PagedownCustom = {
+  // execute is overridden in EditorView
   insertButtons: [
     {
       id: 'wmd-quote-post',
-      description: I18n.t("composer.quote_post_title"),
-      execute: function() {
-        // AWFUL but I can't figure out how to call a controller method from outside our app
-        return Discourse.__container__.lookup('controller:composer').send('importQuote');
-      }
+      description: I18n.t("editor.quote_message_title"),
+      execute: function() {}
     }
   ],
 
@@ -14,7 +12,7 @@ window.PagedownCustom = {
     "doBlockquote": function(chunk, postProcessing, oldDoBlockquote) {
 
       // When traditional linebreaks are set, use the default Pagedown implementation
-      if (Discourse.SiteSettings.traditional_markdown_linebreaks) {
+      if (Vine.SiteSettings.traditional_markdown_linebreaks) {
         return oldDoBlockquote.call(this, chunk, postProcessing);
       }
 

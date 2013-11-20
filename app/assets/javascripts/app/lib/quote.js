@@ -1,22 +1,9 @@
-/**
-  Build the BBCode for a Quote
-
-  @class BBCode
-  @namespace Discourse
-  @module Discourse
-**/
 Vine.Quote = {
 
-  REGEXP: /\[quote=([^\]]*)\]((?:[\s\S](?!\[quote=[^\]]*\]))*?)\[\/quote\]/im,
+  REGEXP: /\[quote=([^\]]*)\]((?:[\s\S](?!\[quote=[^\]]*\]))*?)\[\/quote\]/img,
 
-  /**
-    Build the BBCode quote around the selected text
 
-    @method buildQuote
-    @param {Discourse.Post} post The post we are quoting
-    @param {String} contents The text selected
-  **/
-  build: function(post, contents) {
+  build: function(message, contents) {
     var contents_hashed, result, sansQuotes, stripped, stripped_hashed, tmp;
     if (!contents) contents = "";
 
@@ -27,17 +14,17 @@ Vine.Quote = {
     sansQuotes = sansQuotes.replace(/</g, "&lt;")
                            .replace(/>/g, "&gt;");
 
-    result = "[quote=\"" + post.get('username') + ", post:" + post.get('post_number') + ", topic:" + post.get('topic_id');
+    result = "[quote=\"" + message.get('user.username') + ", message:" + message.get('id');
 
     /* Strip the HTML from cooked */
     tmp = document.createElement('div');
-    tmp.innerHTML = post.get('cooked');
+    tmp.innerHTML = message.get('cooked');
     stripped = tmp.textContent || tmp.innerText;
 
     /*
       Let's remove any non alphanumeric characters as a kind of hash. Yes it's
       not accurate but it should work almost every time we need it to. It would be unlikely
-      that the user would quote another post that matches in exactly this way.
+      that the user would quote another message that matches in exactly this way.
     */
     stripped_hashed = stripped.replace(/[^a-zA-Z0-9]/g, '');
     contents_hashed = contents.replace(/[^a-zA-Z0-9]/g, '');

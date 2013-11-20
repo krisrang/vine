@@ -1,17 +1,8 @@
-// var attr = DS.attr;
-
 // The actions the editor can take
 var REPLY = 'reply',
     EDIT = 'edit';
 
 Vine.Draft = Vine.Model.extend({
-  // reply: attr(),
-  // action: attr(),
-  // message_id: attr('number'),
-  // createdAt: attr('date'),
-
-  // user: DS.belongsTo('user'),
-
   editingMessage: Em.computed.equal('action', EDIT),
   replyingToMessage: Em.computed.equal('action', REPLY),
 
@@ -21,14 +12,17 @@ Vine.Draft = Vine.Model.extend({
     this._super();
     var val = (Vine.Mobile.mobileView ? false : (Vine.KeyValueStore.get('editor.showPreview') || 'true'));
     this.set('showPreview', val === 'true');
+    this.set('loading', false);
   },
 
   replyDirty: function() {
+    if (Em.isEmpty(this.get('reply'))) return false;
+
     if (this.get('message')) {
       return this.get('reply') !== this.get('message.source');
-    } else {
-      return !Em.isEmpty(this.get('reply'));
     }
+
+    return false;
   }.property('reply'),
 
   replyLength: function() {
@@ -100,6 +94,17 @@ Vine.Draft = Vine.Model.extend({
         }
       }
     });
+  },
+
+  importQuote: function() {
+    var message = this.get('message');
+    if (message) {
+      this.appendText(Vine.Quote.build(message, message.get('source')));
+    }
+  },
+
+  appendText: function(text) {
+    this.set('reply', (this.get('reply') || '') + text);
   }
 });
 

@@ -18,10 +18,6 @@
     @include transition(none !important);
   }
 
-  blockquote p {
-    font-size: 14px;
-  }
-
   .submit-panel {
     position: absolute;
     display: block;
@@ -407,3 +403,5 @@
     }
   }
 }
+
+#wmd-quote-post { display: none; }

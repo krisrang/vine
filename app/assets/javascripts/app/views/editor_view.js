@@ -28,13 +28,12 @@ Vine.EditorView = Vine.View.extend({
   },
 
   resize: function() {
-    // this still needs to wait on animations, need a clean way to do that
-    return Em.run.schedule('afterRender', function() {
+    return Em.run.later(jQuery, (function() {
       var editor = $('#editor');
       var h = editor.height() || 0;
       var sizePx = "" + h + "px";
       $('#messages').css('padding-bottom', sizePx);
-    });
+    }), 300);
   }.observes('controller.editorState'),  
 
   // Disable fields when we're loading
@@ -92,6 +91,12 @@ Vine.EditorView = Vine.View.extend({
       return true;
     });
 
+    $('#wmd-quote-post').click(function(e) {
+      editorView.get('model').importQuote();
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
     // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition to finish
     return Em.run.later(jQuery, (function() {
       editor.refreshPreview(); // loaded draft
@@ -99,6 +104,16 @@ Vine.EditorView = Vine.View.extend({
       return $wmdInput.putCursorAtEnd();
     }), 300);
   },
+
+  observeQuoting: function() {
+    var model = this.get('model');
+    return Em.run.schedule("afterRender", (function() {
+      var $btn = $('#wmd-quote-post');
+      if ($btn.length === 0) return;
+
+      model.get('message') && model.get('action') === Vine.Draft.REPLY ? $btn.show() : $btn.hide();
+    }));
+  }.observes('model.message'),
 
   observeReplyChanges: function() {
     var self = this;
