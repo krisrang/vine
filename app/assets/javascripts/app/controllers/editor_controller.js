@@ -41,7 +41,6 @@ Vine.EditorController = Vine.Controller.extend({
       this.store.find('message', draft.get('message_id')).then(
         function(message) {
           if (draft.get('action') === Vine.Draft.EDIT) {
-            draft.set('reply', message.get('source'));
             return controller.editMessage(message, draft);
           } else {
             return controller.replyMessage(message, draft);

@@ -17,11 +17,6 @@ a {
   cursor: pointer;
 }
 
- ul {
-  margin: 0;
-  padding: 0;
-}
-
 input:-moz-placeholder {
   color: #888;
   font-size: 15px;
@@ -199,6 +194,11 @@ input::-webkit-input-placeholder {
 // MESSAGES
 //
 
+#messages > ul {
+  margin: 0;
+  padding: 0;
+}
+
 .message-view {
   list-style: none;
   margin-bottom: 30px;
@@ -224,7 +224,7 @@ input::-webkit-input-placeholder {
   }
 
   .message {
-    padding: 10px 0;
+    padding-top: 10px;
   }
   
   time,
@@ -239,31 +239,6 @@ input::-webkit-input-placeholder {
     a:hover {
       color: rgba(34,59,74,.7);
       text-decoration: none;
-    }
-  }
-}
-
-.messages-controls {
-  .btn {
-    float: left;
-  }
-
-  .online-users {
-    h5 {
-      margin: 0;
-    }
-
-    ul {
-      list-style: none;
-
-      li {
-        display: inline-block;
-
-        img {
-          width: 20px;
-          height: 20px;
-        }
-      }
     }
   }
 }
