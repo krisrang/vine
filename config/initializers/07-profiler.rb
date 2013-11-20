@@ -17,6 +17,7 @@ if defined?(Rack::MiniProfiler)
     (env['PATH_INFO'] !~ /qunit/) &&
     (env['PATH_INFO'] !~ /sidekiq/) &&
     (env['PATH_INFO'] !~ /font/) &&
+    (env['PATH_INFO'] !~ /uploads/) &&
     (env['PATH_INFO'] !~ /favicon/)
   end
 

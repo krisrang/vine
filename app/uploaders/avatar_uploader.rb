@@ -9,7 +9,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   before :cache, :reset_secure_token
 
   def store_dir
-    "user_avatar/#{model.id}"
+    "uploads/user_avatar/#{model.id}"
   end
 
   def filename
@@ -23,7 +23,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   process :set_content_type
 
   version :thumb do
-    process :scale => [50, 50]
+    process resize_to_fill: [45, 45]
   end
 
   def extension_white_list

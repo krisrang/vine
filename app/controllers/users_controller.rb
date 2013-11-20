@@ -121,6 +121,12 @@ class UsersController < ApplicationController
     render nothing: true
   end
 
+  def show
+    @user = fetch_user_from_params
+    authorize_action_for @user
+    render json: @user
+  end
+
 
   private
 

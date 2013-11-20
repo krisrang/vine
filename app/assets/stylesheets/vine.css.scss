@@ -209,10 +209,13 @@ input::-webkit-input-placeholder {
     img {
       width: 45px;
       max-height: 45px;
+      border-radius: 3px;
     }
   }
 
   .userbit {
+    font-size: 13px;
+    
     .author {
       a:hover { text-decoration: none; }
     }

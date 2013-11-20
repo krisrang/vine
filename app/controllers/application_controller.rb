@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
     username_lower = params[:username].downcase
     username_lower.gsub!(/\.json$/, '')
 
-    user = User.where(username_lower: username_lower).first
+    user = User.where("username_lower = ? OR id = ?", username_lower, username_lower).first
     raise Vine::NotFound.new if user.blank?
 
     user
