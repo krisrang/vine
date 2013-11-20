@@ -1,23 +1,31 @@
 <div class="row">
   <div class="col-sm-1">
-    <div class="userbit">
+    <div class="avatarbit">
       {{#linkTo "user" user}}
         <img {{bindAttr src="user.thumbAvatar"}} width="45" height="45" />
       {{/linkTo}}
-
-      <h3>
-        {{#linkTo "user" user}}{{user.username}}{{/linkTo}}
-      </h3>
     </div>
   </div>
 
   <div class="col-sm-11">
-    {{{cooked}}}
-  </div>
-</div>
+    <div class="userbit">
+      <span class="author">{{#linkTo "user" user}}{{user.username}}{{/linkTo}}</span>
+      <span class="bullet">•</span>
+      <time {{bindAttr data-livestamp="timestamp"}}>Some time bla</time>
+    </div>
+    
+    <div class="message">{{{cooked}}}</div>
 
-<div class="row button-row">
-  {{#if canDestroy}}<button {{action deleteMessage}} class="btn btn-sm btn-danger btn-message">{{i18n message.delete}}</button>{{/if}}
-  {{#if canEdit}}<button {{action editMessage}} class="btn btn-sm btn-success btn-message">{{i18n message.edit}}</button>{{/if}}
-  <button {{action replyMessage}} class="btn btn-sm btn-primary btn-message">{{i18n message.reply}}</button>
+    <div class="action-row">
+      {{#if canDestroy}}
+        <a {{action deleteMessage}}>{{i18n message.delete}}</a>
+        <span class="bullet">•</span>
+      {{/if}}
+      {{#if canEdit}}
+        <a {{action editMessage}}>{{i18n message.edit}}</a>
+        <span class="bullet">•</span>
+      {{/if}}
+      <a {{action replyMessage}}>{{i18n message.reply}}</a>
+    </div>
+  </div>
 </div>

@@ -5,5 +5,9 @@ Vine.Message = DS.Model.extend({
   cooked: attr(),
   createdAt: attr('date'),
   updatedAt: attr('date'),
-  user: DS.belongsTo('user')
+  user: DS.belongsTo('user'),
+
+  timestamp: function() {
+    return this.get('createdAt').getTime()/1000;
+  }.property('createdAt')
 });

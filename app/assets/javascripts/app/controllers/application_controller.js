@@ -1,4 +1,13 @@
 Vine.ApplicationController = Vine.Controller.extend({
+  needs: ['editor'],
+
+  actions: {
+    newMessage: function() {
+      var editor = this.get('controllers.editor');
+      editor.newMessage();
+    }
+  },
+  
   setupDOM: function() {
     $(window).focus(function() {
       Vine.set('hasFocus', true);
@@ -20,6 +29,8 @@ Vine.ApplicationController = Vine.Controller.extend({
       backdrop: true,
       locale: Vine.Locale
     });
+
+    moment.lang(Vine.Locale);
   },
 
   setupListeners: function() {

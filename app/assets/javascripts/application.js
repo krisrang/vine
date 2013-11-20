@@ -10,6 +10,8 @@
 //= require ember-data-beta
 //= require bootstrap
 //= require spin
+//= require moment-lang
+//= require livestamp
 //= require Markdown.Converter.js
 //= require Markdown.Editor.js
 //= require better_markdown.js
