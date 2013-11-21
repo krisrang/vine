@@ -446,6 +446,19 @@
     font-size: 13px;
   }
 
+  .hint {
+    color: #222;
+    margin: 15px 0 0 0;
+
+    i {
+      color: #00A2FF;
+    }
+  }
+
+  .description {
+    padding: 0 2px;
+  }
+
   .fa-plus {
     font-size: 10px;
     position: relative;

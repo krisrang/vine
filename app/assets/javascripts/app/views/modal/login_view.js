@@ -2,7 +2,6 @@ Vine.LoginView = Vine.ModalBodyView.extend({
   templateName: 'modal/login',
   title: I18n.t('login.title'),
 
-
   mouseMove: function(e) {
     this.set('controller.lastX', e.screenX);
     this.set('controller.lastY', e.screenY);

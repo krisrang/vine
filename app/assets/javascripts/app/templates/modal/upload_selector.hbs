@@ -1,37 +1,37 @@
 <div class="modal-body">
-  <div class="radio">
-    <label for="local">
-      <input type="radio" id="local" value="local" name="upload" {{action useLocal}}>
-      {{i18n upload_selector.from_my_computer}}
-    </label>
-    
-    {{#if controller.local}}
-      <div class="inputs">
-        <input type="file" id="filename-input"><br>
-        <span class="description">{{unbound view.tip}}</span>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="radios">
+        <label for="local">
+          <input type="radio" id="local" value="local" name="upload" {{action useLocal}}>
+          {{i18n upload_selector.from_my_computer}}
+        </label>
+
+        <label for="remote">
+          <input type="radio" id="remote" value="remote" name="upload" {{action useRemote}}>
+          {{i18n upload_selector.from_the_web}}
+        </label>
       </div>
-    {{/if}}
-  </div>
+    </div>
 
-  <div class="radio">
-    <label for="remote">
-      <input type="radio" id="remote" value="remote" name="upload" {{action useRemote}}>
-      {{i18n upload_selector.from_the_web}}
-    </label>
+    <div class="col-lg-9">    
+      {{#if controller.local}}
+        <div class="form-group">
+          <input type="file" class="form-control" id="filename-input">
+          <span class="description">{{unbound view.tip}}</span>
+        </div>
+      {{/if}}
 
-    {{#if controller.remote}}
-      <div class="form-group">
-        <input type="text" class="form-control" id="fileurl-input"><br>
-        <span class="description">{{unbound view.tip}}</span>
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="form-group">
-    <div class="inputs">
-      <p class="hint">{{unbound view.hint}}</p>
+      {{#if controller.remote}}
+        <div class="form-group">
+          <input type="text" class="form-control" id="fileurl-input">
+          <span class="description">{{unbound view.tip}}</span>
+        </div>
+      {{/if}}
     </div>
   </div>
+
+  <p class="hint"><i class="fa fa-info-circle"></i> {{unbound view.hint}}</p>
 </div>
 
 <div class="modal-footer">

@@ -15,8 +15,11 @@ Vine.UploadSelectorController = Vine.Controller.extend(Vine.ModalFunctionality, 
         // this.get('editorView').addMarkdown($('#fileurl-input').val());
       }
     }
-  }
+  },
 
+  onShow: function(){
+    this.set('controllers.modal.modalClass', 'upload-selector-dialog');
+  }
 });
 
 Vine.UploadSelectorController.reopenClass({

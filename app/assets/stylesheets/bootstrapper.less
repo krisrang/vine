@@ -143,6 +143,7 @@ body.modal-open,
 }
 
 .modal-footer {
+  margin: 0;
   text-align: center;
 }
 
@@ -155,6 +156,14 @@ body.modal-open,
 @media screen and (min-width: @screen-tablet) {
   .modal-dialog {
     width: 500px;
+  }
+}
+
+@media screen and (min-width: @screen-tablet) {
+  .upload-selector-dialog {
+    .modal-dialog {
+      width: 700px;
+    }
   }
 }
 
