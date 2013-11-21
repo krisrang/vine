@@ -4,6 +4,7 @@
 //= require locales/en
 //= require preload_store
 //= require application
+//= require sanitizer-bundle
 
 //= require sinon
 //= require sinon-qunit

@@ -3,7 +3,7 @@ Todo
 
 * ~~Message deleting and authorization~~
 * ~~Message quoting~~
-* Smilies & autocomplete
+* ~~Smilies & autocomplete~~
 * Hover userbit
 * Hotkeys in editor
 * Image upload

@@ -208,7 +208,7 @@ Vine.EditorController = Vine.Controller.extend({
   },
 
   toggle: function() {
-    // this.closeAutocomplete();
+    this.closeAutocomplete();
     switch (this.get('editorState')) {
       case OPEN:
         if (Em.isEmpty('model.reply')) {
@@ -248,6 +248,10 @@ Vine.EditorController = Vine.Controller.extend({
   appendText: function(text) {
     var m = this.get('model');
     if (m) { m.appendText(text); }
+  },
+
+  closeAutocomplete: function() {
+    $('#wmd-input').autocomplete({ cancel: true });
   }
 });
 

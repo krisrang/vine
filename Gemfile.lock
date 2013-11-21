@@ -184,6 +184,7 @@ GEM
       dotenv (>= 0.7)
       thor (>= 0.13.6)
     formatador (0.2.4)
+    gemoji (1.5.0)
     given_core (3.1.1)
       sorcerer (>= 0.3.7)
     guard (1.7.0)
@@ -222,7 +223,6 @@ GEM
       launchy (~> 2.2)
     libv8 (3.16.14.3)
     listen (0.7.3)
-    lockfile (2.1.0)
     lru_redux (0.8.1)
     lumberjack (1.0.4)
     mail (2.5.4)
@@ -250,7 +250,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    oj (2.2.2)
+    oj (2.2.3)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -371,9 +371,8 @@ GEM
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
-    simplecov (0.8.1)
+    simplecov (0.8.2)
       docile (~> 1.1.0)
-      lockfile (>= 2.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
@@ -448,6 +447,7 @@ DEPENDENCIES
   flamegraph!
   fog
   foreman
+  gemoji
   guard-rspec
   hiredis
   jbuilder

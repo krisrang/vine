@@ -56,21 +56,8 @@ Vine.EditorView = Vine.View.extend({
     if ($wmdInput.length === 0 || $wmdInput.data('init') === true) return;
 
     $LAB.script(assetPath('sanitizer-bundle'));
-    // Vine.ComposerView.trigger("initWmdEditor");
-    // var template = Vine.UserSelector.templateFunction();
-
+    Vine.EditorView.trigger("initWmdEditor");
     $wmdInput.data('init', true);
-    // $wmdInput.autocomplete({
-    //   template: template,
-    //   dataSource: function(term) {
-    //     return Vine.UserSearch.search({
-    //       term: term,
-    //       topicId: composerView.get('controller.controllers.topic.model.id')
-    //     });
-    //   },
-    //   key: "@",
-    //   transformComplete: function(v) { return v.username; }
-    // });
 
     this.editor = editor = Vine.Markdown.createEditor({});
 
@@ -111,7 +98,11 @@ Vine.EditorView = Vine.View.extend({
       var $btn = $('#wmd-quote-post');
       if ($btn.length === 0) return;
 
-      model.get('message') && model.get('action') === Vine.Draft.REPLY ? $btn.show() : $btn.hide();
+      if (model.get('message') && model.get('action') === Vine.Draft.REPLY) {
+        $btn.show();
+      } else {
+        $btn.hide();
+      }
     }));
   }.observes('model.message'),
 
@@ -154,3 +145,4 @@ Vine.NotifyingTextArea = Ember.TextArea.extend({
   }
 });
 
+RSVP.EventTarget.mixin(Vine.EditorView);

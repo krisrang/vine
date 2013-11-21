@@ -45,7 +45,7 @@ Vine.Draft = Vine.Model.extend({
 
     if (message) {
       var messageNumber = this.get('message.id');
-      messageLink = "<a href='/message/" + messageNumber + "'>" +
+      var messageLink = "<a href='/message/" + messageNumber + "'>" +
         I18n.t("message.message_number", { number: messageNumber }) + "</a>";
 
       messageDescription = I18n.t('message.' +  this.get('action') + '_action', {
@@ -53,7 +53,7 @@ Vine.Draft = Vine.Model.extend({
         username: this.get('message.user.username')
       });
 
-      return messageDescription
+      return messageDescription;
     } else {
       return I18n.t('message.create_long');
     }

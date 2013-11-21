@@ -34,6 +34,23 @@ Vine.Utilities = {
     return 0;
   },
 
+  // Set the caret's position
+  setCaretPosition: function(ctrl, pos) {
+    var range;
+    if (ctrl.setSelectionRange) {
+      ctrl.focus();
+      ctrl.setSelectionRange(pos, pos);
+      return;
+    }
+    if (ctrl.createTextRange) {
+      range = ctrl.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', pos);
+      range.moveStart('character', pos);
+      return range.select();
+    }
+  },
+
   selectedText: function() {
     var html = '';
 

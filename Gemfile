@@ -23,6 +23,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'jbuilder'
 gem 'ember-rails'
+gem 'gemoji'
 
 
 ### MISC

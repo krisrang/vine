@@ -50,3 +50,4 @@
 //= require_tree ./app/routes
 
 //= require ./router
+//= require ./emoji

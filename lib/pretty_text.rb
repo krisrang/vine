@@ -73,6 +73,8 @@ module PrettyText
       end
     end
 
+    ctx.load("app/assets/javascripts/emoji.js")
+
     ctx['quoteTemplate'] = File.open(app_root + 'app/assets/javascripts/app/templates/quote.hbs') {|f| f.read}
     ctx.eval("HANDLEBARS_TEMPLATES = {
       'quote': Handlebars.compile(quoteTemplate)
