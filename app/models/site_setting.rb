@@ -53,6 +53,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:add_rel_nofollow_to_user_content, true)
   setting(:exclude_rel_nofollow_domains, '')
 
+  client_setting(:authorized_extensions, '.jpg|.jpeg|.png|.gif')
+
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)
   end

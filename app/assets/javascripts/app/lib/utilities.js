@@ -1,4 +1,7 @@
 Vine.Utilities = {
+  IMAGE_EXTENSIONS: [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".tiff"],
+  IS_AN_IMAGE_REGEXP: /\.(png|jpg|jpeg|gif|bmp|tif|tiff)$/i,
+
   normalizeHash: function(hash, hashTypes) {
     for (var prop in hash) {
       if (hashTypes[prop] === 'ID') {
@@ -76,5 +79,13 @@ Vine.Utilities = {
     var text = div.textContent || div.innerText || "";
 
     return String(text).trim();
-  }
+  },
+
+  allowsAttachments: function() {
+    return _.difference(Vine.SiteSettings.authorized_extensions.split("|"), Vine.Utilities.IMAGE_EXTENSIONS).length > 0;
+  },
+
+  authorizedExtensions: function() {
+    return Vine.SiteSettings.authorized_extensions.replace(/\|/g, ", ");
+  },
 };

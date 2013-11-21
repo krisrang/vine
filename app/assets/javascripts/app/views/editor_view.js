@@ -61,6 +61,13 @@ Vine.EditorView = Vine.View.extend({
 
     this.editor = editor = Vine.Markdown.createEditor({});
 
+    var $uploadTarget = $('#editor');
+    this.editor.hooks.insertImageDialog = function(callback) {
+      callback(null);
+      editorView.get('controller').send('showUploadSelector', editorView);
+      return true;
+    };
+
     this.editor.hooks.onPreviewRefresh = function() {
       return editorView.afterRender();
     };

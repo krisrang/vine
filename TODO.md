@@ -4,10 +4,10 @@ Todo
 * ~~Message deleting and authorization~~
 * ~~Message quoting~~
 * ~~Smilies & autocomplete~~
-* Hover userbit
-* Hotkeys in editor
 * Image upload
+* Hotkeys in editor
 * User preferences
+* Hover userbit
 * Infinite scrolling
 * Search
 * Admin

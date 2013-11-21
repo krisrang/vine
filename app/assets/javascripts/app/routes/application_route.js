@@ -46,6 +46,11 @@ Vine.ApplicationRoute = Em.Route.extend({
     createAccount: function() {
       var controller = this.controllerFor('createAccount');
       controller.createAccountAction();
+    },
+
+    showUploadSelector: function(editorView) {
+      Vine.Route.showModal(this, 'uploadSelector');
+      this.controllerFor('uploadSelector').setProperties({ editorView: editorView });
     }
   },
 

@@ -438,3 +438,19 @@
     }
   }
 }
+
+.upload-selector {
+  .description,
+  .hint {
+    color: #444;
+    font-size: 13px;
+  }
+
+  .fa-plus {
+    font-size: 10px;
+    position: relative;
+    left: -5px;
+    bottom: -5px;
+    text-shadow: -1px -1px 0 #00aeef, 1px 1px 0 #00aeef, 1px -1px 0 #00aeef, -1px 1px 0 #00aeef;
+  }
+}

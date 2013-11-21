@@ -4,6 +4,7 @@ en:
     cancel: "Cancel"
     no_value: "No"
     yes_value: "Yes"
+    upload: "Upload"
 
     nav:
       messages: "Messages"
@@ -149,3 +150,16 @@ en:
       edit_action: "Editing {{link}} by {{username}}"
       message_number: "message {{number}}"
       create_long: "Creating new message"
+
+    upload_selector:
+      title: "Add an image"
+      title_with_attachments: "Add an image or a file"
+      from_my_computer: "From my device"
+      from_the_web: "From the web"
+      remote_tip: "enter address of an image in the form http://example.com/image.jpg"
+      remote_tip_with_attachments: "enter address of an image or a file in the form http://example.com/file.ext (allowed extensions: {{authorized_extensions}})."
+      local_tip: "click to select an image from your device"
+      local_tip_with_attachments: "click to select an image or a file from your device (allowed extensions: {{authorized_extensions}})"
+      hint: "(you can also drag & drop into the editor to upload them)"
+      hint_for_chrome: "(you can also drag and drop or paste images into the editor to upload them)"
+      uploading: "Uploading"

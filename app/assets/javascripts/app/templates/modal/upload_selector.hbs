@@ -1,0 +1,43 @@
+<div class="modal-body">
+  <div class="radio">
+    <label for="local">
+      <input type="radio" id="local" value="local" name="upload" {{action useLocal}}>
+      {{i18n upload_selector.from_my_computer}}
+    </label>
+    
+    {{#if controller.local}}
+      <div class="inputs">
+        <input type="file" id="filename-input"><br>
+        <span class="description">{{unbound view.tip}}</span>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="radio">
+    <label for="remote">
+      <input type="radio" id="remote" value="remote" name="upload" {{action useRemote}}>
+      {{i18n upload_selector.from_the_web}}
+    </label>
+
+    {{#if controller.remote}}
+      <div class="form-group">
+        <input type="text" class="form-control" id="fileurl-input"><br>
+        <span class="description">{{unbound view.tip}}</span>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group">
+    <div class="inputs">
+      <p class="hint">{{unbound view.hint}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" data-dismiss="modal" {{action upload}}>
+    <span class='add-upload'><i {{bindAttr class="view.uploadIcon"}}></i><i class='fa fa-plus'></i></span>
+    {{i18n upload}}
+  </button>
+  <a data-dismiss="modal" {{action closeModal}}>{{i18n cancel}}</a>
+</div>
