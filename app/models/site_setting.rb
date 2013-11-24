@@ -53,6 +53,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:add_rel_nofollow_to_user_content, true)
   setting(:exclude_rel_nofollow_domains, '')
 
+  client_setting(:max_image_size_kb, 5120)
+  client_setting(:max_attachment_size_kb, 10240)
   client_setting(:authorized_extensions, '.jpg|.jpeg|.png|.gif')
 
   def self.generate_api_key!
@@ -63,6 +65,31 @@ class SiteSetting < ActiveRecord::Base
     t = tested.strip
     t.length == 64 && t == self.api_key
   end
+
+  def self.authorized_uploads
+    authorized_extensions.tr(" ", "")
+                         .split("|")
+                         .map { |extension| (extension.start_with?(".") ? extension[1..-1] : extension).gsub(".", "\.") }
+  end
+
+  def self.authorized_upload?(file)
+    authorized_uploads.count > 0 && file.original_filename =~ /\.(#{authorized_uploads.join("|")})$/i
+  end
+
+  def self.images
+    @images ||= Set.new ["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"]
+  end
+
+  def self.authorized_images
+    authorized_uploads.select { |extension| images.include?(extension) }
+  end
+
+  def self.authorized_image?(file)
+    authorized_images.count > 0 && file.original_filename =~ /\.(#{authorized_images.join("|")})$/i
+  end
+  
+  
+  ## API METHODS
 
   def self.save_override(name, value, data_type)
     data = {

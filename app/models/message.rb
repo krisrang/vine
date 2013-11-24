@@ -5,6 +5,7 @@ class Message < ActiveRecord::Base
   self.authorizer_name = 'MessageAuthorizer'
 
   belongs_to :user
+  has_and_belongs_to_many :uploads
 
   scope :latest, -> { order('created_at DESC').limit(10) }
 

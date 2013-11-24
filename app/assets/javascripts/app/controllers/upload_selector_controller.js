@@ -10,9 +10,9 @@ Vine.UploadSelectorController = Vine.Controller.extend(Vine.ModalFunctionality, 
       this.send('closeModal');
 
       if (this.get("local")) {
-        // $('#reply-control').fileupload('add', { fileInput: $('#filename-input') });
+        $('#editor').fileupload('add', { fileInput: $('#filename-input') });
       } else {
-        // this.get('editorView').addMarkdown($('#fileurl-input').val());
+        this.get('editorView').addMarkdown($('#fileurl-input').val());
       }
     }
   },

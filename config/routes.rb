@@ -38,6 +38,9 @@ Vine::Application.routes.draw do
   match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
   match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
 
+  get 'uploads/:id/:type' => 'uploads#show', constraints: {id: /\d+/, type: /[a-z0-9]{15,16}/i}
+  post 'uploads' => 'uploads#create'
+
   resources :messages
   resources :media
   resource :drafts

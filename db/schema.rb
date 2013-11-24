@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117203132) do
+ActiveRecord::Schema.define(version: 20131124165230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(version: 20131117203132) do
     t.datetime "updated_at"
   end
 
+  create_table "messages_uploads", id: false, force: true do |t|
+    t.integer "message_id", null: false
+    t.integer "upload_id",  null: false
+  end
+
+  add_index "messages_uploads", ["message_id"], name: "index_messages_uploads_on_message_id", using: :btree
+  add_index "messages_uploads", ["upload_id"], name: "index_messages_uploads_on_upload_id", using: :btree
+
   create_table "site_settings", force: true do |t|
     t.string   "name",       null: false
     t.integer  "data_type",  null: false
@@ -67,6 +75,21 @@ ActiveRecord::Schema.define(version: 20131117203132) do
   end
 
   add_index "site_settings", ["name"], name: "index_site_settings_on_name", using: :btree
+
+  create_table "uploads", force: true do |t|
+    t.integer  "user_id",           null: false
+    t.string   "file",              null: false
+    t.string   "sha",               null: false
+    t.string   "content_type",      null: false
+    t.string   "original_filename", null: false
+    t.string   "size",              null: false
+    t.string   "width"
+    t.string   "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "user_open_ids", force: true do |t|
     t.integer  "user_id",    null: false

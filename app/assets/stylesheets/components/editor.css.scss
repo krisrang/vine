@@ -59,6 +59,12 @@
     text-decoration: underline;
   }
 
+  #file-uploading {
+    left: 51%;
+    font-size: 12px;
+    color: darken(#CCC, 40);
+  }
+
   #draft-status {
     right: 51%;
     color: lighten(#000, 60);

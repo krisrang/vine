@@ -70,3 +70,14 @@ en:
     please_continue: "Your new account is confirmed, and you are now logged in. Continue to %{link}"
     welcome_to: "Welcome to %{site_name}!"
     approval_required: "A moderator must manually approve your new account before you can access this forum. You'll get an email when your account is approved!"
+    
+  upload:
+    unauthorized: "Sorry, the file you are trying to upload is not authorized (authorized extensions: %{authorized_extensions})."
+    pasted_image_filename: "Pasted image"
+    attachments:
+      too_large: "Sorry, the file you are trying to upload is too big (maximum size is %{max_size_kb}%kb)."
+    images:
+      too_large: "Sorry, the image you are trying to upload is too big (maximum size is %{max_size_kb}%kb), please resize it and try again."
+      fetch_failure: "Sorry, there has been an error while fetching the image."
+      unknown_image_type: "Sorry, but the file you tried to upload doesn't appear to be an image."
+      size_not_found: "Sorry, but we couldn't determine the size of the image. Maybe your image is corrupted?"

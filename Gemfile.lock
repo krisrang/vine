@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 14ef77ba72e8eb6030752671e64fece6f568d76a
+  revision: 21b8806a66b9e03603cf37dc86100a84282c1c85
   branch: 4-0-stable
   specs:
     actionmailer (4.0.1)
@@ -99,7 +99,7 @@ GEM
       activemodel (>= 3.0)
     activerecord-deprecated_finders (1.0.3)
     addressable (2.3.5)
-    analytics-ruby (0.5.0)
+    analytics-ruby (0.5.1)
       faraday (>= 0.8, < 0.10)
       faraday_middleware (>= 0.8, < 0.10)
       multi_json (~> 1.0)
@@ -126,6 +126,9 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    carrierwave-imageoptimizer (1.1.0)
+      carrierwave (~> 0.8)
+      image_optimizer (~> 1.1)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     certified (0.1.1)
@@ -148,8 +151,8 @@ GEM
       handlebars-source
       jquery-rails (>= 1.0.17)
       railties (>= 3.1)
-    ember-source (1.1.2)
-      handlebars-source (= 1.0.12)
+    ember-source (1.2.0)
+      handlebars-source (= 1.1.1)
     erubis (2.7.0)
     eventmachine (1.0.3)
     excon (0.28.0)
@@ -196,13 +199,14 @@ GEM
     guard-rspec (2.5.4)
       guard (>= 1.1)
       rspec (~> 2.11)
-    handlebars-source (1.0.12)
+    handlebars-source (1.1.1)
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
     httpauth (0.2.0)
     i18n (0.6.5)
     ice_cube (0.11.1)
+    image_optimizer (1.1.0)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -271,7 +275,7 @@ GEM
     postmark-rails (0.5.2)
       actionmailer (>= 3.0.0)
       postmark (~> 1.0)
-    pry (0.9.12.3)
+    pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -391,7 +395,7 @@ GEM
     slop (3.4.7)
     sorcerer (1.0.2)
     spork (1.0.0rc4)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -438,6 +442,7 @@ DEPENDENCIES
   binding_of_caller
   bourbon
   carrierwave
+  carrierwave-imageoptimizer
   certified
   ember-rails
   fabrication

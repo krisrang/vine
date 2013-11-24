@@ -91,12 +91,86 @@ Vine.EditorView = Vine.View.extend({
       e.stopPropagation();
     });
 
+    // In case it's still bound somehow
+    // $uploadTarget.fileupload('destroy');
+    $uploadTarget.off();
+
+    $uploadTarget.fileupload({
+        url: '/uploads',
+        dataType: 'json'
+    });
+
+    // submit - this event is triggered for each upload
+    $uploadTarget.on('fileuploadsubmit', function (e, data) {
+      var result = Vine.Utilities.validateUploadedFiles(data.files);
+      // reset upload status when everything is ok
+      if (result) editorView.setProperties({ uploadProgress: 0, isUploading: true });
+      return result;
+    });
+
+    // send - this event is triggered when the upload request is about to start
+    $uploadTarget.on('fileuploadsend', function (e, data) {
+      // hide the "file selector" modal
+      editorView.get('controller').send('closeModal');
+      // cf. https://github.com/blueimp/jQuery-File-Upload/wiki/API#how-to-cancel-an-upload
+      var jqXHR = data.xhr();
+      // need to wait for the link to show up in the DOM
+      Em.run.schedule('afterRender', function() {
+        // bind on the click event on the cancel link
+        $('#cancel-file-upload').on('click', function() {
+          // cancel the upload
+          // NOTE: this will trigger a 'fileuploadfail' event with status = 0
+          if (jqXHR) jqXHR.abort();
+          // unbind
+          $(this).off('click');
+        });
+      });
+    });
+
+    // progress all
+    $uploadTarget.on('fileuploadprogressall', function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      editorView.set('uploadProgress', progress);
+    });
+
+    // done
+    $uploadTarget.on('fileuploaddone', function (e, data) {
+      // make sure we have a url
+      if (data.result.url) {
+        var markdown = Vine.Utilities.getUploadMarkdown(data.result);
+        // appends a space at the end of the inserted markdown
+        editorView.addMarkdown(markdown + " ");
+        editorView.set('isUploading', false);
+      } else {
+        bootbox.alert(I18n.t('message.errors.upload'));
+      }
+    });
+
+    // fail
+    $uploadTarget.on('fileuploadfail', function (e, data) {
+      // hide upload status
+      editorView.set('isUploading', false);
+      // display an error message
+      Vine.Utilities.displayErrorForUpload(data);
+    });
+
     // I hate to use Em.run.later, but I don't think there's a way of waiting for a CSS transition to finish
     return Em.run.later(jQuery, (function() {
       editor.refreshPreview(); // loaded draft
       editorView.resize();
       return $wmdInput.putCursorAtEnd();
     }), 300);
+  },
+
+  addMarkdown: function(text) {
+    var ctrl = $('#wmd-input').get(0),
+        caretPosition = Vine.Utilities.caretPosition(ctrl),
+        current = this.get('model.reply');
+    this.set('model.reply', current.substring(0, caretPosition) + text + current.substring(caretPosition, current.length));
+
+    Em.run.schedule('afterRender', function() {
+      Vine.Utilities.setCaretPosition(ctrl, caretPosition + text.length);
+    });
   },
 
   observeQuoting: function() {

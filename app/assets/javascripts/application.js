@@ -5,6 +5,9 @@
 //= require lab
 //= require jquery.html5-placeholder-shim
 //= require jquery.putCursorAtEnd
+//= require jquery.ui.widget
+//= require jquery.fileupload
+//= require jquery.iframe-transport
 //= require handlebars
 //= require ember
 //= require ember-data-beta
