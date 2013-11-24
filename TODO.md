@@ -4,7 +4,7 @@ Todo
 * ~~Message deleting and authorization~~
 * ~~Message quoting~~
 * ~~Smilies & autocomplete~~
-* Image upload
+* ~~Image upload~~
 * Hotkeys in editor
 * User preferences
 * Hover userbit

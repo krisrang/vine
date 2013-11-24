@@ -24,17 +24,13 @@ class UploadsController < ApplicationController
     render json: UploadSerializer.new(upload, root:false)
   end
 
-  # /uploads/1/thumb
+  # /uploads/sha.jpg
   def show
-    id = params[:id].to_i
-    url = request.fullpath
-
-    # the "url" parameter is here to prevent people from scanning the uploads using the id
-    upload = Upload.where(id: id, url: url).first
+    sha = params[:sha].downcase
+    upload = Upload.where("sha LIKE ?", "#{sha}%").first
 
     return render nothing: true, status: 404 unless upload
 
-    send_file(Discourse.store.path_for(upload), filename: upload.original_filename)
+    redirect_to upload.file.url
   end
-
 end
