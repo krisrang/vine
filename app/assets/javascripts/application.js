@@ -19,7 +19,6 @@
 //= require Markdown.Editor.js
 //= require better_markdown.js
 //= require rsvp
-//= require zxcvbn-async
 
 //= require ./assets
 //= require ./init

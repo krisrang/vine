@@ -5,6 +5,8 @@ Vine.CreateAccountView = Vine.ModalBodyView.extend({
   didInsertElement: function(e) {
     this._super();
 
+    $LAB.script(assetPath('zxcvbn'));
+
     // allows the submission the form when pressing 'ENTER' on *any* text input field
     // but only when the submit button is enabled
     var createAccountController = this.get('controller');

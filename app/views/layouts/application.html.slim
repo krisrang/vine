@@ -35,7 +35,6 @@ html lang="#{SiteSetting.default_locale}" class="#{html_classes}"
     = javascript_include_tag "https://login.persona.org/include.js"
     = javascript_include_tag  "locales/#{I18n.locale}"
     = javascript_include_tag "application"
-    = render_analytics
     
     javascript:
       Vine.Environment = '#{Rails.env}';
