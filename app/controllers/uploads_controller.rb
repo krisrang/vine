@@ -13,7 +13,7 @@ class UploadsController < ApplicationController
     # check the file size
     filesize = File.size(file.tempfile)
     type = SiteSetting.authorized_image?(file) ? "image" : "attachment"
-    max_size_kb = SiteSetting.send("max_#{type}_size_kb") * 1024
+    max_size_kb = SiteSetting.send("max_#{type}_size_kb").kilobytes
 
     if filesize > max_size_kb
       return render status: 413, text: I18n.t("upload.#{type}s.too_large", max_size_kb: max_size_kb)

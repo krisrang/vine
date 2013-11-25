@@ -25,9 +25,24 @@ Vine.Dialect.replaceBlock({
       });
     }
 
+    var avatarImg;
+    if (options.lookupAvatarByPostNumber) {
+      // client-side, we can retrieve the avatar from the post
+      var postNumber = parseInt(params['data-post'], 10);
+      avatarImg = options.lookupAvatarByPostNumber(postNumber);
+    } else if (options.lookupAvatar) {
+      // server-side, we need to lookup the avatar from the username
+      avatarImg = options.lookupAvatar(username);
+    }
+
     var contents = ['blockquote'];
     if (blockContents.length) {
       var self = this;
+
+      if (blockContents && (typeof blockContents[0] === "string")) {
+        blockContents[0] = blockContents[0].replace(/^[\s]*/, '');
+      }
+
       blockContents.forEach(function (bc) {
         var processed = self.processInline(bc);
         if (processed.length) {
@@ -43,6 +58,8 @@ Vine.Dialect.replaceBlock({
 
     return ['p', ['aside', params,
                    ['div', {'class': 'title'},
+                     ['div', {'class': 'quote-controls'}],
+                     avatarImg ? ['__RAW', avatarImg] : "",
                      username ? I18n.t('user.said', {username: username}) : ""
                    ],
                    contents
@@ -66,3 +83,4 @@ Vine.Dialect.on("parseNode", function(event) {
   }
 
 });
+

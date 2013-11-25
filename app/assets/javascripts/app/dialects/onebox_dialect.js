@@ -49,17 +49,17 @@ Vine.Dialect.on("parseNode", function(event) {
     return;
   }
 
-  // // We don't onebox mentions
-  // if (node[1]['class'] === 'mention') { return; }
+  // We don't onebox mentions
+  if (node[1]['class'] === 'mention') { return; }
 
-  // // Don't onebox links within a list
-  // for (var i=0; i<path.length; i++) {
-  //   if (path[i][0] === 'li') { return; }
-  // }
+  // Don't onebox links within a list
+  for (var i=0; i<path.length; i++) {
+    if (path[i][0] === 'li') { return; }
+  }
 
-  // // If the link has a different label text than the link itself, don't onebox it.
-  // var label = node[node.length-1];
-  // if (label !== node[1]['href']) { return; }
+  // If the link has a different label text than the link itself, don't onebox it.
+  var label = node[node.length-1];
+  if (label !== node[1]['href']) { return; }
 
   // if (isOnOneLine(node, parent)) {
 

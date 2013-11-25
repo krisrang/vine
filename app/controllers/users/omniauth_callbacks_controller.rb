@@ -27,6 +27,7 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def complete
     auth = request.env["omniauth.auth"]
+    auth[:session] = session
 
     authenticator = self.class.find_authenticator(params[:provider])
 
@@ -60,9 +61,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     end
 
     Vine.auth_providers.each do |provider|
-      if provider.name == name
-        return provider.authenticator
-      end
+      return provider.authenticator if provider.name == name
     end
 
     raise Vine::InvalidAccess.new("provider is not found")

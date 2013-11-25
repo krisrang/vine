@@ -1,6 +1,15 @@
+/*jshint bitwise: false*/
+
+/**
+  Message Bus functionality.
+
+  @class MessageBus
+  @namespace Vine
+  @module Vine
+**/
 Vine.MessageBus = (function() {
   // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-  var callbacks, clientId, failCount, interval, shouldLongPoll, queue, responseCallbacks, uniqueId;
+  var callbacks, clientId, failCount, interval, shouldLongPoll, queue, responseCallbacks, uniqueId, baseUrl;
   var me;
 
   uniqueId = function() {
@@ -18,6 +27,7 @@ Vine.MessageBus = (function() {
   queue = [];
   interval = null;
   failCount = 0;
+  baseUrl = "/";
 
   var isHidden = function() {
     if (document.hidden !== void 0) {
@@ -29,8 +39,8 @@ Vine.MessageBus = (function() {
     } else if (document.mozHidden !== void 0) {
       return document.mozHidden;
     } else {
-      // fallback to problamatic window.focus
-      return !Vine.get('hasFocus');
+      // problamatic fallback
+      return !document.hasFocus;
     }
   };
 
@@ -46,6 +56,7 @@ Vine.MessageBus = (function() {
     clientId: clientId,
     alwaysLongPoll: false,
     stop: false,
+    baseUrl: baseUrl,
 
     // Start polling
     start: function(opts) {
@@ -64,12 +75,14 @@ Vine.MessageBus = (function() {
           data[callback.channel] = callback.last_id;
         });
         gotData = false;
-        _this.longPoll = $.ajax(Vine.getURL("/message-bus/") + clientId + "/poll?" + (!shouldLongPoll() || !_this.enableLongPolling ? "dlp=t" : ""), {
+        _this.longPoll = $.ajax(baseUrl + "message-bus/" + clientId + "/poll?" + (!shouldLongPoll() || !_this.enableLongPolling ? "dlp=t" : ""), {
           data: data,
           cache: false,
           dataType: 'json',
           type: 'POST',
-          headers: {},
+          headers: {
+            'X-SILENCE-LOGGER': 'true'
+          },
           success: function(messages) {
             failCount = 0;
             _.each(messages,function(message) {

@@ -57,19 +57,19 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_username_or_email(username_or_email)
-    conditions = if username_or_email.include?('@')
-      { email: Email.downcase(username_or_email) }
+    if username_or_email.include?('@')
+      find_by_email(username_or_email)
     else
-      { username_lower: username_or_email.downcase }
+      find_by_username(username_or_email)
     end
+  end
 
-    users = User.where(conditions).to_a
+  def self.find_by_email(email)
+    where(email: Email.downcase(email)).first
+  end
 
-    if users.size > 1
-      raise Vine::TooManyMatches
-    else
-      users.first
-    end
+  def self.find_by_username(username)
+    where(username_lower: username.downcase).first
   end
 
   def approve(approved_by, send_mail=true)
@@ -208,24 +208,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def update_last_seen!(now=nil)
-    now ||= Time.zone.now
+  def update_last_seen!(now=Time.zone.now)
     now_date = now.to_date
-
     # Only update last seen once every minute
-    redis_key = "user:#{self.id}:#{now_date}"
-    if $redis.setnx(redis_key, "1")
-      $redis.expire(redis_key, SiteSetting.active_user_rate_limit_secs)
+    redis_key = "user:#{id}:#{now_date}"
+    return unless $redis.setnx(redis_key, "1")
 
-      update_visit_record!(now_date)
-
-      # Keep track of our last visit
-      if seen_before? && (self.last_seen_at < (now - SiteSetting.previous_visit_timeout_hours.hours))
-        previous_visit_at = last_seen_at
-        update_column(:previous_visit_at, previous_visit_at)
-      end
-      update_column(:last_seen_at, now)
-    end
+    $redis.expire(redis_key, SiteSetting.active_user_rate_limit_secs)
+    update_previous_visit(now)
+    # using update_column to avoid the AR transaction
+    update_column(:last_seen_at, now)
   end
 
   def create_user_stat
@@ -240,5 +232,19 @@ class User < ActiveRecord::Base
 
   def send_approval_email
     UserEmail.perform_async({type: :signup_after_approval, user_id: id, email_token: email_tokens.first.token})
+  end
+
+  private
+
+  def previous_visit_at_update_required?(timestamp)
+    seen_before? &&
+      (last_seen_at < (timestamp - SiteSetting.previous_visit_timeout_hours.hours))
+  end
+
+  def update_previous_visit(timestamp)
+    update_visit_record!(timestamp.to_date)
+    if previous_visit_at_update_required?(timestamp)
+      update_column(:previous_visit_at, last_seen_at)
+    end
   end
 end
