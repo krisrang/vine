@@ -15,11 +15,17 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   process :set_content_type
 
-  # version :thumb, :if => :is_image? do
-  #   process resize_to_fill: [45, 45]
-  # end
+  version :thumb, :if => :image? do
+    process resize_to_fit: [SiteSetting.max_image_width.to_f, SiteSetting.max_image_height.to_f]
+  end
 
   def extension_white_list
     SiteSetting.authorized_uploads
+  end
+
+  protected
+
+  def image?(upload)
+    upload.content_type.include? 'image'
   end
 end
