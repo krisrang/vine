@@ -138,7 +138,7 @@ Vine.Utilities = {
 
   getUploadMarkdown: function(upload) {
     if (Vine.Utilities.isAnImage(upload.original_filename)) {
-      return '<img src="' + upload.url + '" width="' + upload.width + '" height="' + upload.height + '">';
+      return '<img src="' + upload.url + '" width="' + upload.client_width + '" height="' + upload.client_height + '">';
     } else {
       return '<a class="attachment" href="' + upload.url + '">' + upload.original_filename + '</a> (' + I18n.toHumanSize(upload.size) + ')';
     }

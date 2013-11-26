@@ -21,6 +21,15 @@ Vine.EditorView = Vine.View.extend({
   didInsertElement: function() {
     var $editor = $('#editor');
     $editor.DivResizer({resize: this.resize});
+    this.ensureMaximumDimensionForImagesInPreview();
+  },
+
+  ensureMaximumDimensionForImagesInPreview: function() {
+    $('<style>#wmd-preview img, .cooked img {' +
+      'max-width:' + Vine.SiteSettings.max_image_width + 'px;' +
+      'max-height:' + Vine.SiteSettings.max_image_height + 'px;' +
+      '}</style>'
+     ).appendTo('head');
   },
 
   childDidInsertElement: function(e) {

@@ -1,4 +1,5 @@
 require "digest/sha1"
+require_dependency 'image_sizer'
 
 class Upload < ActiveRecord::Base  
   mount_uploader :file, AttachmentUploader
@@ -26,6 +27,8 @@ class Upload < ActiveRecord::Base
       image = MiniMagick::Image.open(file.path)
       self.width = image[:width] 
       self.height = image[:height]
+
+      self.client_width, self.client_height = ImageSizer.resize(width, height)
     rescue MiniMagick::Invalid
     end
 

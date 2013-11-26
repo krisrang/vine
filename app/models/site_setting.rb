@@ -54,6 +54,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:exclude_rel_nofollow_domains, '')
 
   client_setting(:max_image_size_kb, 5120)
+  client_setting(:max_image_width, 690)
+  client_setting(:max_image_height, 500)
   client_setting(:max_attachment_size_kb, 10240)
   client_setting(:authorized_extensions, '.jpg|.jpeg|.png|.gif')
 

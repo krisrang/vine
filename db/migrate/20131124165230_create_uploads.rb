@@ -7,8 +7,8 @@ class CreateUploads < ActiveRecord::Migration
       t.string  :content_type,      null: false
       t.string  :original_filename, null: false
       t.string  :size,              null: false
-      t.string  :width
-      t.string  :height
+      t.integer  :width
+      t.integer  :height
 
       t.timestamps
 
