@@ -206,8 +206,8 @@ class CookedPostProcessor
     # # make sure no other job is scheduled
     # Jobs.cancel_scheduled_job(:pull_hotlinked_images, post_id: @post.id)
     # schedule the job
-    delay = SiteSetting.ninja_edit_window + 1
-    PullHotlinkedImages.perform_in(delay, {message_id: @message.id})
+    # delay = SiteSetting.ninja_edit_window + 1
+    PullHotlinkedImages.perform_in(2.seconds, {message_id: @message.id})
   end
 
   def disable_if_low_on_disk_space

@@ -36,6 +36,9 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:analytics_code, 'urza14xmgm')
 
+  setting(:twitter_consumer_key, Figaro.env.twitter_key)
+  setting(:twitter_consumer_secret, Figaro.env.twitter_secret)
+
   setting(:hostname, Rails.env.development? ? 'localhost' : 'forum.rang.ee')
   setting(:port, Rails.env.development? ? 5000 : '')
   setting(:use_ssl, false)
@@ -63,6 +66,8 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:download_remote_images_to_local, true)
   setting(:download_remote_images_threshold, 10)
+
+  setting(:onebox_max_chars, 5000)
 
   setting(:ninja_edit_window, 300)
 

@@ -5,7 +5,7 @@ Todo
 * ~~Message quoting~~
 * ~~Smilies & autocomplete~~
 * ~~Image upload~~
-* Oneboxes
+* ~~Oneboxes~~
 * Quote controls
 * Schedule upload pruning
 * Message versions
@@ -15,3 +15,10 @@ Todo
 * Infinite scrolling
 * Search
 * Admin
+
+Secondary Tasks
+---
+
+* Move message controls to top
+* Android onebox smart banner
+* 9gag onebox eughh

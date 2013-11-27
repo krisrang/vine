@@ -4,3 +4,5 @@ POSTMARK: key
 RAVEN_DSN: raven
 AWS_KEY: key
 AWS_SECRET: secret
+TWITTER_KEY: key
+TWITTER_SECRET: secret

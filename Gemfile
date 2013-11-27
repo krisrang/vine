@@ -58,6 +58,8 @@ gem 'nokogiri'
 gem 'fastimage'
 gem 'seed-fu'
 gem 'paper_trail', '>= 3.0.0.rc2'
+gem 'mustache'
+gem 'rinku'
 
 group :development do
   gem 'foreman'
