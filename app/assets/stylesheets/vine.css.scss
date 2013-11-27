@@ -204,7 +204,12 @@ input::-webkit-input-placeholder {
   list-style: none;
   margin-bottom: 30px;
 
-  .col-sm-11 { padding-left: 0; }
+  .col-sm-11 { 
+    padding-left: 0;
+    background: #F5F5F5;
+    border-radius: 3px;
+    padding: 5px 10px;
+  }
 
   .avatarbit {
     text-align: right;
@@ -225,20 +230,20 @@ input::-webkit-input-placeholder {
   }
 
   .message {
-    padding-top: 10px;
+    padding-top: 15px;
   }
   
   time,
   .action-row a {
     color: rgba(34, 59, 74, 0.5);
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .action-row {
-    text-align: right;
+    float: right;
     
     a:hover {
-      color: rgba(34,59,74,.7);
+      color: #222;
       text-decoration: none;
     }
   }

@@ -8,14 +8,6 @@
   </div>
 
   <div class="col-sm-11">
-    <div class="userbit">
-      <span class="author">{{#linkTo "user" user}}{{user.username}}{{/linkTo}}</span>
-      <span class="bullet">•</span>
-      <time {{bindAttr data-livestamp="timestamp"}}>Some time bla</time>
-    </div>
-    
-    <div class="message cooked" {{bindAttr data-message-id="id"}}>{{{cooked}}}</div>
-
     <div class="action-row">
       {{#if canDestroy}}
         <a {{action deleteMessage}}>{{i18n message.delete}}</a>
@@ -27,5 +19,13 @@
       {{/if}}
       <a {{action replyMessage}}>{{i18n message.reply}}</a>
     </div>
+    
+    <div class="userbit">
+      <span class="author">{{#linkTo "user" user}}{{user.username}}{{/linkTo}}</span>
+      <span class="bullet">•</span>
+      <time {{bindAttr data-livestamp="timestamp"}}>Some time bla</time>
+    </div>
+    
+    <div class="message cooked" {{bindAttr data-message-id="id"}}>{{{cooked}}}</div>
   </div>
 </div>

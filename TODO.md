@@ -8,8 +8,9 @@ Todo
 * ~~Oneboxes~~
 * Quote controls
 * Schedule upload pruning
-* Message versions
+* Message versions & history
 * Hotkeys in editor
+* New messages marking
 * User preferences
 * Hover userbit
 * Infinite scrolling
@@ -19,6 +20,6 @@ Todo
 Secondary Tasks
 ---
 
-* Move message controls to top
 * Android onebox smart banner
 * 9gag onebox eughh
+* reddit onebox
