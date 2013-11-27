@@ -94,7 +94,10 @@ module Oneboxer
        Entry.new(/^https?:\/\/(?:www\.)?khanacademy\.org\/.+/, false),
        Entry.new(/^https?:\/\/(?:www\.)?ted\.com\/talks\/.+/, false), # only /talks have meta info
        Entry.new(/^https?:\/\/(?:www\.)?wikihow\.com\/.+/, false),
-       Entry.new(/^https?:\/\/(?:\w+\.)?wonderhowto\.com\/.+/, false)
+       Entry.new(/^https?:\/\/(?:\w+\.)?wonderhowto\.com\/.+/, false),
+
+       Entry.new(/^https?:\/\/(?:www\.)?9gag\.com\/.+/, false),
+       Entry.new(/^https?:\/\/(?:www\.)?auto24\.ee\/.+/, false)
       ]
     end
 

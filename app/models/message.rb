@@ -41,7 +41,11 @@ class Message < ActiveRecord::Base
   end
 
   def updated_by
-    User.find originator.to_i
+    User.where(id: originator.to_i).first
+  end
+
+  def system_update?
+    updated_by == Vine.system_user
   end
 
   def system_update(args={})

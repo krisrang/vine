@@ -1,3 +1,5 @@
+require 'timeout'
+
 require_dependency 'url_helper'
 
 class PullHotlinkedImages
@@ -31,6 +33,7 @@ class PullHotlinkedImages
           # have we already downloaded that file?
           if !downloaded_urls.include?(src)
             hotlinked = download(src)
+            puts "Downloading #{src} from #{message_id}"
             if hotlinked.try(:size) <= @max_size
               filename = File.basename(URI.parse(src).path)
               file = ActionDispatch::Http::UploadedFile.new(tempfile: hotlinked, filename: filename)
@@ -68,11 +71,6 @@ class PullHotlinkedImages
     # TODO: make sure the post hasn´t changed while we were downloading remote images
     if source != message.source
       message.system_update({source: source})
-      # options = {
-      #   force_new_version: true,
-      #   edit_reason: I18n.t("upload.edit_reason")
-      # }
-      # post.revise(Discourse.system_user, raw, options)
     end
   end
 
@@ -83,7 +81,7 @@ class PullHotlinkedImages
   end
 
   def is_valid_image_url(src)
-    src.present? && !is_upload(src)
+    src.present? && !is_upload(src) && !is_local(src)
   end
 
   def download(url)
@@ -91,12 +89,19 @@ class PullHotlinkedImages
     extension = File.extname(URI.parse(url).path)
     tmp = Tempfile.new(["vine-hotlinked", extension])
 
-    File.open(tmp.path, "wb") do |f|
-      hotlinked = open(url, "rb", read_timeout: 5)
-      while f.size <= @max_size && data = hotlinked.read(@max_size)
-        f.write(data)
+    begin
+      status = Timeout::timeout(30, Errno::ETIMEDOUT) do
+        File.open(tmp.path, "wb") do |f|
+          hotlinked = open(url, "rb", read_timeout: 5)
+          while f.size <= @max_size && data = hotlinked.read(@max_size)
+            f.write(data)
+          end
+          hotlinked.close!
+        end
       end
-      hotlinked.close!
+    rescue Errno::ETIMEDOUT
+      tmp.close
+      tmp.unlink
     end
 
     tmp

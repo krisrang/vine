@@ -29,14 +29,14 @@ class CookedPostProcessor
 
     @doc.search("a").each do |a|
       href = a["href"].to_s
-      if upload = Upload.get_from_url(href)
+      if is_upload(href) && upload = Upload.get_from_url(href)
         upload_ids << upload.id
       end
     end
 
     @doc.search("img").each do |img|
       src = img["src"].to_s
-      if upload = Upload.get_from_url(src)
+      if is_upload(src) && upload = Upload.get_from_url(src)
         upload_ids << upload.id
       end
     end
@@ -111,7 +111,7 @@ class CookedPostProcessor
 
     return if is_a_hyperlink?(img)
 
-    upload = Upload.get_from_url(src)
+    upload = is_upload(src) ? Upload.get_from_url(src) : nil
     add_lightbox!(img, original_width, original_height, upload)
 
     @dirty = true
@@ -202,7 +202,7 @@ class CookedPostProcessor
     # have we enough disk space?
     return if disable_if_low_on_disk_space
     # we only want to run the job whenever it's changed by a user
-    return if @message.updated_by == Vine.system_user
+    return if @message.system_update?
     # # make sure no other job is scheduled
     # Jobs.cancel_scheduled_job(:pull_hotlinked_images, post_id: @post.id)
     # schedule the job

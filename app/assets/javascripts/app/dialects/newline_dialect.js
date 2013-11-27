@@ -21,7 +21,9 @@ Vine.Dialect.postProcessText(function (text, event) {
     if (split.length) {
       var replacement = [];
       for (var i=0; i<split.length; i++) {
-        if (split[i].length > 0) {
+        if (i == 0 && split[i].length == 0) {
+          replacement.push(['br']);
+        } else if (split[i].length > 0) {
           replacement.push(split[i]);
           if (i !== split.length-1) { replacement.push(['br']); }
         }
