@@ -63,12 +63,11 @@ class PullHotlinkedImages
           hotlinked && hotlinked.close!
         end
       end
-
     end
 
     # TODO: make sure the post hasn´t changed while we were downloading remote images
     if source != message.source
-      message.update_attribute(:source, source)
+      message.system_update({source: source})
       # options = {
       #   force_new_version: true,
       #   edit_reason: I18n.t("upload.edit_reason")

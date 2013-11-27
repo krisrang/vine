@@ -56,6 +56,8 @@ gem 'unf'
 gem 'authority'
 gem 'nokogiri'
 gem 'fastimage'
+gem 'seed-fu'
+gem 'paper_trail', '>= 3.0.0.rc2'
 
 group :development do
   gem 'foreman'

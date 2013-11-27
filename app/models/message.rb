@@ -6,6 +6,8 @@ class Message < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'MessageAuthorizer'
 
+  has_paper_trail :if => Proc.new { |m| m.source_changed? }
+
   belongs_to :user
   has_and_belongs_to_many :uploads
 
@@ -38,8 +40,13 @@ class Message < ActiveRecord::Base
     message_analyzer.cook(*args)
   end
 
-  def self.white_listed_image_classes
-    @white_listed_image_classes ||= ['avatar', 'favicon', 'thumbnail']
+  def updated_by
+    User.find originator.to_i
+  end
+
+  def system_update(args={})
+    PaperTrail.whodunnit = Vine.system_user
+    update_attributes(args)
   end
 
   private

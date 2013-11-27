@@ -201,13 +201,13 @@ class CookedPostProcessor
     return unless SiteSetting.download_remote_images_to_local?
     # have we enough disk space?
     return if disable_if_low_on_disk_space
-    # # we only want to run the job whenever it's changed by a user
-    # return if @post.updated_by == Discourse.system_user
+    # we only want to run the job whenever it's changed by a user
+    return if @message.updated_by == Vine.system_user
     # # make sure no other job is scheduled
     # Jobs.cancel_scheduled_job(:pull_hotlinked_images, post_id: @post.id)
     # schedule the job
     delay = SiteSetting.ninja_edit_window + 1
-    PullHotlinkedImages.perform_in(delay.seconds, {message_id: @message.id})
+    PullHotlinkedImages.perform_in(delay, {message_id: @message.id})
   end
 
   def disable_if_low_on_disk_space

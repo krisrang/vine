@@ -22,6 +22,10 @@ module Vine
   # Cross site request forgery
   class CSRF < Exception; end
 
+  def self.system_user
+    User.where(id: -1).first
+  end
+
   def self.current_hostname
     SiteSetting.hostname
   end

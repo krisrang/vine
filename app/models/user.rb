@@ -1,6 +1,5 @@
 require_dependency 'pbkdf2'
 require_dependency 'email'
-require_dependency 'vine'
 
 class User < ActiveRecord::Base
   include Authority::UserAbilities
