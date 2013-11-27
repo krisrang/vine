@@ -6,7 +6,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   def store_dir
-    "uploads/attachment/#{model.id}"
+    "uploads/attachment/#{model.sha}"
   end
 
   # def default_url
@@ -21,6 +21,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     SiteSetting.authorized_uploads
+  end
+
+  def filename
+    'file' + File.extname(original_filename)
   end
 
   protected

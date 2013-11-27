@@ -221,6 +221,20 @@ Vine.EditorView = Vine.View.extend({
 
     Vine.SyntaxHighlighting.apply($wmdPreview);
 
+    var message = this.get('model.message'),
+        refresh = false;
+
+    // If we are editing a post, we'll refresh its contents once. This is a feature that
+    // allows a user to refresh its contents once.
+    if (message && Em.isEmpty(message.get('refreshedMessage'))) {
+      refresh = true;
+      message.set('refreshedMessage', true);
+    }
+
+    $('a.onebox', $wmdPreview).each(function(i, e) {
+      Vine.Onebox.load(e, refresh);
+    });
+
     this.trigger('previewRefreshed', $wmdPreview);
   }, 100)
 });

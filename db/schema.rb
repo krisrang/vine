@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 20131126130511) do
     t.string   "content_type",      null: false
     t.string   "original_filename", null: false
     t.string   "size",              null: false
-    t.integer  "width"
-    t.integer  "height"
+    t.string   "width"
+    t.string   "height"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "client_width"

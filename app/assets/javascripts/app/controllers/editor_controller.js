@@ -135,6 +135,7 @@ Vine.EditorController = Vine.Controller.extend({
 
       if (message) {
         message.set('source', model.get('reply'));
+        message.set('imageSizes', this.imageSizes());
         message.save().then(
           function(result) {
             editorController.set('createdMessage', message);
@@ -152,6 +153,18 @@ Vine.EditorController = Vine.Controller.extend({
         bootbox.alert(I18n.t('editor.cant_save'));
       }
     }
+  },
+
+  imageSizes: function() {
+    var result = {};
+    $('#wmd-preview img').each(function(i, e) {
+      var $img = $(e);
+      result[$img.prop('src')] = {
+        width: $img.width(),
+        height: $img.height()
+      };
+    });
+    return result;
   },
 
   openIfDraft: function() {

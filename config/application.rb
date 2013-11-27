@@ -29,7 +29,7 @@ module Vine
       config.assets.precompile << "locales/#{file.match(/([a-z_A-Z]+\.js)\.erb$/)[1]}"
     end
 
-    config.assets.precompile << %w(preload_store.js zxcvbn.js sanitizer-bundle.js highlight.pack.js)
+    config.assets.precompile << %w(preload_store.js zxcvbn.js sanitizer-bundle.js highlight.pack.js jquery.magnific.js)
 
     config.handlebars.templates_root = 'app/templates'
     config.ember.variant = :development

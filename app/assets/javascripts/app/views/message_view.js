@@ -10,5 +10,6 @@ Vine.MessageView = Vine.View.extend({
     var $message = this.$();
 
     Vine.SyntaxHighlighting.apply($message);
+    Vine.Lightbox.apply($message);
   }
 });

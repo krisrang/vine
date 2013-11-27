@@ -54,6 +54,8 @@ gem 'fog'
 gem 'mini_magick'
 gem 'unf'
 gem 'authority'
+gem 'nokogiri'
+gem 'fastimage'
 
 group :development do
   gem 'foreman'

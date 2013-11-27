@@ -79,6 +79,10 @@ module Vine
     !!$redis.get( maintenance_mode_key )
   end
 
+  def self.asset_host
+    Rails.configuration.action_controller.asset_host
+  end
+
 private
 
   def self.maintenance_mode_key

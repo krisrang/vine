@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message)
-      .permit(:cooked, :created_at, :updated_at, :user_id, :source)
+      .permit(:cooked, :created_at, :updated_at, :user_id, :source, :image_sizes)
       .except(:cooked, :created_at, :updated_at, :user_id) # filter Ember Data crap
       .merge(user: current_user)
   end

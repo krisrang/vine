@@ -61,19 +61,19 @@ Vine.Dialect.on("parseNode", function(event) {
   var label = node[node.length-1];
   if (label !== node[1]['href']) { return; }
 
-  // if (isOnOneLine(node, parent)) {
+  if (isOnOneLine(node, parent)) {
 
-  //   node[1]['class'] = 'onebox';
-  //   node[1].target = '_blank';
+    node[1]['class'] = 'onebox';
+    node[1].target = '_blank';
 
-  //   if (Vine && Vine.Onebox) {
-  //     var contents = Vine.Onebox.lookupCache(node[1].href);
-  //     if (contents) {
-  //       node[0] = '__RAW';
-  //       node[1] = contents;
-  //       node.length = 2;
-  //     }
-  //   }
-  // }
+    if (Vine && Vine.Onebox) {
+      var contents = Vine.Onebox.lookupCache(node[1].href);
+      if (contents) {
+        node[0] = '__RAW';
+        node[1] = contents;
+        node.length = 2;
+      }
+    }
+  }
 });
 

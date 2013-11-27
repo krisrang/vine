@@ -22,6 +22,13 @@ class Upload < ActiveRecord::Base
     upload
   end
 
+  def self.get_from_url(url)
+    sha = url.split("/")[-2..-2]
+    Upload.where(sha: sha).first
+  end
+
+  private
+
   def save_meta
     begin
       image = MiniMagick::Image.open(file.path)

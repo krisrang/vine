@@ -47,6 +47,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:reply_by_email_address, '')
 
   setting(:email_editable, true)
+  
+  setting(:crawl_images, true)
 
   client_setting(:enable_mobile_theme, true)
 
@@ -58,6 +60,11 @@ class SiteSetting < ActiveRecord::Base
   client_setting(:max_image_height, 500)
   client_setting(:max_attachment_size_kb, 10240)
   client_setting(:authorized_extensions, '.jpg|.jpeg|.png|.gif')
+
+  setting(:download_remote_images_to_local, true)
+  setting(:download_remote_images_threshold, 10)
+
+  setting(:ninja_edit_window, 300)
 
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)

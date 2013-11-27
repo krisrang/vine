@@ -5,7 +5,8 @@ window.assetPath = (function(){
     'logo100w.png.uri': <%= asset_data_uri('logo100w.png').inspect.html_safe %>,
 
     'sanitizer-bundle': <%= asset_path('sanitizer-bundle.js').inspect.html_safe %>,
-    'zxcvbn': <%= asset_path('zxcvbn.js').inspect.html_safe %>
+    'zxcvbn': <%= asset_path('zxcvbn.js').inspect.html_safe %>,
+    'jquery.magnific': <%= asset_path('jquery.magnific.js').inspect.html_safe %>
   };
 
   var assetPath = function(asset){ return map[asset]; };

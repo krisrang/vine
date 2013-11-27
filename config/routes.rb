@@ -41,6 +41,8 @@ Vine::Application.routes.draw do
   get 'uploads/:sha.:extension' => 'uploads#show', constraints: {sha: /[a-z0-9]{15,16}/i, extension: /\w{2,}/}, as: :upload
   post 'uploads' => 'uploads#create'
 
+  get 'onebox' => 'onebox#show'
+
   resources :messages
   resources :media
   resource :drafts
