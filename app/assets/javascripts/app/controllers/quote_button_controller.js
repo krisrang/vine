@@ -10,7 +10,7 @@ Vine.QuoteButtonController = Vine.Controller.extend({
     If the buffer is cleared, clear out other state (post)
   **/
   bufferChanged: function() {
-    if (this.blank('buffer')) this.set('post', null);
+    if (this.blank('buffer')) this.set('message', null);
   }.observes('buffer'),
 
   /**

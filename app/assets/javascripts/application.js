@@ -8,6 +8,8 @@
 //= require jquery.ui.widget
 //= require jquery.fileupload
 //= require jquery.iframe-transport
+//= require jquery.ba-replacetext
+//= require showhtml
 //= require handlebars
 //= require ember
 //= require ember-data-beta

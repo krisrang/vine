@@ -6,13 +6,14 @@ Todo
 * ~~Smilies & autocomplete~~
 * ~~Image upload~~
 * ~~Oneboxes~~
-* Quote controls
+* ~~Quote controls~~
 * Schedule upload pruning
 * Message versions & history
 * Hotkeys in editor
 * New messages marking
 * User preferences
 * Hover userbit
+* Load more messages after deleting
 * Infinite scrolling
 * Search
 * Admin

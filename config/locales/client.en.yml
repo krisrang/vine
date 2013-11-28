@@ -12,12 +12,13 @@ en:
             kb: KB
             mb: MB
             tb: TB
-            
+
     close: "Close"
     cancel: "Cancel"
     no_value: "No"
     yes_value: "Yes"
     upload: "Upload"
+    loading: "Loading"
 
     nav:
       messages: "Messages"
@@ -163,6 +164,7 @@ en:
       edit_action: "Editing {{link}} by {{username}}"
       message_number: "message {{number}}"
       create_long: "Creating new message"
+      expand_collapse: "expand/collapse"
 
       errors:
         upload: "Sorry, there was an error uploading that file. Please try again."

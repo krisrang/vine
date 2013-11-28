@@ -75,7 +75,6 @@ Vine.Utilities = {
     // Strip out any .click elements from the HTML before converting it to text
     var div = document.createElement('div');
     div.innerHTML = html;
-    $('.clicks', $(div)).remove();
     var text = div.textContent || div.innerText || "";
 
     return String(text).trim();

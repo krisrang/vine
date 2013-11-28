@@ -208,6 +208,10 @@ input::-webkit-input-placeholder {
   list-style: none;
   margin-bottom: 30px;
 
+  .highlighted {
+    background-color: #ffffe5 !important;
+  }
+
   .col-sm-11 { 
     padding-left: 0;
     background: #F5F5F5;
