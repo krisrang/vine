@@ -21,6 +21,7 @@
 //= require Markdown.Editor.js
 //= require better_markdown
 //= require behave
+//= require mousetrap
 //= require rsvp
 
 //= require ./assets

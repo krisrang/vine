@@ -11,7 +11,7 @@ MVP
 * ~~Oneboxes~~
 * ~~Quote controls~~
 * ~~Schedule upload pruning~~
-* Hotkeys in editor
+* ~~Hotkeys in editor~~
 * User preferences
 * Hover userbit
 * Load more messages after deleting

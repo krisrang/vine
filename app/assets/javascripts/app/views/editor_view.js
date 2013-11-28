@@ -18,12 +18,6 @@ Vine.EditorView = Vine.View.extend({
     return Vine.EditorController.CLOSED;
   }.property('controller.editorState'),
 
-  didInsertElement: function() {
-    var $editor = $('#editor');
-    $editor.DivResizer({resize: this.resize});
-    this.ensureMaximumDimensionForImagesInPreview();
-  },
-
   ensureMaximumDimensionForImagesInPreview: function() {
     $('<style>#wmd-preview img, .cooked img {' +
       'max-width:' + Vine.SiteSettings.max_image_width + 'px;' +
@@ -32,8 +26,41 @@ Vine.EditorView = Vine.View.extend({
      ).appendTo('head');
   },
 
+  didInsertElement: function() {
+    var $editor = $('#editor');
+    $editor.DivResizer({resize: this.resize});
+    this.ensureMaximumDimensionForImagesInPreview();
+    this.setupHotkeys();
+  },
+
   childDidInsertElement: function(e) {
     return this.initEditor();
+  },
+
+  willDestroyElement: function(e) {
+    Mousetrap.reset();
+  },
+
+  setupHotkeys: function() {
+    var controller = this.get('controller');
+
+    Mousetrap.bind('mod+s', function(e) {
+      controller.save();
+      return false; // stop bubbling
+    });
+
+    // only accept shortcuts when we're in the editor input
+    Mousetrap.stopCallback = function(e, element, combo) {
+      // if the element has the class "mousetrap" then no need to stop
+      if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
+          return false;
+      }
+
+      if (combo === "mod+s") { return true; }
+
+      // stop for input, select, and textarea
+      return element.tagName == 'INPUT' || element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || (element.contentEditable && element.contentEditable == 'true');
+    }
   },
 
   resize: function() {
