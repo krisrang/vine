@@ -1,4 +1,8 @@
 Vine.MessagesRoute = Vine.Route.extend({
+  activate: function() {
+    Vine.set('title', '');
+  },
+
   setupController: function(controller) {
     var store = this.store,
         route = this;

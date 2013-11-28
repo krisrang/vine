@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   skip_before_filter :check_xhr, only: [:show, :password_reset, :update, :activate_account, :authorize_email]
 
-  before_filter :ensure_logged_in, only: [:username, :update, :change_email]
+  before_filter :ensure_logged_in, only: [:index, :show, :username, :update, :change_email]
 
   # we need to allow account creation with bad CSRF tokens, if people are caching, the CSRF token on the
   #  page is going to be empty, this means that server will see an invalid CSRF and blow the session
@@ -124,7 +124,25 @@ class UsersController < ApplicationController
   def show
     @user = fetch_user_from_params
     authorize_action_for @user
-    render json: @user
+    user_serializer = UserSerializer.new(@user)
+
+    respond_to do |format|
+      format.html
+
+      format.json do
+        render json: @user
+      end
+    end
+  end
+
+  def index
+    @users = User.where(username_lower: params[:username].downcase)
+    authorize_action_for @users
+    render json: @users
+  end
+
+  def preferences
+    render nothing: true
   end
 
 

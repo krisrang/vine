@@ -31,6 +31,7 @@ en:
       said: "{{username}} said:"
       log_in: "Log In"
       log_out: "Log Out"
+      profile: "Profile"
 
       email:
         title: "Email"

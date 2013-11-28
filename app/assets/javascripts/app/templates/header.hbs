@@ -39,7 +39,7 @@
           {{currentUser.username}} <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li>{{#linkTo "preferences"}}Preferences{{/linkTo}}</li>
+          <li>{{#linkTo "user" currentUser}}{{i18n user.profile}}{{/linkTo}}</li>
           <li><a {{action logout}}>{{i18n user.log_out}}</a></li>
         </ul>
       </li>

@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_filter :ensure_logged_in, only: [:create]
+  skip_before_filter :check_xhr, only: [:show]
 
   def create
     file = params[:file] || params[:files].first

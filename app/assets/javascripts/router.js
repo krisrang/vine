@@ -2,12 +2,15 @@ Vine.Router.map(function() {
   var router = this;
   
   this.resource('messages', { path: '/' });
-  this.resource('users', { path: '/users' });
-  this.resource('user', { path: '/user/:user_id' });
+  
+  // User routes
+  this.resource('user', { path: '/users/:id' }, function() {
+    this.route('index', { path: '/'} );
+    this.resource('userActivity', { path: '/activity' });
+    this.resource('preferences', { path: '/preferences' });
+  });
   
   this.route('media');
-  this.route('notifications');
-  this.route('preferences');
 
   this.route('search', { path: '/search/:query' });
 

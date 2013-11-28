@@ -2,6 +2,7 @@ var attr = DS.attr;
 
 Vine.User = DS.Model.extend({
   username: attr(),
+  usernameLower: attr(),
   email: attr(),
   password: attr(),
   createdAt: attr('date'),

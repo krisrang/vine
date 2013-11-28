@@ -6,8 +6,9 @@ Ember.Application.initializer({
     var userJson = PreloadStore.get('currentUser');
 
     if (userJson) {
-      var user = store.push('user', userJson);
-      // var user = Vine.User.create(userJson);
+      var serializer = store.serializerFor('user');
+      var normalized = serializer.normalize(Vine.User, userJson.user);
+      var user = store.push('user', normalized);
 
       container.lookup('controller:currentUser').set('content', user);
       container.typeInjection('controller', 'currentUser', 'controller:currentUser');

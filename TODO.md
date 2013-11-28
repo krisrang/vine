@@ -23,6 +23,8 @@ Secondary Tasks
 ---
 * Message versions & history
 * New messages marking
+* Messages view shortcuts ala gmail
+* Don't do a full page refresh on login/logout
 
 Tertiary Tasks
 ---

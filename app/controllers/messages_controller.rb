@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   # App root, load latest messages
   def index
-    @messages = Message.latest
+    @messages = Message.latest.includes(:user)
 
     respond_to do |format|
       format.html do

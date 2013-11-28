@@ -1,6 +1,7 @@
 class DraftsController < ApplicationController
   authorize_actions_for Draft
   before_filter :ensure_logged_in
+  skip_before_filter :check_xhr
 
   def index
     @draft = Draft.get(current_user)

@@ -17,8 +17,16 @@ class ApplicationController < ActionController::Base
   before_filter :block_if_maintenance_mode
   before_filter :authorize_mini_profiler
   before_filter :preload_json
+  before_filter :check_xhr
   before_filter :set_locale
   before_filter :redirect_to_login_if_required
+
+  class RenderEmpty < Exception; end
+
+  # Render nothing unless we are an xhr request
+  rescue_from RenderEmpty do
+    render 'common/empty'
+  end
 
   rescue_from Vine::NotLoggedIn do |e|
     raise e if Rails.env.test?
@@ -84,7 +92,7 @@ class ApplicationController < ActionController::Base
     username_lower = params[:username].downcase
     username_lower.gsub!(/\.json$/, '')
 
-    user = User.where("username_lower = ? OR id = ?", username_lower, username_lower).first
+    user = User.where("username_lower = ? OR id = ?", username_lower, username_lower.to_i).first
     raise Vine::NotFound.new if user.blank?
 
     user
@@ -99,6 +107,12 @@ class ApplicationController < ActionController::Base
     Rack::MiniProfiler.authorize_request
   end
 
+  def check_xhr
+    # bypass xhr check on PUT / POST / DELETE provided api key is there, otherwise calling api is annoying
+    return if !request.get? && api_key_valid?
+    raise RenderEmpty.new unless ((request.format && request.format.json?) || request.xhr?)
+  end
+
   private
 
   def preload_anonymous_data
@@ -106,7 +120,7 @@ class ApplicationController < ActionController::Base
   end
 
   def preload_current_user_data
-    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user, root: false)))
+    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user, root: 'user')))
 
     draft = Draft.get(current_user)
     store_preloaded("draft", MultiJson.dump(DraftSerializer.new(draft))) if draft

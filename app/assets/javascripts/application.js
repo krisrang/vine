@@ -44,6 +44,7 @@
 //= require ./app/views/modal/modal_view
 //= require ./app/views/modal/modal_body_view
 //= require ./app/routes/route
+//= require ./app/routes/restricted_user_route
 //= require ./app/dialects/dialect
 
 //= require_tree ./app/dialects

@@ -31,7 +31,9 @@ Vine::Application.routes.draw do
   get 'users/hp' => 'users#get_honeypot_value'
 
   get 'users/:username' => 'users#show', constraints: {username: USERNAME_ROUTE_FORMAT}
-  put 'users/:username' => 'users#update', constraints: {username: USERNAME_ROUTE_FORMAT}
+  get 'users/:username' => 'users#show', constraints: {username: USERNAME_ROUTE_FORMAT}
+  get 'users/:username/preferences' => 'users#preferences', constraints: {username: USERNAME_ROUTE_FORMAT}
+  get 'users/:username/activity' => 'users#show', constraints: {username: USERNAME_ROUTE_FORMAT}
 
   post 'users/:username/send_activation_email' => 'users#send_activation_email', constraints: {username: USERNAME_ROUTE_FORMAT}
 

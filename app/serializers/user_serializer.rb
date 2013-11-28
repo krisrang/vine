@@ -2,6 +2,7 @@ class UserSerializer < ApplicationSerializer
 
   attributes :id, 
              :username,
+             :username_lower,
              :email,
              :last_seen_at,
              :created_at,
