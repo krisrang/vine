@@ -1,16 +1,17 @@
 Todo
 ===
 
+MVP
+---
+
 * ~~Message deleting and authorization~~
 * ~~Message quoting~~
 * ~~Smilies & autocomplete~~
 * ~~Image upload~~
 * ~~Oneboxes~~
 * ~~Quote controls~~
-* Schedule upload pruning
-* Message versions & history
+* ~~Schedule upload pruning~~
 * Hotkeys in editor
-* New messages marking
 * User preferences
 * Hover userbit
 * Load more messages after deleting
@@ -20,7 +21,12 @@ Todo
 
 Secondary Tasks
 ---
+* Message versions & history
+* New messages marking
 
-* Android onebox smart banner
-* 9gag onebox eughh
+Tertiary Tasks
+---
+
+* ~~Android onebox smart banner~~
+* ~~9gag onebox eughh~~
 * reddit onebox

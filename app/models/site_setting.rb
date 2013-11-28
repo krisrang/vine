@@ -67,6 +67,9 @@ class SiteSetting < ActiveRecord::Base
   setting(:download_remote_images_to_local, true)
   setting(:download_remote_images_threshold, 10)
 
+  setting(:clean_up_uploads, true)
+  setting(:uploads_grace_period_in_hours, 1)
+
   setting(:onebox_max_chars, 5000)
 
   setting(:ninja_edit_window, 300)

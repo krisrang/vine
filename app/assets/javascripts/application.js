@@ -19,7 +19,8 @@
 //= require livestamp
 //= require Markdown.Converter.js
 //= require Markdown.Editor.js
-//= require better_markdown.js
+//= require better_markdown
+//= require behave
 //= require rsvp
 
 //= require ./assets

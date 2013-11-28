@@ -81,6 +81,10 @@ Vine.EditorView = Vine.View.extend({
       return editorView.afterRender();
     };
 
+    var behaveEditor = new Behave({
+        textarea: document.getElementById('wmd-input')
+    });
+
     this.editor.run();
     this.set('editor', this.editor);
     this.loadingChanged();
