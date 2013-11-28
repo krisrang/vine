@@ -73,7 +73,7 @@ module PrettyText
       end
     end
 
-    ctx.load("app/assets/javascripts/emoji.js")
+    ctx_load(ctx, "app/assets/javascripts/emoji.js.erb")
 
     ctx['quoteTemplate'] = File.open(app_root + 'app/assets/javascripts/app/templates/quote.hbs') {|f| f.read}
     ctx.eval("HANDLEBARS_TEMPLATES = {
@@ -197,7 +197,13 @@ module PrettyText
 
   def self.ctx_load(ctx, *files)
     files.each do |file|
-      ctx.load(app_root + file)
+      if(file =~ /\.erb/)
+        erb = ERB.new(File.read(app_root + file))
+        erb.filename = file
+        ctx.eval(erb.result)
+      else
+        ctx.load(app_root + file)
+      end
     end
   end
 

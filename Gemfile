@@ -23,7 +23,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'jbuilder'
 gem 'ember-rails'
-gem 'gemoji'
+gem 'gemoji', github: 'github/gemoji'
 
 
 ### MISC
