@@ -97,7 +97,8 @@ module Oneboxer
        Entry.new(/^https?:\/\/(?:\w+\.)?wonderhowto\.com\/.+/, false),
 
        Entry.new(/^https?:\/\/(?:www\.)?9gag\.com\/.+/, false),
-       Entry.new(/^https?:\/\/(?:www\.)?auto24\.ee\/.+/, false)
+       Entry.new(/^https?:\/\/(?:www\.)?auto24\.ee\/.+/, false),
+       Entry.new(/^https?:\/\/(?:www\.)?twitch\.tv\/.+/, false)
       ]
     end
 
