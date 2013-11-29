@@ -2,8 +2,8 @@
   <div class="row">
     <div id="messages">
       <ul>
-        {{#each message in filteredContent}}
-          {{render message message}}
+        {{#each}}
+          {{render message this}}
         {{/each}}
       </ul>
     </div>

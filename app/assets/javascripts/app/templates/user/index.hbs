@@ -12,10 +12,10 @@
         <dl>
           <dt>{{i18n user.created_at}}</dt>
           <dd>{{date path="createdAt" leaveAgo="true"}}</dd>
-          <dt>{{i18n user.last_seen}}</dt>
-          <dd>{{date path="lastSeenAt" leaveAgo="true"}}</dd>
           <dt>{{i18n user.last_message}}</dt>
           <dd>{{date path="lastMessageAt" leaveAgo="true"}}</dd>
+          <dt>{{i18n user.last_seen}}</dt>
+          <dd>{{date path="lastSeenAt" leaveAgo="true"}}</dd>
         </dl>
       </div>
     </div>
@@ -28,6 +28,16 @@
       {{#if viewingSelf}}
         <a {{action logout}} class="btn btn-danger"><i class="fa fa-sign-out"></i>{{i18n user.log_out}}</a>
       {{/if}}
+    </div>
+
+    {{messages}}
+
+    <div id="messages">
+      <ul>
+        {{#each message in messages}}
+          {{render message message}}
+        {{/each}}
+      </ul>
     </div>
   </div>
 </div>
