@@ -73,9 +73,19 @@ class ApplicationController < ActionController::Base
     @preloaded[key] = json.gsub("</", "<\\/")
   end
 
-  def store_preloaded_json(key, data)
-    serializer = ActiveModel::ArraySerializer.new(data)
-    store_preloaded(key, MultiJson.dump(serializer))
+  def store_preloaded_array(key, data, serializer, opts={})
+    data = serialize_to_array(data, serializer, opts)
+    store_preloaded(key, MultiJson.dump(data))
+  end
+
+  def serialize_to_array(obj, serializer, opts={})
+    # If it's an array, apply the serializer as an each_serializer to the elements
+    if !obj.is_a?(Array) && !obj.is_a?(ActiveRecord::Associations::CollectionProxy)
+      obj = [obj]
+    end
+
+    opts[:each_serializer] = serializer
+    ActiveModel::ArraySerializer.new(obj, opts).as_json
   end
 
   def preload_json

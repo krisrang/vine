@@ -124,10 +124,11 @@ class UsersController < ApplicationController
   def show
     @user = fetch_user_from_params
     authorize_action_for @user
-    user_serializer = UserSerializer.new(@user)
 
     respond_to do |format|
-      format.html
+      format.html do
+        store_preloaded_array("users", @user, UserSerializer, root: "users")
+      end
 
       format.json do
         render json: @user

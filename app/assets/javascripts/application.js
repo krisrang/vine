@@ -56,5 +56,5 @@
 //= require_tree ./app/templates
 //= require_tree ./app/routes
 
-//= require ./router
+//= require ./app/routes/application_routes
 //= require ./emoji
