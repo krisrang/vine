@@ -1,5 +1,5 @@
-Vine.UserView = Vine.View.extend({
-  templateName: 'user/user',
+Vine.UserIndexView = Vine.View.extend({
+  templateName: 'user/index',
   userBinding: 'controller.content',
 
   updateTitle: function() {

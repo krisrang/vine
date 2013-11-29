@@ -6,6 +6,7 @@ class UserSerializer < ApplicationSerializer
              :email,
              :last_seen_at,
              :created_at,
+             :last_message_at,
              :admin,
              :message,
              :active,
@@ -14,6 +15,7 @@ class UserSerializer < ApplicationSerializer
   def avatars
     { 
       thumb: object.avatar.thumb.url,
+      profile: object.avatar.profile.url,
       full: object.avatar.url
     }
   end

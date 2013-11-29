@@ -1,0 +1,33 @@
+<div class="container userprofile">
+  <div class="row">
+    <div class="userwell clearfix">
+      <div class="userbit">
+        <img {{bindAttr src="profileAvatar"}} width="128" height="128" alt="" />
+        <h2>
+          {{username}}
+        </h2>
+      </div>
+
+      <div class="userinfo">
+        <dl>
+          <dt>{{i18n user.created_at}}</dt>
+          <dd>{{date path="createdAt" leaveAgo="true"}}</dd>
+          <dt>{{i18n user.last_seen}}</dt>
+          <dd>{{date path="lastSeenAt" leaveAgo="true"}}</dd>
+          <dt>{{i18n user.last_message}}</dt>
+          <dd>{{date path="lastMessageAt" leaveAgo="true"}}</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="useractions">
+      {{#if canEdit}}
+        {{#linkTo "preferences" class="btn btn-primary"}}<i class="fa fa-cog"></i>Preferences{{/linkTo}}
+      {{/if}}
+
+      {{#if viewingSelf}}
+        <a {{action logout}} class="btn btn-danger"><i class="fa fa-sign-out"></i>{{i18n user.log_out}}</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -5,8 +5,6 @@ Vine.Router.map(function() {
   
   // User routes
   this.resource('user', { path: '/users/:username' }, function() {
-    this.route('index', { path: '/'} );
-    this.resource('userActivity', { path: '/activity' });
     this.resource('preferences', { path: '/preferences' });
   });
   

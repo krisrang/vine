@@ -1,11 +1,18 @@
 module JsLocaleHelper
 
   def self.output_locale(locale, translations = nil)
-
     locale_str = locale.to_s
 
+    # load default translations
     translations ||= YAML::load(File.open("#{Rails.root}/config/locales/client.#{locale_str}.yml"))
 
+    # We used to split the admin versus the client side, but it's much simpler to just
+    # include both for now due to the small size of the admin section.
+    #
+    # For now, let's leave it split out in the translation file in case we want to split
+    # it again later, so we'll merge the JSON ourselves.
+    admin_contents = translations[locale_str].delete('admin_js')
+    translations[locale_str]['js'].merge!(admin_contents) if admin_contents.present?
     message_formats = strip_out_message_formats!(translations[locale_str]['js'])
 
     result = generate_message_format(message_formats, locale_str)
@@ -24,7 +31,7 @@ module JsLocaleHelper
     result << moment_format_function('short_date_no_year')
     result << moment_format_function('short_date')
     result << moment_format_function('long_date')
-    result << "moment.fn.relativeAge = function(opts){ return Discourse.Formatter.relativeAge(this.toDate(), opts)};\n"
+    result << "moment.fn.relativeAge = function(opts){ return Vine.Formatter.relativeAge(this.toDate(), opts)};\n"
   end
 
   def self.moment_format_function(name)

@@ -6,7 +6,7 @@ Vine.StaticController = Vine.Controller.extend({
 
     this.setProperties({
       path: path,
-      content: null
+      contents: null
     });
 
     // Load from <noscript> if we have it.
@@ -14,10 +14,10 @@ Vine.StaticController = Vine.Controller.extend({
     if ($preloaded.length) {
       var text = $preloaded.text();
       text = text.match(/<!--preload-content:-->((?:.|[\n\r])*)<!--:preload-content-->/)[1];
-      this.set('content', text);
+      this.set('contents', text);
     } else {
       return Vine.ajax(path, {dataType: 'html'}).then(function (result) {
-        self.set('content', result);
+        self.set('contents', result);
       });
     }
   }

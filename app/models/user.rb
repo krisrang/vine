@@ -186,6 +186,11 @@ class User < ActiveRecord::Base
     save
   end
 
+  def last_message_at
+    message = messages.latest.limit(1).last
+    message.created_at if message.present?
+  end
+
   def seen_before?
     last_seen_at.present?
   end

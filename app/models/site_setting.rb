@@ -73,6 +73,8 @@ class SiteSetting < ActiveRecord::Base
   setting(:onebox_max_chars, 5000)
 
   setting(:ninja_edit_window, 300)
+  
+  setting(:relative_date_duration, 30)
 
   def self.generate_api_key!
     self.api_key = SecureRandom.hex(32)

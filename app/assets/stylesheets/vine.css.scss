@@ -258,6 +258,47 @@ input::-webkit-input-placeholder {
 }
 
 // 
+// USER PROFILES
+// 
+
+.userprofile {
+  .userwell {
+    background-color: #444;
+    padding: 20px;
+    overflow: hidden;
+    color: #fff;
+
+    .userinfo {
+      float: right;
+      width: 20%;
+      background-color: #222;
+      text-align: right;
+      padding: 15px;
+
+      dl { margin: 0; }
+    }
+
+    .userbit {
+      float: left;
+      width: 75%;
+      margin: 0 auto;
+      text-align: center;
+
+      img {
+        border: 2px solid #DDD;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .useractions {
+    background-color: #ddd;
+    padding: 12px;
+    text-align: right;
+  }
+}
+
+// 
 // COMPONENTS
 //
 

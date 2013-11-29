@@ -15,7 +15,6 @@
 //= require ember-data-beta
 //= require bootstrap
 //= require spin
-//= require moment-lang
 //= require livestamp
 //= require Markdown.Converter.js
 //= require Markdown.Editor.js
@@ -28,13 +27,14 @@
 //= require ./init
 //= require ./debug
 //= require_tree ./app/ember
-//= require ./app/helpers/i18n
+//= require ./app/helpers/i18n_helpers
 //= require ./app/mixins/ajax
 //= require ./vine
 //= require ./store
 //= require ./pagedown_custom
 
 // Load first
+
 //= require_tree ./app/lib
 //= require_tree ./app/mixins
 //= require_tree ./app/initializers
@@ -48,9 +48,9 @@
 //= require ./app/dialects/dialect
 
 //= require_tree ./app/dialects
-//= require_tree ./app/components
-//= require_tree ./app/models
 //= require_tree ./app/controllers
+//= require_tree ./app/models
+//= require_tree ./app/components
 //= require_tree ./app/views
 //= require_tree ./app/helpers
 //= require_tree ./app/templates

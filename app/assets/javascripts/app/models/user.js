@@ -7,6 +7,7 @@ Vine.User = DS.Model.extend({
   password: attr(),
   createdAt: attr('date'),
   lastSeenAt: attr('date'),
+  lastMessageAt: attr('date'),
   admin: attr('boolean'),
   active: attr('boolean'),
   avatars: attr(),
@@ -19,11 +20,25 @@ Vine.User = DS.Model.extend({
   messages: DS.hasMany('message'),
   drafts: DS.hasMany('draft'),
 
+  avatar: function() {
+    var avatars = this.get('avatars');
+    if (avatars && avatars.full) { return avatars.full; }
+
+    return "";
+  }.property('avatars'),
+
+  profileAvatar: function() {
+    var avatars = this.get('avatars');
+    if (avatars && avatars.profile) { return avatars.profile; }
+    if (avatars && avatars.full) { return avatars.full; }
+
+    return "";
+  }.property('avatars'),
+
   thumbAvatar: function() {
     var avatars = this.get('avatars');
-    if (avatars && avatars.thumb) {
-      return avatars.thumb;
-    }
+    if (avatars && avatars.thumb) { return avatars.thumb; }
+    if (avatars && avatars.full) { return avatars.full; }
 
     return "";
   }.property('avatars')

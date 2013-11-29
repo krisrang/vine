@@ -1,5 +1,4 @@
 Vine.UserRoute = Vine.Route.extend({
-
   actions: {
     logout: function() {
       this.get('currentUser').logout();

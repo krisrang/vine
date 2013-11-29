@@ -58,14 +58,14 @@ Vine.Ajax = Em.Mixin.create({
       if (!args.type) args.type = 'GET';
       if ((!args.dataType) && (args.type === 'GET')) args.dataType = 'json';
 
-      $.ajax(Vine.getURL(url), args);
+      $.ajax(url, args);
     };
 
     // For cached pages we strip out CSRF tokens, need to round trip to server prior to sending the
     //  request (bypass for GET, not needed)
     if(args.type && args.type !== 'GET' && !Vine.csrfToken){
       return Ember.Deferred.promise(function(promise){
-        $.ajax(Vine.getURL('/session/csrf'))
+        $.ajax('/session/csrf')
            .success(function(result){
               Vine.csrfToken = result.csrf;
               performAjax(promise);

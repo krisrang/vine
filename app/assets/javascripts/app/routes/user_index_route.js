@@ -1,5 +1,9 @@
-Vine.UserIndexRoute = Vine.Route.extend({
-  redirect: function() {
-    this.transitionTo('userActivity', this.modelFor('user'));
+Vine.UserIndexRoute = Vine.RestrictedUserRoute.extend({
+  model: function() {
+    return this.modelFor('user');
+  },
+
+  setupController: function(controller, model) {
+    controller.set('model', model);
   }
 });

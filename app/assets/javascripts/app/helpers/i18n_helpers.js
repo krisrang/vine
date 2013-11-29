@@ -49,9 +49,9 @@ Ember.Handlebars.registerBoundHelper("boundI18n", function(property, options) {
   @for Handlebars
 **/
 Ember.Handlebars.registerHelper('countI18n', function(key, options) {
-  var view = Vine.View.extend({
+  var view = Discourse.View.extend({
     tagName: 'span',
-    shouldRerender: Vine.View.renderIfChanged('count'),
+    shouldRerender: Discourse.View.renderIfChanged('count'),
 
     render: function(buffer) {
       buffer.push(I18n.t(key, { count: this.get('count') }));

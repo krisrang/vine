@@ -20,6 +20,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [45, 45]
   end
 
+  version :profile do
+    process resize_to_fill: [128, 128]
+  end
+
   def extension_white_list
     %w(jpg jpeg gif png)
   end

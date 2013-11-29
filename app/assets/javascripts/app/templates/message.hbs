@@ -23,7 +23,7 @@
     <div class="userbit">
       <span class="author">{{#linkTo "user" user}}{{user.username}}{{/linkTo}}</span>
       <span class="bullet">•</span>
-      <time {{bindAttr data-livestamp="timestamp"}}>Some time bla</time>
+      <time>{{date path="createdAt" leaveAgo="true"}}</time>
     </div>
     
     <div class="message cooked" {{bindAttr data-message-id="id"}}>{{{cooked}}}</div>
