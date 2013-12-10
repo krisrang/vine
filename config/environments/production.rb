@@ -79,7 +79,7 @@ Vine::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = { api_key: Figaro.env.postmark }
+  config.action_mailer.postmark_settings = { api_key: ENV['POSTMARK'] }
 
   # a comma delimited list of emails your devs have
   # developers have god like rights and may impersonate anyone in the system

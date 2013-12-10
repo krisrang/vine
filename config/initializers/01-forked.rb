@@ -15,9 +15,6 @@ if defined?(PhusionPassenger)
       Vine::Application.config.cache_store.reconnect
 
       MessageBus.after_fork
-      
-      # Analytics = AnalyticsRuby
-      # Analytics.init(secret: Figaro.env.analytics)
     else
       # We're in conservative spawning mode. We don't need to do anything.
     end
