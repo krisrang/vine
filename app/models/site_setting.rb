@@ -36,8 +36,8 @@ class SiteSetting < ActiveRecord::Base
 
   setting(:analytics_code, 'urza14xmgm')
 
-  setting(:twitter_consumer_key, Figaro.env.twitter_key)
-  setting(:twitter_consumer_secret, Figaro.env.twitter_secret)
+  setting(:twitter_consumer_key, ENV['TWITTER_KEY'])
+  setting(:twitter_consumer_secret, ENV['TWITTER_SECRET'])
 
   setting(:hostname, Rails.env.development? ? 'localhost' : 'forum.rang.ee')
   setting(:port, Rails.env.development? ? 5000 : '')
