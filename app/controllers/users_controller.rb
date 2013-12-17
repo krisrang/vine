@@ -36,10 +36,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    return fake_success_response if suspicious? params[:user]
+    return fake_success_response if suspicious? params
 
-    user = User.new_from_params(params[:user])
-    auth = authenticate_user(user, params[:user])
+    user = User.new_from_params(params)
+    auth = authenticate_user(user, params)
 
     if user.save
       activator = UserActivator.new(user, request, session, cookies)
@@ -190,7 +190,7 @@ class UsersController < ApplicationController
   end
 
   def fake_success_response
-    user = User.new(active: false, message: I18n.t("login.activate_email", email: params[:user][:email]))
+    user = User.new(active: false, message: I18n.t("login.activate_email", email: params[:email]))
     render json: user
   end
 

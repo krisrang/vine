@@ -6,37 +6,18 @@ Vine.UserRoute = Vine.Route.extend({
   },
 
   model: function(params) {
-    var currentUser = this.get('currentUser'),
-        username = params.username.toLowerCase(),
-        store = this.store;
-
-    if (currentUser && (username === currentUser.get('usernameLower'))) {
+    // If we're viewing the currently logged in user, return that object
+    // instead.
+    var currentUser = this.get('currentUser');
+    if (currentUser && (params.username.toLowerCase() === currentUser.get('username_lower'))) {
       return currentUser;
     }
 
-    var promise = Ember.Deferred.create();
+    return Vine.User.create({username: params.username});
+  },
 
-    PreloadStore.getAndRemove("users").then(function(result) {
-      var id;
-
-      if (result && result.users) {
-        _.each(result.users, function(user) {
-          if (user.usernameLower === username) id = user.id;
-        });
-      }
-
-      if (id > 0) {
-        promise.resolve(store.find('user', id));
-      } else {
-        store.find('user', {username: username}).then(function(result) {
-          if (result && result.get('length') > 0) {
-            promise.resolve(result.get('firstObject'));
-          }
-        });
-      }
-    });
-
-    return promise;
+  afterModel: function() {
+    return this.modelFor('user').findDetails();
   },
 
   serialize: function(params) {

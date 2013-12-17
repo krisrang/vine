@@ -1,14 +1,15 @@
 class MessagesController < ApplicationController
   authorize_actions_for Message, except: [:update, :destroy]
   before_filter :ensure_logged_in, except: [:index, :show]
+  skip_before_filter :check_xhr, only: [:index]
 
   # App root, load latest messages
   def index
-    @messages = Message.latest.includes(:user)
+    @messages = Message.latest.includes(:user).all
 
     respond_to do |format|
       format.html do
-        store_preloaded_json("messages_latest", @messages)
+        store_preloaded_array("messages_latest", @messages, MessageSerializer)
       end
 
       format.json do

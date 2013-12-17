@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
   end
 
   def preload_current_user_data
-    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user, root: 'user')))
+    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user)))
 
     draft = Draft.get(current_user)
     store_preloaded("draft", MultiJson.dump(DraftSerializer.new(draft))) if draft
