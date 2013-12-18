@@ -23,48 +23,6 @@ GIT
     gemoji (1.5.0)
 
 GIT
-  remote: git://github.com/rails/rails.git
-  revision: da5cb3bd06db527961541bb3a4557e9b1fdf837d
-  branch: 4-0-stable
-  specs:
-    actionmailer (4.0.2)
-      actionpack (= 4.0.2)
-      mail (~> 2.5.4)
-    actionpack (4.0.2)
-      activesupport (= 4.0.2)
-      builder (~> 3.1.0)
-      erubis (~> 2.7.0)
-      rack (~> 1.5.2)
-      rack-test (~> 0.6.2)
-    activemodel (4.0.2)
-      activesupport (= 4.0.2)
-      builder (~> 3.1.0)
-    activerecord (4.0.2)
-      activemodel (= 4.0.2)
-      activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.2)
-      arel (~> 4.0.0)
-    activesupport (4.0.2)
-      i18n (~> 0.6, >= 0.6.4)
-      minitest (~> 4.2)
-      multi_json (~> 1.3)
-      thread_safe (~> 0.1)
-      tzinfo (~> 0.3.37)
-    rails (4.0.2)
-      actionmailer (= 4.0.2)
-      actionpack (= 4.0.2)
-      activerecord (= 4.0.2)
-      activesupport (= 4.0.2)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.2)
-      sprockets-rails (~> 2.0.0)
-    railties (4.0.2)
-      actionpack (= 4.0.2)
-      activesupport (= 4.0.2)
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
-
-GIT
   remote: git://github.com/sporkrb/spork-rails.git
   revision: 0dd45e59d3237b4c8f9efc215b46d9c07072a95e
   specs:
@@ -82,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/SamSaffron/flamegraph.git
-  revision: 18cef50195800ebae8c8714b7dd5f0a8386336aa
+  revision: f0660ed17b8d03e2115d7d6be5b2ea285ce1e49b
   specs:
     flamegraph (0.0.5)
       fast_stack
@@ -100,9 +58,32 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    actionmailer (4.0.2)
+      actionpack (= 4.0.2)
+      mail (~> 2.5.4)
+    actionpack (4.0.2)
+      activesupport (= 4.0.2)
+      builder (~> 3.1.0)
+      erubis (~> 2.7.0)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
     active_model_serializers (0.8.1)
       activemodel (>= 3.0)
+    activemodel (4.0.2)
+      activesupport (= 4.0.2)
+      builder (~> 3.1.0)
+    activerecord (4.0.2)
+      activemodel (= 4.0.2)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.2)
+      arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activesupport (4.0.2)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
     addressable (2.3.5)
     analytics-ruby (0.5.2)
       faraday (>= 0.8, < 0.10)
@@ -140,11 +121,20 @@ GEM
     coderay (1.1.0)
     commonjs (0.2.7)
     connection_pool (1.2.0)
+    cookiejar (0.3.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.1)
     dotenv (0.9.0)
+    em-http-request (1.1.1)
+      addressable (>= 2.3.4)
+      cookiejar
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0.beta.2)
+    em-socksify (0.3.0)
+      eventmachine (>= 1.0.0.beta.4)
     ember-data-source (0.14)
       ember-source
     ember-rails (0.14.1)
@@ -176,6 +166,17 @@ GEM
       rake-compiler
     fastimage (1.5.4)
       addressable (~> 2.3, >= 2.3.5)
+    faye (1.0.1)
+      cookiejar (>= 0.3.0)
+      em-http-request (>= 0.3.0)
+      eventmachine (>= 0.12.0)
+      faye-websocket (>= 0.7.0)
+      multi_json (>= 1.0.0)
+      rack (>= 1.0.0)
+      websocket-driver (>= 0.3.0)
+    faye-websocket (0.7.1)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.3.1)
     ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -209,6 +210,7 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     hiredis (0.4.5)
+    http_parser.rb (0.6.0)
     httpauth (0.2.0)
     i18n (0.6.9)
     ice_cube (0.11.1)
@@ -305,11 +307,24 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails (4.0.2)
+      actionmailer (= 4.0.2)
+      actionpack (= 4.0.2)
+      activerecord (= 4.0.2)
+      activesupport (= 4.0.2)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.0.2)
+      sprockets-rails (~> 2.0.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.1)
     rails_stdout_logging (0.0.3)
+    railties (4.0.2)
+      actionpack (= 4.0.2)
+      activesupport (= 4.0.2)
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
     rake-compiler (0.9.2)
       rake
@@ -440,6 +455,7 @@ GEM
       unf_ext
     unf_ext (0.0.6)
     uuidtools (2.1.4)
+    websocket-driver (0.3.1)
 
 PLATFORMS
   ruby
@@ -460,6 +476,7 @@ DEPENDENCIES
   fakeweb
   fast_xor
   fastimage
+  faye
   figaro
   flamegraph!
   fog
@@ -492,7 +509,7 @@ DEPENDENCIES
   quiet_assets
   qunit-rails
   rack-mini-profiler!
-  rails!
+  rails (~> 4.0.2)
   rails_12factor
   rb-fsevent
   rb-inotify (~> 0.9)

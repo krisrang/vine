@@ -3,13 +3,14 @@ ruby '2.0.0'
 
 ### REAR END
 
-gem 'rails', github: 'rails/rails', branch: '4-0-stable'
+gem 'rails', '~> 4.0.2'
 gem 'pg'
 
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
 
+gem 'faye'
 gem 'message_bus', github: 'SamSaffron/message_bus'
 
 
