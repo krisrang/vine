@@ -76,9 +76,6 @@ GEM
       multi_json (~> 1.0)
     arel (4.0.1)
     atomic (1.1.14)
-    authority (2.9.0)
-      activesupport (>= 3.0.0)
-      rake (>= 0.8.7)
     barber (0.4.2)
       ember-source
       execjs
@@ -254,9 +251,6 @@ GEM
     openid-redis-store (0.0.2)
       redis
       ruby-openid
-    paper_trail (3.0.0)
-      activerecord (>= 3.0, < 5.0)
-      activesupport (>= 3.0, < 5.0)
     pg (0.17.0)
     polyglot (0.3.3)
     postmark (1.0.1)
@@ -273,6 +267,8 @@ GEM
       pry (>= 0.9.10)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
+    pundit (0.2.1)
+      activesupport (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     qunit-rails (0.0.4)
@@ -443,7 +439,6 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   analytics-ruby
-  authority
   bcrypt-ruby
   better_errors
   binding_of_caller
@@ -479,11 +474,11 @@ DEPENDENCIES
   omniauth-oauth2
   omniauth-openid
   openid-redis-store
-  paper_trail (>= 3.0.0.rc2)
   pg
   postmark-rails
   pry-rails
   puma
+  pundit
   quiet_assets
   qunit-rails
   rack-mini-profiler (= 0.9.0.pre)

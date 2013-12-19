@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
   def show
     @user = fetch_user_from_params
-    authorize_action_for @user
+    authorize @user
 
     respond_to do |format|
       format.html do
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where(username_lower: params[:username].downcase)
-    authorize_action_for @users
+    authorize @users
     render json: @users
   end
 

@@ -1,11 +1,11 @@
 class MessagesController < ApplicationController
-  authorize_actions_for Message, except: [:update, :destroy]
   before_filter :ensure_logged_in, except: [:index, :show]
   skip_before_filter :check_xhr, only: [:index]
 
   # App root, load latest messages
   def index
     @messages = Message.includes(:user).latest.to_a
+    authorize @messages
 
     respond_to do |format|
       format.html do
@@ -20,24 +20,26 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+    authorize @message
     render json: @message
   end
 
   def create
     @message = Message.create(message_params)
+    authorize @message
     render json: @message
   end
 
   def update
     @message = Message.find(params[:id])
-    authorize_action_for @message
+    authorize @message
     @message.update_attributes!(message_params)
     render json: @message
   end
 
   def destroy
     @message = Message.find(params[:id])
-    authorize_action_for @message
+    authorize @message
     @message.destroy
     render json: @message
   end

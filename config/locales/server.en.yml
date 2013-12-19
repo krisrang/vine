@@ -9,6 +9,8 @@ en:
       short_no_year: "%B %-d"
       date_only: "%b %-d, %Y"
 
+  unauthorized: "You are not authorized to perform this action."
+
   login:
     not_approved: "Your account hasn't been approved yet. You will be notified by email when you are ready to log in."
     incorrect_username_email_or_password: "Incorrect username, email or password"

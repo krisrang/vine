@@ -1,10 +1,10 @@
 class DraftsController < ApplicationController
-  authorize_actions_for Draft
   before_filter :ensure_logged_in
   skip_before_filter :check_xhr
 
   def index
     @draft = Draft.get(current_user)
+    authorize @draft
 
     respond_to do |format|
       format.json do
@@ -14,11 +14,13 @@ class DraftsController < ApplicationController
   end
 
   def create
-    draft = Draft.set(current_user, params[:draft])
-    render json: draft
+    @draft = Draft.set(current_user, params[:draft])
+    authorize @draft
+    render json: @draft
   end
 
   def destroy
+    authorize nil
     Draft.clear(current_user)
     render json: success_json
   end

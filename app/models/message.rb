@@ -3,19 +3,16 @@ require_dependency 'pretty_text'
 require 'digest/sha1'
 
 class Message < ActiveRecord::Base
-  include Authority::Abilities
-  self.authorizer_name = 'MessageAuthorizer'
-
-  has_paper_trail :if => Proc.new { |m| m.source_changed? }
-
+  belongs_to :room
   belongs_to :user
   has_and_belongs_to_many :uploads
 
   scope :latest, -> { order('created_at DESC').limit(10) }
 
-  attr_accessor :image_sizes, :invalidate_oneboxes
+  attr_accessor :image_sizes, :invalidate_oneboxes, :system_update?
 
   before_save do
+    self.system_update? = false
     # self.last_editor_id ||= user_id
     self.cooked = cook(source, {}) if self.source_changed?
   end
@@ -40,17 +37,9 @@ class Message < ActiveRecord::Base
     message_analyzer.cook(*args)
   end
 
-  def updated_by
-    User.where(id: originator.to_i).first
-  end
-
-  def system_update?
-    updated_by == Vine.system_user
-  end
-
   def system_update(args={})
-    PaperTrail.whodunnit = Vine.system_user
     update_attributes(args)
+    self.system_update? = true
   end
 
   private

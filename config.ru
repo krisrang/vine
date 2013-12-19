@@ -19,8 +19,8 @@ FAYE_CLIENT = faye_server.get_client
 # end
 
 run Rack::URLMap.new({
-  "/remote"  => faye_server,
-  "/"      => Rails.application
+  "/remote" => faye_server,
+  "/"       => Rails.application
 })
 
 # run Rails.application
