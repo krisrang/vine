@@ -39,13 +39,6 @@ GIT
       rack (>= 1.1.3)
 
 GIT
-  remote: https://github.com/SamSaffron/flamegraph.git
-  revision: f0660ed17b8d03e2115d7d6be5b2ea285ce1e49b
-  specs:
-    flamegraph (0.0.5)
-      fast_stack
-
-GIT
   remote: https://github.com/callahad/omniauth-browserid.git
   revision: af62d667626c1622de6fe13b60849c3640765ab1
   branch: observer_api
@@ -126,7 +119,6 @@ GEM
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.1)
-    dotenv (0.9.0)
     em-http-request (1.1.1)
       addressable (>= 2.3.4)
       cookiejar
@@ -158,9 +150,6 @@ GEM
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    fast_stack (0.1.0)
-      rake
-      rake-compiler
     fast_xor (1.1.3)
       rake
       rake-compiler
@@ -191,9 +180,6 @@ GEM
       net-ssh (>= 2.1.3)
       nokogiri (~> 1.5)
       ruby-hmac
-    foreman (0.63.0)
-      dotenv (>= 0.7)
-      thor (>= 0.13.6)
     formatador (0.2.4)
     given_core (3.2.0)
       sorcerer (>= 0.3.7)
@@ -478,9 +464,7 @@ DEPENDENCIES
   fastimage
   faye
   figaro
-  flamegraph!
   fog
-  foreman
   gemoji!
   guard-rspec
   hiredis

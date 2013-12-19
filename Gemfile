@@ -64,7 +64,6 @@ gem 'mustache'
 gem 'rinku'
 
 group :development do
-  gem 'foreman'
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -98,9 +97,8 @@ group :production do
 end
 
 
-gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git'
 gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git',  ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
 
+# possible servers
 gem 'puma', require: false
 gem 'thin', require: false
-
