@@ -97,7 +97,7 @@ group :production do
 end
 
 
-gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git',  ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
+gem 'rack-mini-profiler', '0.9.0.pre'
 
 # possible servers
 gem 'puma', require: false
