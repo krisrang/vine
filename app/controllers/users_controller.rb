@@ -36,10 +36,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    return fake_success_response if suspicious? params
+    return fake_success_response if suspicious? params[:user]
 
-    user = User.new_from_params(params)
-    auth = authenticate_user(user, params)
+    user = User.new_from_params(params[:user])
+    auth = authenticate_user(user, params[:user])
 
     if user.save
       activator = UserActivator.new(user, request, session, cookies)
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
   def show
     @user = fetch_user_from_params
-    authorize @user
+    authorize_action_for @user
 
     respond_to do |format|
       format.html do
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where(username_lower: params[:username].downcase)
-    authorize @users
+    authorize_action_for @users
     render json: @users
   end
 
@@ -190,7 +190,7 @@ class UsersController < ApplicationController
   end
 
   def fake_success_response
-    user = User.new(active: false, message: I18n.t("login.activate_email", email: params[:email]))
+    user = User.new(active: false, message: I18n.t("login.activate_email", email: params[:user][:email]))
     render json: user
   end
 

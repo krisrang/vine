@@ -227,23 +227,28 @@ Vine.CreateAccountController = Vine.Controller.extend(Vine.ModalFunctionality, {
   },
 
   createAccountAction: function() {
+    var store = this.get('store'); 
     var createAccountController = this;
     this.set('formSubmitted', true);
 
-    var email = this.get('accountEmail');
-    var password = this.get('accountPassword');
-    var username = this.get('accountUsername');
-    var passwordConfirm = this.get('accountPasswordConfirm');
-    var challenge = this.get('accountChallenge');
+    var user = store.createRecord('user', {
+      email: this.get('accountEmail'),
+      password: this.get('accountPassword'),
+      username: this.get('accountUsername'),
+      password_confirmation: this.get('accountPasswordConfirm'),
+      challenge: this.get('accountChallenge')
+    });
 
-    return Vine.User.createAccount(email, password, username, passwordConfirm, challenge).then(function(result) {
+    var test = user.save();
+
+    return test.then(function(result) {
       createAccountController.set('complete', true);
 
-      if (result.message) {
-        createAccountController.flash(result.message);
+      if (result.get('message')) {
+        createAccountController.flash(result.get('message'));
       }
 
-      if (result.active) {
+      if (result.get('active')) {
         return window.location.reload();
       }
     }, function(result) {

@@ -1,4 +1,7 @@
-class Draft < ActiveRecord::Base  
+class Draft < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'DraftAuthorizer'
+  
   belongs_to :user
   belongs_to :message
 

@@ -3,14 +3,13 @@ ruby '2.0.0'
 
 ### REAR END
 
-gem 'rails', '~> 4.0.2'
+gem 'rails', github: 'rails/rails', branch: '4-0-stable'
 gem 'pg'
 
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 gem 'redis-rails'
 
-gem 'faye'
 gem 'message_bus', github: 'SamSaffron/message_bus'
 
 
@@ -55,14 +54,16 @@ gem 'carrierwave-imageoptimizer'
 gem 'fog'
 gem 'mini_magick'
 gem 'unf'
-gem 'pundit'
+gem 'authority'
 gem 'nokogiri'
 gem 'fastimage'
 gem 'seed-fu'
+gem 'paper_trail', '>= 3.0.0.rc2'
 gem 'mustache'
 gem 'rinku'
 
 group :development do
+  gem 'foreman'
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -96,8 +97,9 @@ group :production do
 end
 
 
-gem 'rack-mini-profiler', '0.9.0.pre'
+gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git'
+gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git',  ref: '5f2048351f5f8ed7cffa2943539a7cc97f0a9764'
 
-# possible servers
 gem 'puma', require: false
 gem 'thin', require: false
+

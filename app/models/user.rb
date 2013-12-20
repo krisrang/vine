@@ -1,7 +1,12 @@
 require_dependency 'pbkdf2'
 require_dependency 'email'
 
-class User < ActiveRecord::Base 
+class User < ActiveRecord::Base
+  include Authority::UserAbilities
+
+  include Authority::Abilities
+  self.authorizer_name = 'UserAuthorizer'
+  
   mount_uploader :avatar, AvatarUploader
   
   has_many :user_visits, dependent: :destroy

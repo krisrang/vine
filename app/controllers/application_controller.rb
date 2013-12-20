@@ -2,7 +2,6 @@ require 'current_user'
 
 class ApplicationController < ActionController::Base
   include CurrentUser
-  include Pundit
   
   protect_from_forgery
 
@@ -42,8 +41,6 @@ class ApplicationController < ActionController::Base
     rescue_vine_actions("[error: 'invalid access']", 403)
   end
 
-  rescue_from Pundit::NotAuthorizedError, with: :pundit_forbidden
-
   def rescue_vine_actions(message, error)
     if request.format && request.format.json?
       render status: error, layout: false, text: (error == 404) ? build_not_found_page(error) : message
@@ -52,8 +49,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def pundit_forbidden(error)
-    raise Vine::InvalidAccess.new(I18n.t("unauthorized"))
+  def authority_forbidden(error)
+    Authority.logger.warn(error.message)
+    raise Vine::InvalidAccess.new(error.message)
   end
 
   def build_not_found_page(status=404, layout=false)
@@ -132,7 +130,7 @@ class ApplicationController < ActionController::Base
   end
 
   def preload_current_user_data
-    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user)))
+    store_preloaded("currentUser", MultiJson.dump(CurrentUserSerializer.new(current_user, root: 'user')))
 
     draft = Draft.get(current_user)
     store_preloaded("draft", MultiJson.dump(DraftSerializer.new(draft))) if draft

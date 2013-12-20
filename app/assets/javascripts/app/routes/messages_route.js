@@ -4,7 +4,20 @@ Vine.MessagesRoute = Vine.Route.extend({
   },
 
   setupController: function(controller) {
-    var route = this;
+    var store = this.store,
+        route = this;
+
+    PreloadStore.getAndRemove("messages_latest").then(function(result) {
+      if (result && result.messages) {
+        _.each(result.messages, function(message) {
+          store.push('message', message);
+        });
+
+        controller.set('model', store.all('message'));
+      } else {
+        controller.set('model', store.findAll('message'));
+      }      
+    });
 
     PreloadStore.getAndRemove("draft").then(
       function(result) {
@@ -15,17 +28,5 @@ Vine.MessagesRoute = Vine.Route.extend({
         }
       }
     );
-
-    PreloadStore.getAndRemove("messages_latest", Vine.ajax("/messages.json")).then(function(result) {
-      var messages = Em.A();
-
-      if (result) {
-        _.each(result, function(message) {
-          messages.push(Vine.Message.create(message));
-        });
-      }
-
-      controller.set('model', messages);
-    });
   }
 });
